@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react"
 
 class NavBar extends Component {
   constructor(props) {
@@ -18,7 +18,10 @@ class NavBar extends Component {
           </li>
           <li>
             <a href="https://developer.lyft.com/v1/reference#availability-ride-estimates">
-              <img className="lyft-logo" src="https://i.imgur.com/zXnHuRO.png" />
+              <img
+                className="lyft-logo"
+                src="https://i.imgur.com/zXnHuRO.png"
+              />
             </a>
           </li>
         </ul>
