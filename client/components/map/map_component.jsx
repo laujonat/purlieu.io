@@ -1,16 +1,16 @@
 import React from "react"
 
-import NavBar from '../ui/nav';
-import UserInputForm from '../forms/user_input_form';
-import FetchLocationForm from '../forms/fetch_location';
-import MapStyle from './map_style';
-import { Loading } from '../_reusables/loading';
-import * as MapTools from '../../util/cartographic_tools';
-import * as AlgorithmLogic from '../../util/algorithm_logic';
-import UserRideSelection from '../user/user_ride_selection';
+import NavBar from "../ui/nav"
+import UserInputForm from "../forms/user_input_form"
+import FetchLocationForm from "../forms/fetch_location"
+import MapStyle from "./map_style"
+import { Loading } from "../_reusables/loading"
+import * as MapTools from "../../util/cartographic_tools"
+import * as AlgorithmLogic from "../../util/algorithm_logic"
+import UserRideSelection from "../user/user_ride_selection"
 
 class Map extends React.Component {
-  static rideTypes = ["lyft", "lyft_plus", "lyft_line"];
+  static rideTypes = ["lyft", "lyft_plus", "lyft_line"]
 
   constructor(props) {
     super(props)
@@ -30,14 +30,14 @@ class Map extends React.Component {
   }
 
   componentDidMount() {
-    this.initializeMap();
-    this.setState({ status: "FETCHING CURRENT LOCATION" });
-    this.getUserLocation();
+    this.initializeMap()
+    this.setState({ status: "FETCHING CURRENT LOCATION" })
+    this.getUserLocation()
   }
 
   loadingMount = () => {
-    this.setState({ loading: true });
-  };
+    this.setState({ loading: true })
+  }
 
   mapOptions = center => ({
     center: center,
@@ -49,66 +49,70 @@ class Map extends React.Component {
     rotateControl: false,
     fullscreenControl: false,
     styles: MapStyle
-  });
+  })
 
   initializeMap = () => {
-    const sfCenter = { lat: 37.773972, lng: -122.431297 }
+    const sfCenter = {
+      lat: 37.773972,
+      lng: -122.431297
+    }
     const center = this.state.userLocation || sfCenter
 
     this.map = new google.maps.Map(
       this.refs.renderedMap,
+
       this.mapOptions(center)
-    );
+    )
 
     this.marker = new google.maps.Marker({
       position: center,
       map: this.map,
       draggable: true
-    });
+    })
 
     this.marker.addListener("dragend", () =>
       this.resetMarkerPositionOnClick(this.marker)
-    );
+    )
     this.marker.addListener("click", () =>
       this.resetMarkerPositionOnClick(this.marker)
-    );
+    )
     this.map.addListener("click", e => {
-      this.marker.setPosition(e.latLng);
-      this.resetMarkerPositionOnClick(this.marker);
-    });
-  };
+      this.marker.setPosition(e.latLng)
+      this.resetMarkerPositionOnClick(this.marker)
+    })
+  }
 
   geocodeLocation = latLngObject => {
-    const geocoder = new google.maps.Geocoder();
+    const geocoder = new google.maps.Geocoder()
     geocoder.geocode({ location: latLngObject }, (results, status) => {
       if (status === "OK") {
-        this.setState({ userAddress: results[0].formatted_address });
+        this.setState({ userAddress: results[0].formatted_address })
       }
-    });
-  };
+    })
+  }
 
   clearOverlay = rideType => {
     this.state.newBoundary[rideType].setMap(null)
 
-    const currentBoundaries = this.state.newBoundary;
-    delete currentBoundaries[rideType];
-    this.setState({ newBoundary: currentBoundaries });
-  };
+    const currentBoundaries = this.state.newBoundary
+    delete currentBoundaries[rideType]
+    this.setState({ newBoundary: currentBoundaries })
+  }
 
   resetMarkerPositionOnClick = centerMarker => {
-    this.resetMap();
-    const newPosition = centerMarker.getPosition();
-    this.geocodeLocation(newPosition);
-    this.centerMap(newPosition);
-  };
+    this.resetMap()
+    const newPosition = centerMarker.getPosition()
+    this.geocodeLocation(newPosition)
+    this.centerMap(newPosition)
+  }
 
   centerMap = locationLatLng => {
     this.map.setCenter(locationLatLng)
     this.setState({
       userLocation: locationLatLng
-    });
-    this.marker.setPosition(locationLatLng);
-  };
+    })
+    this.marker.setPosition(locationLatLng)
+  }
 
   resetMap = () => {
     rideTypes.map(type => {
@@ -117,16 +121,16 @@ class Map extends React.Component {
       }
     })
 
-    let elements = document.getElementsByClassName("selected");
+    let elements = document.getElementsByClassName("selected")
     while (elements.length > 0) {
-      elements[0].classList.remove("selected");
+      elements[0].classList.remove("selected")
     }
-  };
+  }
 
   redrawBoundaries() {
     Object.keys(this.state.newBoundary).forEach(rideType => {
-      this.getBoundaries(this.state.userLocation, rideType);
-    });
+      this.getBoundaries(this.state.userLocation, rideType)
+    })
   }
 
   getUserLocation = () => {
@@ -134,18 +138,18 @@ class Map extends React.Component {
       const parsedLocation = {
         lat: position.coords.latitude,
         lng: position.coords.longitude
-      };
-      this.setState({ userLocation: parsedLocation });
-      this.geocodeLocation(parsedLocation);
-      this.marker.setPosition(parsedLocation);
-      this.centerMap(parsedLocation);
-    };
+      }
+      this.setState({ userLocation: parsedLocation })
+      this.geocodeLocation(parsedLocation)
+      this.marker.setPosition(parsedLocation)
+      this.centerMap(parsedLocation)
+    }
 
     const errorCallback = error => {
       this.setState({ status: "SORRY, COULDN'T FIND YOU..." })
       setTimeout(
         function() {
-          this.setState({ userAddress: " " });
+          this.setState({ userAddress: " " })
         }.bind(this),
         3000
       )
@@ -154,8 +158,8 @@ class Map extends React.Component {
     navigator.geolocation.getCurrentPosition(successCallback, errorCallback, {
       timeout: 10000,
       enableHighAccuracy: true
-    });
-  };
+    })
+  }
 
   newMarker = pos => {
     new google.maps.Marker({
@@ -166,8 +170,8 @@ class Map extends React.Component {
         url: "http://maps.google.com/mapfiles/ms/icons/red-dot.png",
         scaledSize: new google.maps.Size(20, 20)
       }
-    });
-  };
+    })
+  }
 
   render() {
     let form, loading, rideSelection
@@ -176,7 +180,7 @@ class Map extends React.Component {
         <Loading>
           <p id="loading-text">CALCULATING DISTANCE</p>
         </Loading>
-      );
+      )
     }
 
     if (this.state.userAddress) {
