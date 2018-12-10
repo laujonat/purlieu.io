@@ -1,13 +1,8 @@
 module.exports = {
   env: {
-    browser: true,
     node: true
   },
-  extends: [
-    "eslint:recommended",
-    "prettier",
-    "plugin:react/recommended"
-  ],
+  extends: ["eslint:recommended", "prettier"],
   globals: {
     artifacts: false,
     assert: false,
@@ -21,9 +16,7 @@ module.exports = {
       experimentalObjectRestSpread: true
     }
   },
-  plugins: [
-    "react"
-  ],
+  plugins: [],
   rules: {
     camelcase: [
       "error",

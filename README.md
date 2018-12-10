@@ -6,8 +6,9 @@ Utilize Heroku pipelines for continued development. Set up Jest tests and fix wa
 
 # How to use
 ```
-yarn
-yarn start
+yarn 
+yarn dev 
+yarn watch
 ```
 
 ### Setup
