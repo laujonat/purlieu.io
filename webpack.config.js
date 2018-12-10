@@ -1,20 +1,14 @@
 const path = require("path")
 const Dotenv = require("dotenv-webpack")
 
-const env = process.env.NODE_ENV
-const config = {
-   mode: env || 'development'
-}
-
 module.exports = {
-  mode: config.mode, 
   entry: ["babel-polyfill", "./client/index.js"],
   output: {
     path: path.resolve(__dirname, "client"),
     filename: "bundle.js"
   },
   module: {
-    rules: [
+    loaders: [
       {
         test: /.jsx?$/,
         loader: "babel-loader",
@@ -44,4 +38,3 @@ module.exports = {
     extensions: [".js", ".jsx", "*"]
   }
 }
-

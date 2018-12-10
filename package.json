@@ -41,8 +41,7 @@
     "eslint-plugin-prettier": "^3.0.0",
     "eslint-plugin-react": "^7.11.1",
     "prettier": "^1.15.3",
-    "webpack": "^4.0.0",
-    "webpack-cli": "^3.1.2"
+    "webpack": "^4.0.0"
   },
   "description": "lyft app",
   "main": "./client/index.js",
