@@ -1,5 +1,4 @@
 import React from "react"
-
 import NavBar from "../ui/nav"
 import UserInputForm from "../forms/user_input_form"
 import FetchLocationForm from "../forms/fetch_location"
@@ -10,12 +9,11 @@ import * as AlgorithmLogic from "../../util/algorithm_logic"
 import UserRideSelection from "../user/user_ride_selection"
 
 class Map extends React.Component {
-  static rideTypes = ["lyft", "lyft_plus", "lyft_line"]
-
   constructor(props) {
     super(props)
     this.directionsServiceObject = new google.maps.DirectionsService()
     this.directionsRenderer = new google.maps.DirectionsRenderer()
+    this.rideTypes = ["lyft", "lyft_plus", "lyft_line"]
 
     this.state = {
       userLocation: null,
@@ -115,7 +113,7 @@ class Map extends React.Component {
   }
 
   resetMap = () => {
-    rideTypes.map(type => {
+    this.rideTypes.map(type => {
       if (this.state.newBoundary[type]) {
         this.clearOverlay(type)
       }
