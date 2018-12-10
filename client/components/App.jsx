@@ -1,4 +1,4 @@
-import React from "react"
+import React, { Fragment } from "react"
 import ReactDOM from "react-dom"
 import axios from "axios"
 
@@ -11,9 +11,9 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <React.Fragment>
+      <Fragment>
         <Map />
-      </React.Fragment>
+      </Fragment>
     )
   }
 }
