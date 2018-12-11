@@ -26,8 +26,8 @@
     "prettier-fix": "prettier --write --no-semi './**/*.{js,jsx}' './**/*.css **/*.json'",
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "webpack --watch",
-    "dev": "webpack && nodemon --exec babel-node -- bin/www",
-    "start": "webpack && nodemon --exec -- ./bin/www"
+    "dev": "webpack && nodemon --exec babel-node -- ./bin/www",
+    "start": "node ./bin/www"
   },
   "devDependencies": {
     "@babel/core": "^7.1.6",
@@ -41,7 +41,8 @@
     "eslint-plugin-prettier": "^3.0.0",
     "eslint-plugin-react": "^7.11.1",
     "prettier": "^1.15.3",
-    "webpack": "^4.0.0"
+    "webpack": "^4.0.0",
+    "webpack-cli": "^3.1.2"
   },
   "description": "lyft app",
   "main": "./client/index.js",
