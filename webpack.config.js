@@ -3,7 +3,7 @@ const Dotenv = require("dotenv-webpack")
 
 const env = process.env.NODE_ENV
 const config = {
-   mode: env || 'development'
+  mode: env || "development"
 }
 
 module.exports = {
@@ -16,9 +16,9 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /.jsx?$/,
         loader: "babel-loader",
         exclude: /node_modules/,
+        test: /.jsx?$/,
         query: {
           presets: ["@babel/env", "@babel/react"],
           plugins: ["@babel/proposal-class-properties"]
