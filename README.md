@@ -1,4 +1,4 @@
-# Moneymile
+# Purlieu.io
 
 ## Directions
 We want to incorporate various ride sharing API's and allow users to receive a visual distance estimate based on a dollar amount. Due to API request limits, we may want to develop an algorithm to store estimates based on time, distance, and time of year.
