@@ -1,5 +1,4 @@
 import React from "react"
-import NavBar from "../ui/nav"
 import UserInputForm from "../forms/user_input_form"
 import FetchLocationForm from "../forms/fetch_location"
 import MapStyle from "./map_style"

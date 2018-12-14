@@ -1,5 +1,5 @@
 import React, { Fragment } from "react"
-import Map from "../map"
+import Map from "../Map"
 
 export default class App extends React.Component {
   constructor(props) {
