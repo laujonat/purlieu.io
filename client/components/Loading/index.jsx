@@ -1,6 +1,6 @@
 import React from "react"
 
-export const Loading = ({ children, customClasses }) => (
+export default Loading = ({ children, customClasses }) => (
   <div id="loading-overlay">
     <div className={`loading-content ${customClasses}`}>
       {children}

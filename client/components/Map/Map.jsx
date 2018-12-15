@@ -1,7 +1,7 @@
 import React from "react"
 import InputForm from "../InputForm"
 import MapStyle from "./map_style"
-import { Loading } from "../Loading"
+import Loading from "../Loading"
 import async from "async"
 import axios from 'axios'
 
