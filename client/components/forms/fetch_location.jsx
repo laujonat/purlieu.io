@@ -1,5 +1,5 @@
 import React, { Fragment } from "react"
-import NavBar from "../Ui/nav"
+import NavBar from "../ui/nav"
 import { Loading } from "../_reusables/loading"
 
 class FetchLocationForm extends React.Component {

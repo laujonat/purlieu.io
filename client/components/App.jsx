@@ -1,5 +1,8 @@
 import React, { Fragment } from "react"
-import Map from "../Map"
+import ReactDOM from "react-dom"
+import axios from "axios"
+
+import Map from "./map/map_component"
 
 export default class App extends React.Component {
   constructor(props) {

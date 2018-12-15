@@ -8,9 +8,9 @@ const config = {
 
 module.exports = {
   mode: config.mode,
-  entry: ["babel-polyfill", "./client/resources"],
+  entry: ["babel-polyfill", "./client/index.js"],
   output: {
-    path: path.join(__dirname, "client/resources"),
+    path: path.join(__dirname, "client"),
     filename: "bundle.js"
   },
   module: {

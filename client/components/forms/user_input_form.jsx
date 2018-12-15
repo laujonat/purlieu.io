@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from "react"
-import NavBar from "../Ui/nav"
+import NavBar from "../ui/nav"
 import UserRideSelection from "../user/user_ride_selection"
 
 import { WELCOME_DESCRIPTION } from "../_reusables/text"
