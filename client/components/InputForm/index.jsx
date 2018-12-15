@@ -1,12 +1,10 @@
 import React, { Component, Fragment } from "react"
-import NavBar from "../Ui/nav"
 import UserRideSelection from "../user/user_ride_selection"
-
-import { WELCOME_DESCRIPTION } from "../_reusables/text"
+import { WELCOME_DESCRIPTION } from "../Loading/constants"
 import { parseAddressToLatLng } from "../../util/latlong_conversion"
 import * as AlgorithmLogic from "../../util/algorithm_logic"
 
-class UserInputForm extends Component {
+export default class InputForm extends Component {
   constructor(props) {
     super(props)
 
@@ -88,7 +86,7 @@ class UserInputForm extends Component {
     if (!this.props.currentAddress) return null
     const isEnabled = this.validate()
 
-    let formClassName, formName, infoContainer, navBar, rideSelection
+    let formClassName, formName, infoContainer, rideSelection
 
     if (this.state.formSubmitted) {
       formName = "submitted"
@@ -102,7 +100,6 @@ class UserInputForm extends Component {
         />
       )
     } else {
-      navBar = <NavBar />
       formClassName = "user-input-form"
       infoContainer = (
         <div className="info-container">
@@ -113,7 +110,6 @@ class UserInputForm extends Component {
 
     return (
       <Fragment>
-        {navBar}
         <form className={formClassName} onSubmit={this.submitForm}>
           <div id={formName} className="question">
             WHERE CAN I GO WITH
@@ -167,5 +163,3 @@ class UserInputForm extends Component {
     )
   }
 }
-
-export default UserInputForm

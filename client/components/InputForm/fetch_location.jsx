@@ -1,6 +1,6 @@
 import React, { Fragment } from "react"
-import NavBar from "../Ui/nav"
-import { Loading } from "../_reusables/loading"
+import NavBar from "../NavBar"
+import Loading from "../Loading"
 
 class FetchLocationForm extends React.Component {
   constructor(props) {
