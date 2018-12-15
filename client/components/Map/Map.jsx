@@ -5,7 +5,7 @@ import { Loading } from "../Loading"
 import * as MapTools from "../../lib/utils/cartographic_tools"
 import * as AlgorithmLogic from "../../lib/utils/algorithm_logic"
 
-class Map extends React.Component {
+export default class Map extends React.Component {
   constructor(props) {
     super(props)
     this.directionsServiceObject = new google.maps.DirectionsService()
@@ -169,8 +169,9 @@ class Map extends React.Component {
   }
 
   render() {
-    let form, loading, rideSelection
-    if (this.state.loading) {
+    let form
+    const { loading, status, userAddress } = this.state;
+    if (loading) {
       loading = (
         <Loading>
           <p id="loading-text">CALCULATING DISTANCE</p>
@@ -178,22 +179,33 @@ class Map extends React.Component {
       )
     }
 
-    if (this.state.userAddress) {
+    if (userAddress) {
       form = (
         <InputForm
-          currentAddress={this.state.userAddress}
-          centerMap={this.centerMap}
-          resetMap={this.resetMap}
-          clearOverlay={this.clearOverlay}
+          currentAddress={userAddress}
+          // centerMap={this.centerMap}
+          // resetMap={this.resetMap}
+          // clearOverlay={this.clearOverlay}
           drawBoundaries={this.drawBoundaries}
-          newMarker={this.newMarker}
-          map={this.map}
-          loadingMount={this.loadingMount}
-          selectedRideTypes={Object.keys(this.state.newBoundary)}
-          currentStatus={this.state.status} 
+          // newMarker={this.newMarker}
+          // map={this.map}
+          // loadingMount={this.loadingMount}
+          // selectedRideTypes={Object.keys(this.state.newBoundary)}
+          // currentStatus={this.state.status} 
         />
       )
-    } 
+    } else {
+      form = ( 
+        <Loading customClasses="fetch-location">
+          <img
+            className="fetch-location-img"
+            src="https://i.imgur.com/P0CmA6f.png"
+          />
+          <p className="status">{status}</p>
+          <p className="wait-text">Please wait...</p>
+        </Loading>
+      )
+    }
     return (
       <div className="map-component">
         <div ref="renderedMap" id="map-container" />
@@ -203,5 +215,3 @@ class Map extends React.Component {
     )
   }
 }
-
-export default Map

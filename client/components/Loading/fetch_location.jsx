@@ -1,8 +1,7 @@
 import React, { Fragment } from "react"
-import NavBar from "../NavBar"
-import Loading from "../Loading"
+import Loading from "."
 
-class FetchLocationForm extends React.Component {
+export default class FetchLocationForm extends React.Component {
   constructor(props) {
     super(props)
   }
@@ -12,7 +11,6 @@ class FetchLocationForm extends React.Component {
 
     return (
       <Fragment>
-        <NavBar />
         <Loading customClasses="fetch-location">
           <img
             className="fetch-location-img"
@@ -25,5 +23,3 @@ class FetchLocationForm extends React.Component {
     )
   }
 }
-
-export default FetchLocationForm
