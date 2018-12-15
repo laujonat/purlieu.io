@@ -1,0 +1,169 @@
+form {
+  margin-top: 10vh;
+  padding: 10px;
+  font-family: "Yantramanav";
+  font-size: 20px;
+  color: #FFFFFF;
+  position: absolute;
+  height: auto;
+  min-width: 300px;
+  width: 85vw;
+  background-color: rgba(12, 7, 17, 0.8);
+  border-radius: 6px;
+  text-align: center;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  box-shadow: 5px 5px 4px 0px rgba(0, 0, 0, 0.5), inset 0 1px 3px 0 rgba(0,0,0,0.50);
+}
+
+form div {
+  margin-top: 12px;
+}
+
+.dollar-input-div,
+.address-input-div {
+  display: flex;
+  font-size: 9px;
+  background-color: rgba(68, 31, 84, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: 6px;
+}
+
+.dollar-input-div {
+  /* width: 50%; */
+  max-width: 300px;
+}
+
+.address-input-div {
+  width: 80%;
+  max-width: 400px;
+}
+
+.dollar-input-icon,
+.address-input-icon,
+.dollar-input,
+.address-input {
+  margin: 5px;
+}
+
+.dollar-input-icon,
+.address-input-icon {
+  height: 24px;
+  width: 24px;
+  margin-right: 0px;
+}
+
+.dollar-input,
+.address-input,
+.submit {
+  background-color: transparent;
+  width: 100%;
+  border: none;
+  text-align: left;
+}
+
+.dollar-input,
+.address-input {
+  font-size: 16px;
+  color: #FFFFFF;
+}
+
+.address-input {
+  font-family: 'Source Code Pro', monospace;
+  font-size: 11px;
+}
+
+.submit {
+  cursor: pointer;
+  background-image: url('https://i.imgur.com/wIo7DEh.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  padding: none;
+  border-bottom: rgba(62, 195, 0, 1);
+  font-size: inherit;
+  color: rgba(51, 51, 51, 1);
+  width: 30px;
+  height: 30px;
+  margin-top: 15px;
+}
+
+.info-container {
+  font-family: 'Source Code Pro', monospace;
+  color: #e247ed;
+  font-size: 12px;
+  text-align: center;
+  line-height: 2.0;
+}
+
+button:disabled{
+  opacity: 0.2;
+}
+
+.question {
+  font-weight: 600;
+}
+
+/* iphone 6/7/8 */
+@media only screen and (min-width: 375px) {
+  .user-input-form {
+    max-width: 375px;
+  }
+
+  .submit {
+    width: 30px;
+    height: 30px;
+  }
+
+  .info-container {
+    font-size: 12px;
+  }
+}
+
+/* ipad */
+@media only screen and (min-width: 768px) {
+
+  .info-container {
+    font-size: 14px;
+  }
+
+  .user-input-form {
+    min-width: 520px;
+    font-size: 34px;
+  }
+
+  .user-input-form div {
+    margin-top: 18px;
+  }
+
+  .address-input {
+    font-size: 20px;
+  }
+
+  .dollar-input {
+    font-size: 26px;
+    text-align: left;
+    margin-left: 12px;
+  }
+
+  .submit {
+    width: 50px;
+    height: 50px;
+  }
+
+  .dollar-input-icon,
+  .address-input-icon {
+    height: 30px;
+    width: 30px;
+    margin-right: 0px;
+  }
+
+  .dollar-input-div,
+  .address-input-div {
+    padding: 4px 0;
+  }
+
+}
