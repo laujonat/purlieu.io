@@ -9,6 +9,10 @@ We want to incorporate various ride sharing API's and allow users to receive a v
 * Bus/Bart transit
 ```
 
+## Project Status
+Visual distance estimating project continuation.
+Utilize Heroku pipelines for continued development. Set up Jest tests and fix water boundary bugs with Google Maps API.
+
 ## Current chores
 ```
 * Project refactor to separate api concerns to node server.
@@ -18,9 +22,10 @@ We want to incorporate various ride sharing API's and allow users to receive a v
 * Fix boundaries algorithm when estimates hit water
 ```
 
-## Project Status
-Visual distance estimating project continuation.
-Utilize Heroku pipelines for continued development. Set up Jest tests and fix water boundary bugs with Google Maps API.
+## Deployment 
+```
+* We will be following standard `Git flow` branching and release strategies as we continue adding features with Heroku pipelines. 
+```
 
 # How to use
 ```
