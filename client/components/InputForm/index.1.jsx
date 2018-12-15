@@ -1,12 +1,12 @@
 import React, { Component, Fragment } from "react"
-import NavBar from "../Ui/nav"
+import NavBar from "../NavBar"
 import UserRideSelection from "../user/user_ride_selection"
 
-import { WELCOME_DESCRIPTION } from "../_reusables/text"
+import { WELCOME_DESCRIPTION } from "../Loading/constants"
 import { parseAddressToLatLng } from "../../util/latlong_conversion"
 import * as AlgorithmLogic from "../../util/algorithm_logic"
 
-class UserInputForm extends Component {
+class InputForm extends Component {
   constructor(props) {
     super(props)
 

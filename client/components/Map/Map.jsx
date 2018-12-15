@@ -1,11 +1,9 @@
 import React from "react"
-import UserInputForm from "../forms/user_input_form"
-import FetchLocationForm from "../forms/fetch_location"
+import InputForm from "../InputForm"
 import MapStyle from "./map_style"
-import { Loading } from "../_reusables/loading"
+import { Loading } from "../Loading"
 import * as MapTools from "../../util/cartographic_tools"
 import * as AlgorithmLogic from "../../util/algorithm_logic"
-import UserRideSelection from "../user/user_ride_selection"
 
 class Map extends React.Component {
   constructor(props) {
@@ -182,7 +180,7 @@ class Map extends React.Component {
 
     if (this.state.userAddress) {
       form = (
-        <UserInputForm
+        <InputForm
           currentAddress={this.state.userAddress}
           centerMap={this.centerMap}
           resetMap={this.resetMap}
@@ -192,12 +190,10 @@ class Map extends React.Component {
           map={this.map}
           loadingMount={this.loadingMount}
           selectedRideTypes={Object.keys(this.state.newBoundary)}
+          currentStatus={this.state.status} 
         />
       )
-    } else {
-      form = <FetchLocationForm currentStatus={this.state.status} />
-    }
-
+    } 
     return (
       <div className="map-component">
         <div ref="renderedMap" id="map-container" />
