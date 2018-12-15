@@ -1,8 +1,5 @@
 import React, { Component, Fragment } from "react"
-import UserRideSelection from "../user/user_ride_selection"
 import { WELCOME_DESCRIPTION } from "../../assets/loading/constants"
-import { parseAddressToLatLng } from "../../lib/utils/latlong_conversion"
-import * as AlgorithmLogic from "../../lib/utils/algorithm_logic"
 
 export default class InputForm extends Component {
   constructor(props) {
@@ -13,13 +10,7 @@ export default class InputForm extends Component {
       dollarInput: "",
       addressInput: addressInput,
       formSubmitted: false,
-      boundaries: [],
-      rideType: "lyft"
     }
-
-    this.parseAddressToLatLng = parseAddressToLatLng.bind(this)
-    this.getBoundaries = AlgorithmLogic.getBoundaries.bind(this)
-    this.rideEstimate = AlgorithmLogic.rideEstimate.bind(this)
   }
 
   componentDidUpdate(prevProps) {
@@ -34,40 +25,15 @@ export default class InputForm extends Component {
 
   submitForm = e => {
     e.preventDefault()
-    this.props.loadingMount()
     this.refs.btn.setAttribute("disabled", "disabled")
+    const { drawBoundaries } = this.props; 
+    const { dollarInput, addressInput } = this.state;
 
-    let elements = document.getElementsByClassName("selected")
-    while (elements.length > 0) {
-      elements[0].classList.remove("selected")
-    }
-
-    if (this.state.formSubmitted) {
-      this.props.resetMap()
-      this.setState({ rideType: "lyft", boundaries: [] }, () => {
-        let dft = document.getElementById("default-select")
-        dft.classList.add("selected")
-      })
-    }
-
-    this.setState({ formSubmitted: true, boundaries: [] }, () => {
-      this.parseAddressToLatLng(this.state.addressInput, res =>
-        this.centerMap(res)
-      )
-    })
+    drawBroundaries ? drawBroundaries(dollarInput, addressInput) : null
   }
 
-  updateInput = field => {
-    return e => {
-      this.setState({ [field]: e.target.value })
-    }
-  }
-
-  getRideType = rideType => {
-    this.props.loadingMount()
-    this.setState({ rideType, boundaries: [] }, () => {
-      this.parseAddressToLatLng(this.state.addressInput)
-    })
+  updateInput = field => e => {
+    this.setState({ [field]: e.target.value })
   }
 
   validateDollar = amt => {
@@ -86,19 +52,11 @@ export default class InputForm extends Component {
     if (!this.props.currentAddress) return null
     const isEnabled = this.validate()
 
-    let formClassName, formName, infoContainer, rideSelection
+    let formClassName, formName, infoContainer
 
     if (this.state.formSubmitted) {
       formName = "submitted"
       formClassName = "user-submitted-form"
-      rideSelection = (
-        <UserRideSelection
-          activeType={this.state.rideType}
-          getRideType={this.getRideType}
-          clearOverlay={this.props.clearOverlay}
-          selectedRideTypes={this.props.selectedRideTypes}
-        />
-      )
     } else {
       formClassName = "user-input-form"
       infoContainer = (
@@ -110,7 +68,7 @@ export default class InputForm extends Component {
 
     return (
       <Fragment>
-        <form className={formClassName} onSubmit={this.submitForm}>
+        <form className={formClassName}>
           <div id={formName} className="question">
             WHERE CAN I GO WITH
           </div>
@@ -125,8 +83,6 @@ export default class InputForm extends Component {
               id={formName}
               className={`dollar-input`}
               value={this.state.dollarInput}
-              min="10"
-              max="500"
               onChange={this.updateInput("dollarInput")}
             />
           </div>
@@ -158,7 +114,6 @@ export default class InputForm extends Component {
           />
           {infoContainer}
         </form>
-        {rideSelection}
       </Fragment>
     )
   }
