@@ -1,8 +1,8 @@
 import React, { Component, Fragment } from "react"
 import UserRideSelection from "../user/user_ride_selection"
-import { WELCOME_DESCRIPTION } from "../Loading/constants"
-import { parseAddressToLatLng } from "../../util/latlong_conversion"
-import * as AlgorithmLogic from "../../util/algorithm_logic"
+import { WELCOME_DESCRIPTION } from "../../assets/loading/constants"
+import { parseAddressToLatLng } from "../../lib/utils/latlong_conversion"
+import * as AlgorithmLogic from "../../lib/utils/algorithm_logic"
 
 export default class InputForm extends Component {
   constructor(props) {

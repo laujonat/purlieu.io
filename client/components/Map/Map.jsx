@@ -2,8 +2,8 @@ import React from "react"
 import InputForm from "../InputForm"
 import MapStyle from "./map_style"
 import { Loading } from "../Loading"
-import * as MapTools from "../../util/cartographic_tools"
-import * as AlgorithmLogic from "../../util/algorithm_logic"
+import * as MapTools from "../../lib/utils/cartographic_tools"
+import * as AlgorithmLogic from "../../lib/utils/algorithm_logic"
 
 class Map extends React.Component {
   constructor(props) {

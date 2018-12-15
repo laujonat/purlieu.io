@@ -3,10 +3,10 @@ import NavBar from "../NavBar"
 import UserRideSelection from "../user/user_ride_selection"
 
 import { WELCOME_DESCRIPTION } from "../Loading/constants"
-import { parseAddressToLatLng } from "../../util/latlong_conversion"
-import * as AlgorithmLogic from "../../util/algorithm_logic"
+import { parseAddressToLatLng } from "../../utils/latlong_conversion"
+import * as AlgorithmLogic from "../../utils/algorithm_logic"
 
-class InputForm extends Component {
+export default class InputForm extends Component {
   constructor(props) {
     super(props)
 
@@ -168,4 +168,4 @@ class InputForm extends Component {
   }
 }
 
-export default UserInputForm
+
