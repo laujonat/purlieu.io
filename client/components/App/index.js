@@ -1,5 +1,7 @@
 import React, { Component, Fragment } from "react"
 import { connect } from "react-redux";
+import { bindActionCreators } from 'redux';
+import fetchBoundariesWatcher from '../../store/sagas'
 import Map from "../Map"
 
 class App extends Component {
@@ -7,12 +9,17 @@ class App extends Component {
     super(props)
   }
 
+  click = () => {
+    this.props.fetchBoundariesWatcher()
+  }
+  
+
   render() {
     return (
       <Fragment>
         <div className="tester">
           <div className="tester_inner">
-            <button onClick={this.props.click}>CLICK</button>
+            <button onClick={this.click}>CLICK</button>
           </div>
         </div>
         <Map />
@@ -23,14 +30,14 @@ class App extends Component {
 
 const mapStateToProps = state => {
   return {
-    bound: state.payload
+    endpoints: state.boundaries
   }
 }
 
 const mapDispatchToProps = dispatch => {
-  return {
-    click: () => dispatch({ type: "FETCH_BOUNDARIES", data: 1 }),
-  }
+  return bindActionCreators({
+    fetchBoundariesWatcher
+  }, dispatch)
 }
 
 export default connect(
