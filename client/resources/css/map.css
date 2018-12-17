@@ -3,6 +3,7 @@
 .map-component {
   display: flex;
   justify-content: center;
+  flex-direction: column;
   /* align-items: center; */
   height: 100vh;
   width: 100vw;
@@ -12,4 +13,17 @@
 
 #map-container {
   flex: 1; 
+}
+
+.tester {
+  display: flex;
+  justify-content: center;
+  margin: auto;
+}
+
+.tester_inner {
+  background-color: yellow;
+  width: 100vh;
+  height: 100px;
+  z-index: 99;
 }
