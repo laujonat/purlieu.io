@@ -5,6 +5,15 @@ const bodyParser = require("body-parser")
 const Lyft = require("lyft-node")
 require("dotenv").config()
 
+router.get("/test", (req, res) => {
+  res.send({ 
+    boundaries: [
+      { bound: 22 },
+      { bound: 33 }
+    ]
+  })
+})
+
 router.get("/", (req, res) => {
   res.render("index")
 })

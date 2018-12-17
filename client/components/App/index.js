@@ -1,8 +1,8 @@
-import React, { Fragment } from "react"
+import React, { Component, Fragment } from "react"
+import { connect } from "react-redux";
 import Map from "../Map"
-import NavBar from "../NavBar"
 
-export default class App extends React.Component {
+class App extends Component {
   constructor(props) {
     super(props)
   }
@@ -10,9 +10,30 @@ export default class App extends React.Component {
   render() {
     return (
       <Fragment>
-        <NavBar />
+        <div className="tester">
+          <div className="tester_inner">
+            <button onClick={this.props.click}>CLICK</button>
+          </div>
+        </div>
         <Map />
       </Fragment>
     )
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    bound: state.payload
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    click: () => dispatch({ type: "FETCH_BOUNDARIES", data: 1 }),
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App)
