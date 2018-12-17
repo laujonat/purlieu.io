@@ -7,7 +7,7 @@ require("dotenv").config()
 
 router.get("/test", (req, res) => {
   res.send({ 
-    boundaries: [
+    data: [
       { bound: 22 },
       { bound: 33 }
     ]
