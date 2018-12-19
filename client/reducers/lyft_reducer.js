@@ -5,15 +5,16 @@ const initialState = {
 }
 
 const lyftReducer = (state = initialState, action) => {
-  Object.freeze(state)
-  const newState = { ...state };
-  console.log(action)
+  console.log("STAT#E", state)
+  Object.freeze(state);
+  const newState = {...state}
   switch (action.type) {
     case RECEIVE_BOUNDARIES:
       return {
         ...newState,
         boundaries: action.payload
       }
+
     default: 
       return state
   }

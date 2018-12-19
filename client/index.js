@@ -3,18 +3,16 @@ import ReactDOM from "react-dom"
 import { HashRouter, BrowserRouter, Route, Switch } from "react-router-dom"
 import { createStore, compose, applyMiddleware } from 'redux'
 import createSagaMiddleware from 'redux-saga'
-import logger from 'redux-logger'
-
-import reducer from './store/reducers/root_reducer'
-import  fetchBoundariesWatcher from './store/sagas'
+import reducer from './reducers/root_reducer'
+import rootSagaWatcher from './sagas/'
 import { Provider } from "react-redux";
+import logger from 'redux-logger'
 import App from "./components/App"
 
 const sagaMiddleware = createSagaMiddleware()
-const middlewares = applyMiddleware(logger,sagaMiddleware)
+const middlewares = applyMiddleware(sagaMiddleware, logger)
 const store = createStore(reducer, compose(middlewares))
-console.log(fetchBoundariesWatcher)
-sagaMiddleware.run(fetchBoundariesWatcher)
+sagaMiddleware.run(rootSagaWatcher)
 
 ReactDOM.render(
     <Provider store={store}>

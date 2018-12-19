@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react"
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
-import fetchBoundariesWatcher from '../../store/sagas'
+import { fetchBoundaries,test  } from '../../actions/lyft_actions'
 import Map from "../Map"
 
 class App extends Component {
@@ -10,11 +10,14 @@ class App extends Component {
   }
 
   click = () => {
-    this.props.fetchBoundariesWatcher()
+    console.log("clicked")
+    this.props.fetchBoundaries(test)
+    this.setState()
   }
   
 
   render() {
+
     return (
       <Fragment>
         <div className="tester">
@@ -30,17 +33,14 @@ class App extends Component {
 
 const mapStateToProps = state => {
   return {
-    endpoints: state.boundaries
+    boundaries: state.entities.lyft,
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({
-    fetchBoundariesWatcher
+    fetchBoundaries,
   }, dispatch)
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(App)
+export default connect(mapStateToProps, mapDispatchToProps)(App);
