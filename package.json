@@ -39,6 +39,7 @@
     "@google/maps": "^0.5.5",
     "babel-eslint": "8",
     "babel-loader": "^8.0.4",
+    "cors": "^2.8.5",
     "eslint": "4.x",
     "eslint-config-prettier": "^3.3.0",
     "eslint-plugin-prettier": "^3.0.0",
