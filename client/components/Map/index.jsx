@@ -12,14 +12,14 @@ export default class Map extends React.Component {
       loading: false
     }
 
-    this.geocoder = new google.maps.Geocoder();
-    this.directionsServiceObject = new google.maps.DirectionsService();
-    this.directionsRenderer = new google.maps.DirectionsRenderer();
+    this.geocoder = new google.maps.Geocoder()
+    this.directionsServiceObject = new google.maps.DirectionsService()
+    this.directionsRenderer = new google.maps.DirectionsRenderer()
   }
 
   componentDidMount() {
-    this.getUserLocation();
-    this.initializeMap();
+    this.getUserLocation()
+    this.initializeMap()
   }
 
   mapOptions = center => ({
@@ -38,31 +38,31 @@ export default class Map extends React.Component {
     const sfCenter = {
       lat: 37.773972,
       lng: -122.431297
-    };
-    const center = this.state.userLocation || sfCenter;
+    }
+    const center = this.state.userLocation || sfCenter
 
     this.map = new google.maps.Map(
       this.refs.renderedMap,
       this.mapOptions(center)
-    );
+    )
 
     this.marker = new google.maps.Marker({
       position: center,
       map: this.map,
       draggable: true
-    });
+    })
 
     this.marker.addListener("dragend", () =>
       this.resetMarkerPositionOnClick(this.marker)
-    );
+    )
     this.marker.addListener("click", () =>
       this.resetMarkerPositionOnClick(this.marker)
-    );
+    )
     this.map.addListener("click", e => {
       console.log("Marker moved")
-      this.marker.setPosition(e.latLng);
-      this.resetMarkerPositionOnClick(this.marker);
-    });
+      this.marker.setPosition(e.latLng)
+      this.resetMarkerPositionOnClick(this.marker)
+    })
   }
 
   geocodeLocation = latLngObject => {
@@ -91,28 +91,28 @@ export default class Map extends React.Component {
         lat: position.coords.latitude,
         lng: position.coords.longitude
       }
-      this.geocodeLocation(parsedLocation);
-      this.marker.setPosition(parsedLocation);
-      this.centerMap(parsedLocation);
+      this.geocodeLocation(parsedLocation)
+      this.marker.setPosition(parsedLocation)
+      this.centerMap(parsedLocation)
       this.setState({
         userLocation: parsedLocation,
-        status: ''
-      });
-    };
+        status: ""
+      })
+    }
 
     const errorCallback = () => {
       this.setState({
         status: "could not fetch location",
         userAddress: null
-      });
-    };
+      })
+    }
 
     this.setState({ status: "fetching location" }, () => {
       navigator.geolocation.getCurrentPosition(successCallback, errorCallback, {
         timeout: 10000,
         enableHighAccuracy: true
-      });
-    });
+      })
+    })
   }
 
   newMarker = pos => {

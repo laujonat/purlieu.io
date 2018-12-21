@@ -6,11 +6,8 @@ const Lyft = require("lyft-node")
 require("dotenv").config()
 
 router.get("/test", (req, res) => {
-  res.send({ 
-    data: [
-      { bound: 22 },
-      { bound: 33 }
-    ]
+  res.send({
+    data: [{ bound: 22 }, { bound: 33 }]
   })
 })
 

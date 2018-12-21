@@ -1,30 +1,22 @@
 import {
   RECEIVE_BOUNDARIES,
-  RECEIVE_BOUNDARIES_SUCCESS,
   receiveBoundaries,
-  fetchBoundaries,
-  test
-} from '../actions/lyft_actions'
-import { call, put, takeEvery } from 'redux-saga/effects'
-import axios from 'axios'
+  receiveBoundariesErrors
+} from "../actions/lyft_actions"
+import { call, put, takeEvery } from "redux-saga/effects"
 
-// worker
 function* getEndpoints(action) {
+  console.log("hdd")
   try {
-    const payload  = yield call(test, action.payload)
-    console.log("ASDSD", payload)
-    // dispatch action to change redux state
-    yield put({
-      test
-    })
-  } catch (error) {
-    console.error("ADASLKJD")
-    // yield put(receiveBoundariesErrors({ errors: error }));
+    const endPoint = yield call(receiveBoundaries, action.data)
 
+    // dispatch action to change redux state
+    yield put(receiveBoundariesSuccess, endPoint)
+  } catch (error) {
+    yield put(receiveBoundariesErrors, error)
   }
 }
 
-// watcher
-export default function* lyftAPiWatcher() {
+export default function*() {
   yield takeEvery(RECEIVE_BOUNDARIES, getEndpoints)
 }
