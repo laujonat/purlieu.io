@@ -1,5 +1,5 @@
 {
-  "name": "moneymile",
+  "name": "Purlieu",
   "version": "1.0.0",
   "private": true,
   "dependencies": {
@@ -10,11 +10,9 @@
     "dotenv-webpack": "^1.5.5",
     "ejs": "^2.5.9",
     "lyft-node": "0.0.5",
-    "mongoose": "^5.0.15",
     "nodemon": "^1.18.7",
     "prop-types": "^15.6.2",
     "react": "^16.3.2",
-    "react-bootstrap": "^0.32.1",
     "react-dom": "^16.3.2",
     "react-modal": "^3.4.2",
     "react-router-dom": "^4.2.2",
@@ -40,10 +38,12 @@
     "babel-eslint": "8",
     "babel-loader": "^8.0.4",
     "cors": "^2.8.5",
+    "enzyme": "^3.8.0",
     "eslint": "4.x",
     "eslint-config-prettier": "^3.3.0",
     "eslint-plugin-prettier": "^3.0.0",
     "eslint-plugin-react": "^7.11.1",
+    "jest": "^23.6.0",
     "prettier": "^1.15.3",
     "react-redux": "^6.0.0",
     "redux": "^4.0.1",
@@ -52,9 +52,9 @@
     "webpack": "^4.0.0",
     "webpack-cli": "^3.1.2"
   },
-  "description": "lyft app",
+  "description": "Distance projection project",
   "main": "./client/index.js",
-  "repository": "https://github.com/mingzhaogu/moneymile.git",
-  "author": "Jonathan Lau",
+  "repository": "https://github.com/laujonat/purlieu.io.git",
+  "author": "Jonathan Lau, Andre Le",
   "license": "MIT"
 }

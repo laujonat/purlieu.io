@@ -1,18 +1,24 @@
-import { RECEIVE_BOUNDARIES_SUCCESS } from "../actions/lyft_actions"
+import {
+  RECEIVE_BOUNDARIES_SUCCESS,
+  RECEIVE_BOUNDARIES_ERROR
+} from "../actions"
 
 const initialState = {
-  boundaries: []
+  boundaries: [{ point: 222 }, { point: 333 }]
 }
 
 const lyftReducer = (state = initialState, action) => {
-  console.log("STAT#E", state)
   Object.freeze(state)
   const newState = { ...state }
+
   switch (action.type) {
     case RECEIVE_BOUNDARIES_SUCCESS:
+      newState.boundaries = [...newState.boundaries, ...action.data]
+      return newState    
+    case RECEIVE_BOUNDARIES_ERROR:
       return {
         ...newState,
-        boundaries: action.data
+        errors
       }
 
     default:
