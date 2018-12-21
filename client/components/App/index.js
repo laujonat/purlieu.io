@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react"
 import { connect } from "react-redux"
 import { bindActionCreators } from "redux"
-import { receiveBoundaries } from "../../actions/lyft_actions"
+import { receiveBoundaries } from "../../actions"
 import Map from "../Map"
 
 class App extends Component {
@@ -10,7 +10,7 @@ class App extends Component {
   }
 
   click = () => {
-    this.props.receiveBoundaries({boundaries: [12, 32]})
+    this.props.receiveBoundaries()
   }
 
   render() {
@@ -27,7 +27,9 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = state => ({ boundaries: state.entities.lyft })
+const mapStateToProps = state => ({
+  boundaries: state.entities.lyft.boundaries
+})
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(

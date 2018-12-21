@@ -128,7 +128,6 @@ export default class Map extends React.Component {
   }
 
   render() {
-    console.log(this.state.status)
     return (
       <div className="map-component">
         <div ref="renderedMap" id="map-container" />

@@ -7,7 +7,7 @@ import {
 import axios from "axios"
 
 
-function* getEndpoints() {
+function* localHost() {
   try {
     const endPoint = yield call([axios, axios.get], "http://localhost:8000/test")
     yield put(receiveBoundariesSuccess(endPoint.data))
@@ -17,5 +17,5 @@ function* getEndpoints() {
 }
 
 export default function*() {
-  yield takeEvery(RECEIVE_BOUNDARIES, getEndpoints)
+  yield takeEvery(RECEIVE_BOUNDARIES, localHost)
 }
