@@ -3,5 +3,5 @@ import spikeWatcher from "./spike_saga"
 import { all } from "redux-saga/effects"
 
 export default function* rootSaga() {
-  yield all([spikeWatcher(), lyftAPiWatcher()])
+  yield all([lyftAPiWatcher()])
 }
