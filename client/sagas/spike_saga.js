@@ -1,6 +1,5 @@
 import { call, put, takeEvery } from "redux-saga/effects"
 import {
-  RECEIVE_BOUNDARIES,
   receiveBoundariesSuccess,
   receiveBoundariesErrors
 } from "../actions"
@@ -17,5 +16,5 @@ function* localHost() {
 }
 
 export default function*() {
-  yield takeEvery(RECEIVE_BOUNDARIES, localHost)
+  yield takeEvery(RECEIVE_TEST, localHost)
 }
