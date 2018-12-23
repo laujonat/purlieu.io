@@ -1,7 +1,8 @@
 # Purlieu.io
 
 ## Purpose
-We want to incorporate various ride sharing API's and allow users to receive a visual distance estimate based on a dollar amount. Due to API request limits, we may want to develop an algorithm to store estimates based on time, distance, and time of year.
+We want to incorporate various ride sharing API's and create an orthogonal projection onto a google maps with the intent of visualizing distance based on a dollar amount the user enters into the form. 
+
 ```
 * Uber 
 * Person vehicles
