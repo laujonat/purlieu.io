@@ -17,6 +17,7 @@ We want to incorporate various ride sharing API's and allow users to receive a v
 * Styled components
 * Set up React Proptypes
 * Fix boundaries algorithm when estimates hit water
+* Add git hooks 
 ```
 
 ## Deployment 
@@ -25,11 +26,16 @@ We want to incorporate various ride sharing API's and allow users to receive a v
 * Heroku deployment pipeline 
 ```
 
-# How to use
+## How to use
 ```
 yarn
 yarn dev
-yarn watch
+```
+
+## Testing 
+```
+yarn test 
+yarn --watch 
 ```
 
 ### Setup
