@@ -1,5 +1,19 @@
 import React from "react"
+import styled from "styled-components"
 import MapStyle from "./map_style"
+
+const MapComponent = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+`
+
+const MapContainer = styled.div`
+  flex: 1;
+`
 
 export default class Map extends React.Component {
   constructor(props) {
@@ -12,6 +26,7 @@ export default class Map extends React.Component {
       loading: false
     }
 
+    this.renderedMap = React.createRef()
     this.geocoder = new google.maps.Geocoder()
     this.directionsServiceObject = new google.maps.DirectionsService()
     this.directionsRenderer = new google.maps.DirectionsRenderer()
@@ -42,7 +57,7 @@ export default class Map extends React.Component {
     const center = this.state.userLocation || sfCenter
 
     this.map = new google.maps.Map(
-      this.refs.renderedMap,
+      this.renderedMap.current,
       this.mapOptions(center)
     )
 
@@ -129,9 +144,9 @@ export default class Map extends React.Component {
 
   render() {
     return (
-      <div className="map-component">
-        <div ref="renderedMap" id="map-container" />
-      </div>
+      <MapComponent>
+        <MapContainer ref={this.renderedMap} />
+      </MapComponent>
     )
   }
 }
