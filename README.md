@@ -1,7 +1,8 @@
 # Purlieu.io
 
 ## Purpose
-We want to incorporate various ride sharing API's and allow users to receive a visual distance estimate based on a dollar amount. Due to API request limits, we may want to develop an algorithm to store estimates based on time, distance, and time of year.
+We want to incorporate various ride sharing API's and create an orthogonal projection onto a google maps with the intent of visualizing distance based on a dollar amount the user enters into the form. 
+
 ```
 * Uber 
 * Person vehicles
@@ -17,6 +18,7 @@ We want to incorporate various ride sharing API's and allow users to receive a v
 * Styled components
 * Set up React Proptypes
 * Fix boundaries algorithm when estimates hit water
+* Add git hooks 
 ```
 
 ## Deployment 
@@ -25,11 +27,16 @@ We want to incorporate various ride sharing API's and allow users to receive a v
 * Heroku deployment pipeline 
 ```
 
-# How to use
+## How to use
 ```
 yarn
 yarn dev
-yarn watch
+```
+
+## Testing 
+```
+yarn test 
+yarn --watch 
 ```
 
 ### Setup
