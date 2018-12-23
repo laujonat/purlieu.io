@@ -8,10 +8,7 @@ import {
 
 export function* testSaga() {
   try {
-    const response = yield call(
-      axios.get,
-      "http://localhost:8000/test"
-    )
+    const response = yield call(axios.get, "http://localhost:8000/test")
     yield put(receiveTestSuccess(response.data))
   } catch (error) {
     yield put(receiveTestErrors(error))
