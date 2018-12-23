@@ -6,10 +6,12 @@ import {
 } from "../actions"
 import axios from "axios"
 
-
 function* getEndpoints() {
   try {
-    const endPoint = yield call([axios, axios.get], "http://localhost:8000/test")
+    const endPoint = yield call(
+      [axios, axios.get],
+      "http://localhost:8000/test"
+    )
     yield put(receiveBoundariesSuccess(endPoint.data))
   } catch (error) {
     yield put(receiveBoundariesErrors, error)
