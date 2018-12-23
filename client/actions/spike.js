@@ -12,12 +12,12 @@ const receiveTestErrors = errors => ({
   errors
 })
 
-const receiveTest = data => ({ 
-  type: RECEIVE_TEST, 
-  data 
+const receiveTest = data => ({
+  type: RECEIVE_TEST,
+  data
 })
 
-export {
+export default {
   RECEIVE_TEST,
   RECEIVE_TEST_SUCCESS,
   RECEIVE_TEST_ERROR,

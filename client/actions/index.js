@@ -12,8 +12,7 @@ export const receiveBoundariesErrors = errors => ({
   errors
 })
 
-export const receiveBoundaries = data => ({ 
-  type: RECEIVE_BOUNDARIES, 
-  data 
+export const receiveBoundaries = data => ({
+  type: RECEIVE_BOUNDARIES,
+  data
 })
-

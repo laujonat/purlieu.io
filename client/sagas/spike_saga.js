@@ -1,14 +1,14 @@
 import { call, put, takeEvery } from "redux-saga/effects"
-import {
-  receiveBoundariesSuccess,
-  receiveBoundariesErrors
-} from "../actions"
+import { receiveBoundariesSuccess, receiveBoundariesErrors } from "../actions"
 import axios from "axios"
 
-
-function* localHost() {
+export function* localHost() {
+  console.log("ajkdlasjd")
   try {
-    const endPoint = yield call([axios, axios.get], "http://localhost:8000/test")
+    const endPoint = yield call(
+      [axios, axios.get],
+      "http://localhost:8000/test"
+    )
     yield put(receiveBoundariesSuccess(endPoint.data))
   } catch (error) {
     yield put(receiveBoundariesErrors, error)
