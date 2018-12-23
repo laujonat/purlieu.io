@@ -24,7 +24,7 @@
     "lint-fix": "yarn lint --fix && yarn prettier-fix",
     "prettier": "prettier --list-different --no-semi './**/*.{js,jsx}' './**/*.css **/*.json'",
     "prettier-fix": "prettier --write --no-semi './**/*.{js,jsx}' './**/*.css **/*.json'",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "watch": "webpack --watch",
     "dev": "webpack && nodemon --exec babel-node -- ./bin/www",
     "start": "webpack && node ./bin/www "
@@ -36,6 +36,7 @@
     "@babel/preset-react": "^7.0.0",
     "@google/maps": "^0.5.5",
     "babel-eslint": "8",
+    "babel-jest": "^23.6.0",
     "babel-loader": "^8.0.4",
     "cors": "^2.8.5",
     "enzyme": "^3.8.0",
