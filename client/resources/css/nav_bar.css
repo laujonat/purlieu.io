@@ -1,16 +1,13 @@
-.nav-bar {
+/* .nav-bar {
   flex: 1;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 5vh;
-  width: 100vw;
-  background-color: rgba(0, 0, 0, 0.8);
-  box-shadow: 5px 5px 4px 0px rgba(0, 0, 0, 0.5);
-  color: #FFFFFF;
+  /* background-color: rgba(0, 0, 0, 0.8);
+  box-shadow: 5px 5px 4px 0px rgba(0, 0, 0, 0.5); */
+  /* height: 100vh;
+  z-index: 999;
+  background-color: #FFFFFF;
   position: absolute;
-  font-family: 'Source Code Pro', monospace;
-}
+  font-family: 'Source Code Pro', monospace; 
+} */ 
 
 .app-info-container {
   display: flex;

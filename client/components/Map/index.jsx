@@ -1,18 +1,15 @@
 import React from "react"
 import styled from "styled-components"
+import PropTypes from "prop-types"
 import MapStyle from "./map_style"
 
 const MapComponent = styled.div`
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  height: 100vh;
-  width: 100vw;
-  position: relative;
+  flex: 1 1 70%;
 `
 
 const MapContainer = styled.div`
-  flex: 1;
+  height: 100%;
+  width: 100%;
 `
 
 export default class Map extends React.Component {

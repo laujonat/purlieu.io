@@ -1,6 +1,5 @@
 @import 'reset.css';
 @import 'App.css';
-@import 'map.css';
 @import 'nav_bar.css';
 @import 'fetch_location_form.css';
 @import 'user_input_form.css';
@@ -8,4 +7,3 @@
 @import 'user_ride_selection.css';
 @import './_reusables/loading.css';
 
-/* do we need root/index.css? */
