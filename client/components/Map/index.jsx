@@ -1,4 +1,4 @@
-import React from "react"
+import React, { Component } from "react"
 import styled from "styled-components"
 import PropTypes from "prop-types"
 import MapStyle from "./map_style"
@@ -12,7 +12,7 @@ const MapContainer = styled.div`
   width: 100%;
 `
 
-export default class Map extends React.Component {
+export default class Map extends Component {
   constructor(props) {
     super(props)
 

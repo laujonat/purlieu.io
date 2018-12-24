@@ -1,4 +1,4 @@
-import React, { Fragment } from "react"
+import React from "react"
 import { connect } from "react-redux"
 import { bindActionCreators } from "redux"
 import styled from "styled-components"
@@ -7,13 +7,9 @@ import Map from "../Map"
 import NavPane from "../NavPane"
 
 const Container = styled.div`
-  flex-direction: row;
+  display: flex;
   z-index: -1;
-
-  @media ${media.laptop} {
-    display: flex;
-    flex-direction: column-reverse;
-  }
+  font-family: "Source Code Pro", monospace;
 `
 
 const App = () => {

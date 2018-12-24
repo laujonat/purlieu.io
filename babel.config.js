@@ -3,12 +3,7 @@ module.exports = {
   env: {
     development: {
       plugins: [
-        [
-          "babel-plugin-styled-components",
-          {
-            displayName: true
-          }
-        ]
+        ["babel-plugin-styled-components", { displayName: true }]
       ]
     },
     test: {

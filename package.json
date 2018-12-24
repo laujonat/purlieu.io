@@ -1,5 +1,5 @@
 {
-  "name": "Purlieu",
+  "name": "purlieu",
   "version": "1.0.0",
   "private": true,
   "dependencies": {
@@ -10,7 +10,6 @@
     "babel-polyfill": "^6.26.0",
     "dotenv": "^5.0.1",
     "dotenv-webpack": "^1.5.5",
-    "ejs": "^2.5.9",
     "lyft-node": "0.0.5",
     "nodemon": "^1.18.7",
     "prop-types": "^15.6.2",
@@ -62,6 +61,6 @@
   "description": "Distance projection project",
   "main": "./client/index.js",
   "repository": "https://github.com/laujonat/purlieu.io.git",
-  "author": "Jonathan Lau, Andre Le",
+  "author": "Jonathan Lau",
   "license": "MIT"
 }
