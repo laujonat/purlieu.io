@@ -27,6 +27,6 @@ module.exports = {
         properties: "always"
       }
     ],
-    'no-console': 'off',
+    "no-console": "off"
   }
 }

@@ -1,30 +1,24 @@
-import React, { Component, Fragment } from "react"
+import React from "react"
 import { connect } from "react-redux"
 import { bindActionCreators } from "redux"
-import { receiveBoundaries } from "../../actions"
+import styled from "styled-components"
+import media from "../../media"
 import Map from "../Map"
+import NavPane from "../NavPane"
 
-class App extends Component {
-  constructor(props) {
-    super(props)
-  }
+const Container = styled.div`
+  display: flex;
+  z-index: -1;
+  font-family: "Source Code Pro", monospace;
+`
 
-  click = () => {
-    this.props.receiveBoundaries()
-  }
-
-  render() {
-    return (
-      <Fragment>
-        <div className="tester">
-          <div className="tester_inner">
-            <button onClick={this.click}>CLICK</button>
-          </div>
-        </div>
-        <Map />
-      </Fragment>
-    )
-  }
+const App = () => {
+  return (
+    <Container>
+      <NavPane />
+      <Map />
+    </Container>
+  )
 }
 
 const mapStateToProps = state => ({
@@ -34,7 +28,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
-      receiveBoundaries
+      // receiveBoundaries
     },
     dispatch
   )

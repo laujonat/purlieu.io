@@ -1,6 +1,6 @@
 import React from "react"
 import ReactDOM from "react-dom"
-import { HashRouter, BrowserRouter, Route, Switch } from "react-router-dom"
+import { HashRouter, Route, Switch } from "react-router-dom"
 import { createStore, compose, applyMiddleware } from "redux"
 import createSagaMiddleware from "redux-saga"
 import reducer from "./reducers/root_reducer"
@@ -16,11 +16,11 @@ sagaMiddleware.run(rootSagaWatcher)
 
 ReactDOM.render(
   <Provider store={store}>
-    <BrowserRouter>
-      {/* <Switch> */}
+    <HashRouter>
+      <Switch>
       <Route exact path="/" component={App} />
-      {/* </Switch>, */}
-    </BrowserRouter>
+      </Switch>
+    </HashRouter>
   </Provider>,
   document.getElementById("root")
 )
