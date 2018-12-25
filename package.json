@@ -26,6 +26,7 @@
     "prettier": "prettier --list-different --no-semi './**/*.{js,jsx}' './**/*.css **/*.json'",
     "prettier-fix": "prettier --write --no-semi './**/*.{js,jsx}' './**/*.css **/*.json'",
     "test": "jest",
+    "test:coverage": "jest --coverage",
     "test:watch": "jest --watch",
     "watch": "webpack --watch",
     "dev": "webpack && nodemon --exec babel-node -- ./bin/www",

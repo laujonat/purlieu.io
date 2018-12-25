@@ -6,6 +6,15 @@ module.exports = {
 
   coverageDirectory: "coverage",
 
+  collectCoverage: true,
+
+  collectCoverageFrom: ["client/**.{js, jsx}", "!client/**/index.{js,jsx}"],
+
+  coveragePathIgnorePatterns: [
+    "./client/*.{js, jsx}",
+    "./client/resources/*.{js, jsx}"
+  ],
+
   moduleDirectories: ["node_modules", "client"],
 
   moduleFileExtensions: ["js", "json", "jsx", "node"],

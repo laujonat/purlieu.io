@@ -6,27 +6,33 @@ module.exports = {
     jest: true
   },
   extends: ["eslint:recommended", "prettier", "plugin:react/recommended"],
-  globals: {
-    artifacts: false,
-    assert: false,
-    contract: false
-  },
-  parser: "babel-eslint",
-  parserOptions: {
-    ecmaVersion: 6,
-    sourceType: "module",
-    ecmaFeatures: {
-      experimentalObjectRestSpread: true
-    }
-  },
-  plugins: ["react"],
-  rules: {
-    camelcase: [
-      "error",
-      {
-        properties: "always"
+  settings: {
+    react: {
+      pragma: "React",
+      version: "16.5.2"
+    }, 
+    globals: {
+      artifacts: false,
+      assert: false,
+      contract: false
+    },
+    parser: "babel-eslint",
+    parserOptions: {
+      ecmaVersion: 6,
+      sourceType: "module",
+      allowImportExportEverywhere: true,
+      ecmaFeatures: {
+        experimentalObjectRestSpread: true
       }
+    },
+    rules: {
+      camelcase: [
+        "error",
+        {
+          properties: "always"
+        }
     ],
     "no-console": "off"
+    }
   }
 }
