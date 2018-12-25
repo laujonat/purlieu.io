@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from "react"
 import PropTypes from "prop-types"
-import { WELCOME_DESCRIPTION } from "../../assets/loading/constants"
+import styled from "styled-components"
 
 export default class InputForm extends Component {
   constructor(props) {

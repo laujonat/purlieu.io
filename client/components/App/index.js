@@ -1,8 +1,5 @@
 import React from "react"
-import { connect } from "react-redux"
-import { bindActionCreators } from "redux"
 import styled from "styled-components"
-import media from "../../media"
 import Map from "../Map"
 import NavPane from "../NavPane"
 
@@ -21,20 +18,4 @@ const App = () => {
   )
 }
 
-const mapStateToProps = state => ({
-  boundaries: state.entities.lyft.boundaries
-})
-
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators(
-    {
-      // receiveBoundaries
-    },
-    dispatch
-  )
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(App)
+export default App
