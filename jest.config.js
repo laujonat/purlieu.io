@@ -6,7 +6,6 @@ module.exports = {
   coverageDirectory: "coverage",
 
   // collectCoverage: true,
-
   collectCoverageFrom: ["client/**.{js, jsx}", "!client/**/index.{js,jsx}"],
 
   coveragePathIgnorePatterns: [
@@ -20,7 +19,8 @@ module.exports = {
 
   testEnvironment: "node",
 
-  testMatch: ["**/__tests__/**/*.js?(x)", "**/?(*.)+(spec|test).js?(x)"],
+  // "**/__tests__/**/*.js?(x)",
+  testMatch: ["**/?(*.)+(spec|test).js?(x)"],
 
   testPathIgnorePatterns: ["\\\\node_modules\\\\"],
 
@@ -30,5 +30,5 @@ module.exports = {
     "^.+\\.js?$": "babel-jest"
   },
 
-  transformIgnorePatterns: ["<rootDir>/node_modules/"],
+  transformIgnorePatterns: ["<rootDir>/node_modules/"]
 }

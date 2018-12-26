@@ -2,7 +2,7 @@ import React, { Component } from "react"
 import styled from "styled-components"
 import PropTypes from "prop-types"
 import { connect } from "react-redux"
-import { spaces } from "../../lib/styles"
+import { spaces } from "../../lib/styles/spaces"
 import { bindActionCreators } from "redux"
 
 const Container = styled.nav`

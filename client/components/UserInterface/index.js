@@ -1,4 +1,4 @@
-import React from "react"
+import React, { Component } from "react"
 import styled from "styled-components"
 import Map from "../Map"
 import NavPane from "../NavPane"
@@ -9,13 +9,13 @@ const Container = styled.div`
   font-family: "Source Code Pro", monospace;
 `
 
-const App = () => {
-  return (
-    <Container>
-      <NavPane />
-      <Map />
-    </Container>
-  )
+export default class UserInterface extends Component {
+  render() {
+    return (
+      <Container>
+        <NavPane />
+        <Map />
+      </Container>
+    )
+  }
 }
-
-export default App

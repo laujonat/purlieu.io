@@ -10,7 +10,7 @@ module.exports = {
     react: {
       pragma: "React",
       version: "16.5.2"
-    }, 
+    },
     globals: {
       artifacts: false,
       assert: false,
@@ -31,8 +31,8 @@ module.exports = {
         {
           properties: "always"
         }
-    ],
-    "no-console": "off"
+      ],
+      "no-console": "off"
     }
   }
 }
