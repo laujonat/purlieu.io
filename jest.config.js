@@ -1,12 +1,11 @@
-// For a detailed explanation regarding each configuration property, visit:
-// https://jestjs.io/docs/en/configuration.html
-
 module.exports = {
+  verbose: true,
+
   clearMocks: true,
 
   coverageDirectory: "coverage",
 
-  collectCoverage: true,
+  // collectCoverage: true,
 
   collectCoverageFrom: ["client/**.{js, jsx}", "!client/**/index.{js,jsx}"],
 
@@ -32,6 +31,4 @@ module.exports = {
   },
 
   transformIgnorePatterns: ["<rootDir>/node_modules/"],
-
-  verbose: false
 }
