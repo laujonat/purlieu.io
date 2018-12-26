@@ -1,4 +1,6 @@
 import React, { Component } from "react"
+import { connect } from "react-redux"
+import { bindActionCreators } from "redux"
 import styled from "styled-components"
 import PropTypes from "prop-types"
 import MapStyle from "./map_style"
@@ -12,15 +14,13 @@ const MapContainer = styled.div`
   width: 100%;
 `
 
-export default class Map extends Component {
+class Map extends Component {
   constructor(props) {
     super(props)
 
     this.state = {
       userLocation: null,
-      userAddress: null,
-      status: "",
-      loading: false
+      userAddress: null
     }
 
     this.renderedMap = React.createRef()
@@ -140,6 +140,7 @@ export default class Map extends Component {
   }
 
   render() {
+    console.log(this.state)
     return (
       <MapComponent>
         <MapContainer ref={this.renderedMap} />
@@ -147,3 +148,21 @@ export default class Map extends Component {
     )
   }
 }
+
+const mapStateToProps = state => ({
+  clientLocation: state.entities.map.clientLocation
+})
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators(
+    {
+      // receiveClientAddress
+    },
+    dispatch
+  )
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Map)
