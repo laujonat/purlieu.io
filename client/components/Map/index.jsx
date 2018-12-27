@@ -1,6 +1,5 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
-import { bindActionCreators } from "redux"
 import styled from "styled-components"
 import PropTypes from "prop-types"
 import MapStyle from "./map_style"
@@ -77,15 +76,6 @@ class Map extends Component {
     })
   }
 
-  geocodeLocation = latLngObject => {
-    const geocoder = new google.maps.Geocoder()
-    geocoder.geocode({ location: latLngObject }, (results, status) => {
-      if (status === "OK") {
-        this.setState({ userAddress: results[0].formatted_address })
-      }
-    })
-  }
-
   resetMarkerPositionOnClick = centerMarker => {
     const newPosition = centerMarker.getPosition()
     this.geocodeLocation(newPosition)
@@ -98,34 +88,8 @@ class Map extends Component {
   }
 
   getUserLocation = () => {
-    const successCallback = position => {
-      const parsedLocation = {
-        lat: position.coords.latitude,
-        lng: position.coords.longitude
-      }
-      this.geocodeLocation(parsedLocation)
-      this.marker.setPosition(parsedLocation)
-      this.centerMap(parsedLocation)
-      this.setState({
-        userLocation: parsedLocation,
-        status: ""
-      })
-    }
-
     this.props.fetchClientAddress()
-    const errorCallback = () => {
-      this.setState({
-        status: "could not fetch location",
-        userAddress: null
-      })
-    }
-
-    this.setState({ status: "fetching location" }, () => {
-      navigator.geolocation.getCurrentPosition(successCallback, errorCallback, {
-        timeout: 10000,
-        enableHighAccuracy: true
-      })
-    })
+    // this.centerMap(location)
   }
 
   newMarker = pos => {
@@ -149,8 +113,9 @@ class Map extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  clientLocation: state.entities.map.clientLocation
+const mapStateToProps = ({ entities }) => ({
+  location: entities.map.location,
+  address: entities.map.address
 })
 
 const mapDispatchToProps = dispatch => ({

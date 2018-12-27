@@ -10,7 +10,13 @@ import api from "../services/map"
 function* fetchClientLocation() {
   try {
     const location = yield call(api.getLocation)
-    yield put(receiveClientAddressSuccess(location))
+    const address = yield call(api.getAddress, location)
+    const data = {
+      location,
+      address
+    }
+
+    yield put(receiveClientAddressSuccess(data))
   } catch (error) {
     yield put(receiveClientAddressErrors(error))
   }

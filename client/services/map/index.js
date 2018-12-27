@@ -5,6 +5,7 @@ const getLocation = () =>
         lat: position.coords.latitude,
         lng: position.coords.longitude
       }
+
       success(parsedLocation)
     }
 
@@ -18,8 +19,21 @@ const getLocation = () =>
     })
   })
 
+const getAddress = geoLocation =>
+  new Promise(success => {
+    const successCallback = (results, status) => {
+      if (status === "OK") {
+        success(results[0].formatted_address)
+      }
+    }
+
+    const geocoder = new google.maps.Geocoder()
+    geocoder.geocode({ location: geoLocation }, successCallback)
+  })
+
 const api = {
-  getLocation
+  getLocation,
+  getAddress
 }
 
 export default api
