@@ -19,7 +19,6 @@ module.exports = {
 
   testEnvironment: "node",
 
-  // "**/__tests__/**/*.js?(x)",
   testMatch: ["**/?(*.)+(spec|test).js?(x)"],
 
   testPathIgnorePatterns: ["\\\\node_modules\\\\"],

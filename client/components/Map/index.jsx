@@ -110,9 +110,9 @@ class Map extends Component {
         userLocation: parsedLocation,
         status: ""
       })
-      this.props.fetchClientAddress(parsedLocation)
     }
 
+    this.props.fetchClientAddress()
     const errorCallback = () => {
       this.setState({
         status: "could not fetch location",

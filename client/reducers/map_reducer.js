@@ -13,7 +13,7 @@ const mapReducer = (state = initialState, action) => {
       return {
         ...newState,
         isFetching: false,
-        clientLocation: action.data.result
+        clientLocation: action.data
       }
     default:
       return state
