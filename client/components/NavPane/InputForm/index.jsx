@@ -1,6 +1,12 @@
-import React, { Component, Fragment } from "react"
+import React, { Component } from "react"
 import PropTypes from "prop-types"
 import styled from "styled-components"
+
+const Container = styled.div`
+  flex: 1;
+  background-color: red;
+  height: 100px;
+`
 
 export default class InputForm extends Component {
   constructor(props) {
@@ -57,68 +63,44 @@ export default class InputForm extends Component {
     if (!this.props.currentAddress) return null
     const { dollarInput, addressInput, isButtonEnabled } = this.state
 
-    let formClassName, formName, infoContainer
-
-    if (this.state.formSubmitted) {
-      formName = "submitted"
-      formClassName = "user-submitted-form"
-    } else {
-      formClassName = "user-input-form"
-      infoContainer = (
-        <div className="info-container">
-          <p>{WELCOME_DESCRIPTION}</p>
-        </div>
-      )
-    }
-
     return (
-      <Fragment>
-        <form className={formClassName}>
-          <div id={formName} className="question">
-            WHERE CAN I GO WITH
-          </div>
+      <Container>
+        <div className="question">WHERE CAN I GO WITH</div>
 
-          <div id={formName} className="dollar-input-div">
-            <img
-              className="dollar-input-icon"
-              src="https://i.imgur.com/um4yd7D.png"
-            />
-            <input
-              type="number"
-              id={formName}
-              className="dollar-input"
-              value={dollarInput}
-              onChange={this.onInputChange("dollarInput")}
-            />
-          </div>
-
-          <div id={formName} className="question">
-            &nbsp;FROM&nbsp;
-          </div>
-
-          <div id={formName} className="address-input-div">
-            <img
-              className="address-input-icon"
-              src="https://i.imgur.com/UFHf4wX.png"
-            />
-            <input
-              type="text"
-              id={formName}
-              className="address-input"
-              value={addressInput}
-              onChange={this.onInputChange("addressInput")}
-            />
-          </div>
-
-          <button
-            id={formName}
-            disabled={!isButtonEnabled}
-            className="submit"
-            onClick={this.onSubmitClicked}
+        <div className="dollar-input-div">
+          <img
+            className="dollar-input-icon"
+            src="https://i.imgur.com/um4yd7D.png"
           />
-          {infoContainer}
-        </form>
-      </Fragment>
+          <input
+            type="number"
+            className="dollar-input"
+            value={dollarInput}
+            onChange={this.onInputChange("dollarInput")}
+          />
+        </div>
+
+        <div className="question">&nbsp;FROM&nbsp;</div>
+
+        <div className="address-input-div">
+          <img
+            className="address-input-icon"
+            src="https://i.imgur.com/UFHf4wX.png"
+          />
+          <input
+            type="text"
+            className="address-input"
+            value={addressInput}
+            onChange={this.onInputChange("addressInput")}
+          />
+        </div>
+
+        <button
+          disabled={!isButtonEnabled}
+          className="submit"
+          onClick={this.onSubmitClicked}
+        />
+      </Container>
     )
   }
 }

@@ -4,6 +4,7 @@ import PropTypes from "prop-types"
 import { connect } from "react-redux"
 import { spaces } from "../../lib/styles/spaces"
 import { bindActionCreators } from "redux"
+import InputForm from "./InputForm"
 
 const Container = styled.nav`
   flex: 1 1 auto;
@@ -11,7 +12,6 @@ const Container = styled.nav`
   text-align: center;
   background: #fff;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-  z-index: 1;
 `
 
 const HeaderContainer = styled.div`
@@ -67,9 +67,7 @@ class NavPane extends Component {
         <HeaderContainer>
           <Header>purlieu.io</Header>
         </HeaderContainer>
-        <DollarInput />
-        <AddressInput />
-        <SubmitButton />
+        <InputForm />
       </Container>
     )
   }

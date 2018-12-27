@@ -15,24 +15,27 @@ module.exports = {
       artifacts: false,
       assert: false,
       contract: false
-    },
-    parser: "babel-eslint",
-    parserOptions: {
-      ecmaVersion: 6,
-      sourceType: "module",
-      allowImportExportEverywhere: true,
-      ecmaFeatures: {
-        experimentalObjectRestSpread: true
-      }
-    },
-    rules: {
-      camelcase: [
-        "error",
-        {
-          properties: "always"
-        }
-      ],
-      "no-console": "off"
     }
+  },
+  parser: "babel-eslint",
+  parserOptions: {
+    ecmaVersion: 6,
+    sourceType: "module",
+    allowImportExportEverywhere: true,
+    ecmaFeatures: {
+      experimentalObjectRestSpread: true,
+      modules: true,
+      spread: true,
+      restParams: true
+    }
+  },
+  rules: {
+    camelcase: [
+      "error",
+      {
+        properties: "always"
+      }
+    ],
+    "no-console": "off"
   }
 }

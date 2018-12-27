@@ -4,6 +4,7 @@ import { bindActionCreators } from "redux"
 import styled from "styled-components"
 import PropTypes from "prop-types"
 import MapStyle from "./map_style"
+import { receiveClientAddress } from "../../actions"
 
 const MapComponent = styled.div`
   flex: 1 1 70%;
@@ -71,7 +72,6 @@ class Map extends Component {
       this.resetMarkerPositionOnClick(this.marker)
     )
     this.map.addListener("click", e => {
-      console.log("Marker moved")
       this.marker.setPosition(e.latLng)
       this.resetMarkerPositionOnClick(this.marker)
     })
@@ -110,6 +110,7 @@ class Map extends Component {
         userLocation: parsedLocation,
         status: ""
       })
+      this.props.fetchClientAddress(parsedLocation)
     }
 
     const errorCallback = () => {
@@ -140,7 +141,6 @@ class Map extends Component {
   }
 
   render() {
-    console.log(this.state)
     return (
       <MapComponent>
         <MapContainer ref={this.renderedMap} />
@@ -153,13 +153,12 @@ const mapStateToProps = state => ({
   clientLocation: state.entities.map.clientLocation
 })
 
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators(
-    {
-      // receiveClientAddress
-    },
-    dispatch
-  )
+const mapDispatchToProps = dispatch => ({
+  fetchClientAddress: address => dispatch(receiveClientAddress(address))
+})
+
+Map.propTypes = {
+  fetchClientAddress: PropTypes.func
 }
 
 export default connect(

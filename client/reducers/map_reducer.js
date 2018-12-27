@@ -1,4 +1,3 @@
-import { call, put, takeLaest } from "redux-saga/effects"
 import { RECEIVE_CLIENT_ADDRESS_SUCCESS } from "../actions"
 
 const initialState = {
@@ -11,7 +10,11 @@ const mapReducer = (state = initialState, action) => {
   const newState = { ...state }
   switch (action.type) {
     case RECEIVE_CLIENT_ADDRESS_SUCCESS:
-      return { ...newState, isFetching: false, clientLocation: action.data }
+      return {
+        ...newState,
+        isFetching: false,
+        clientLocation: action.data.result
+      }
     default:
       return state
   }

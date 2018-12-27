@@ -1,4 +1,5 @@
-import { call, put, take } from "redux-saga/effects"
+import axios from "axios"
+import { call, put, takeEvery } from "redux-saga/effects"
 import {
   RECEIVE_CLIENT_ADDRESS,
   receiveClientAddressSuccess,
@@ -18,10 +19,7 @@ import {
 // Nav bar. that's the goal.
 function* fetchClientLocation() {
   try {
-    const endPoint = yield call(
-      [axios, axios.get],
-      "http://localhost:8000/loctest"
-    )
+    const endPoint = yield call(axios.get, "http://localhost:8000/loctest")
 
     yield put(receiveClientAddressSuccess(endPoint.data))
   } catch (error) {
@@ -30,5 +28,5 @@ function* fetchClientLocation() {
 }
 
 export default function*() {
-  yield takeLatest(RECEIVE_CLIENT_ADDRESS, fetchClientLocation)
+  yield takeEvery(RECEIVE_CLIENT_ADDRESS, fetchClientLocation)
 }

@@ -1,6 +1,7 @@
-import lyftAPiWatcher from "./lyft_saga"
+import lyftSagas from "./lyft_saga"
+import mapSagas from "./map_saga"
 import { all } from "redux-saga/effects"
 
 export default function* rootSaga() {
-  yield all([lyftAPiWatcher()])
+  yield all([lyftSagas(), mapSagas()])
 }
