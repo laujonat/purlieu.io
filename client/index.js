@@ -1,13 +1,10 @@
 import React from "react"
-import ReactDOM from "react-dom"
-import { HashRouter, Route, Switch } from "react-router-dom"
-import App from "./components/App"
+import reducers from "./reducers/root_reducer"
+import sagas from "./sagas"
+import { App } from "./App"
+import { configureStore } from "./configureStore"
+import { render } from "react-dom"
 
-ReactDOM.render(
-  <HashRouter>
-    <Switch>
-      <Route exact path="/" component={App} />
-    </Switch>
-  </HashRouter>,
-  document.getElementById("root")
-)
+const { store } = configureStore(reducers, sagas)
+
+render(<App store={store} />, document.getElementById("root"))
