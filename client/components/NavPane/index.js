@@ -48,11 +48,18 @@ const SubmitButton = styled.button`
 `
 
 class NavPane extends Component {
+  static getDerivedStateFromProps(props, prevState) {
+    return {
+      ...prevState,
+      ...props
+    }
+  }
+
   constructor(props) {
     super(props)
 
     this.state = {
-      dollarInput: ""
+      address: ""
     }
   }
 
@@ -60,22 +67,34 @@ class NavPane extends Component {
     e.preventDefault()
   }
 
+  onChange = field => {
+    return e => {
+      this.setState({ [field]: e.target.value })
+    }
+  }
+
   render() {
+    console.log(this.state)
+    const { address } = this.props
     return (
       <Container>
         <HeaderContainer>
           <Header>purlieu.io</Header>
         </HeaderContainer>
         <DollarInput />
-        <AddressInput />
+        <AddressInput
+          value={this.state.address}
+          onChange={this.onChange("address")}
+        />
         <SubmitButton />
       </Container>
     )
   }
 }
 
-const mapStateToProps = state => ({
-  boundaries: state.entities.lyft.boundaries
+const mapStateToProps = ({ entities: { lyft, map } }) => ({
+  boundaries: lyft.boundaries,
+  address: map.clientLocation.address
 })
 
 const mapDispatchToProps = dispatch => {
@@ -85,6 +104,11 @@ const mapDispatchToProps = dispatch => {
     },
     dispatch
   )
+}
+
+NavPane.propTypes = {
+  boundaries: PropTypes.array,
+  address: PropTypes.string
 }
 
 export default connect(

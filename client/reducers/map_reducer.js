@@ -1,4 +1,9 @@
-import { RECEIVE_CLIENT_ADDRESS_SUCCESS } from "../actions"
+import {
+  RECEIVE_CLIENT_ADDRESS_SUCCESS,
+  RECEIVE_CLIENT_ADDRESS_ERROR,
+  RECEIVE_MARKER_LOCATION_SUCCESS,
+  RECEIVE_MARKER_LOCATION_ERROR
+} from "../actions"
 
 const initialState = {
   clientLocation: "",
@@ -14,6 +19,14 @@ const mapReducer = (state = initialState, action) => {
         ...newState,
         isFetching: false,
         clientLocation: action.data
+      }
+    case RECEIVE_MARKER_LOCATION_SUCCESS:
+      newState.clientLocation.address = action.data
+      return newState
+    case RECEIVE_CLIENT_ADDRESS_ERROR:
+      return {
+        ...newState,
+        isFetching: false
       }
     default:
       return state
