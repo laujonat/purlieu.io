@@ -4,6 +4,7 @@ import styled from "styled-components"
 import PropTypes from "prop-types"
 import MapStyle from "./map_style"
 import { receiveClientAddress, receiveMarkerLocation } from "../../actions"
+import { getRecalculatedBoundaries } from "../../services/map"
 
 const google = window.google
 
@@ -40,6 +41,28 @@ class Map extends Component {
     if (prevProps.location !== this.props.location) {
       this.centerMap(this.props.location)
     }
+
+    if (prevProps.boundaries !== this.props.boundaries) {
+      this.drawBoundaries()
+    }
+  }
+
+  drawBoundaries = async () => {
+    const { location, boundaries } = this.props
+    const recalculatedBoundaries = await getRecalculatedBoundaries(location, boundaries, this.map)
+    const bermudaPolygon = new google.maps.Polygon({
+      paths: recalculatedBoundaries,
+      strokeColor: "#f7a0ff",
+      strokeOpacity: 0.7,
+      strokeWeight: 0.5,
+      fillColor: "#f7a0ff",
+      fillOpacity: 0.35
+    })
+
+    const bounds = new google.maps.LatLngBounds()
+    recalculatedBoundaries.forEach(coord => bounds.extend(coord))
+    this.map.fitBounds(bounds)
+    bermudaPolygon.setMap(this.map)
   }
 
   mapOptions = center => ({
@@ -110,7 +133,6 @@ class Map extends Component {
   }
 
   render() {
-    console.log('location', this.props.location)
     return (
       <MapComponent>
         <MapContainer ref={this.renderedMap} />
@@ -121,7 +143,8 @@ class Map extends Component {
 
 const mapStateToProps = ({ entities }) => ({
   location: entities.map.clientLocation.location,
-  address: entities.map.clientLocation.address
+  address: entities.map.clientLocation.address,
+  boundaries: entities.lyft.boundaries
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -135,14 +158,16 @@ Map.defaultProps = {
     lat: 37.773972,
     lng: -122.431297
   },
-  address: ""
+  address: "",
+  boundaries: []
 }
 
 Map.propTypes = {
   fetchClientAddress: PropTypes.func,
   fetchMarkerAddress: PropTypes.func,
   location: PropTypes.object,
-  address: PropTypes.string
+  address: PropTypes.string,
+  boundaries: PropTypes.array
 }
 
 export default connect(

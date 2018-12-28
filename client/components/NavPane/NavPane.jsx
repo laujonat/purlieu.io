@@ -84,8 +84,12 @@ class NavPane extends Component {
   }
 
   onSubmit = () => {
-    const { dollarInput, addressInput } = this.state
-    this.props.getBoundaries(dollarInput, addressInput)
+    const { dollarInput } = this.state;
+    const { location } = this.props;
+    this.props.getBoundaries({
+      amount: dollarInput,
+      currentLocation: location
+    })
   }
 
   onChange = field => e => {
@@ -118,16 +122,19 @@ class NavPane extends Component {
 }
 
 const mapStateToProps = ({ entities: { map } }) => ({
-  address: map.clientLocation.address
+  address: map.clientLocation.address,
+  location: map.clientLocation.location,
 })
 
 const mapDispatchToProps = dispatch => ({
-  getBoundaries: (amount, address) => dispatch(receiveBoundaries({ amount, address }))
+  getBoundaries: ({ amount, currentLocation }) =>
+    dispatch(receiveBoundaries({ amount, currentLocation }))
 })
 
 NavPane.propTypes = {
   getBoundaries: PropTypes.func,
-  address: PropTypes.string
+  address: PropTypes.string,
+  location: PropTypes.object
 }
 
 export default connect(

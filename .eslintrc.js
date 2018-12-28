@@ -33,7 +33,7 @@ module.exports = {
     camelcase: [
       "error",
       {
-        properties: "always"
+        properties: "never"
       }
     ],
     "no-console": "off"

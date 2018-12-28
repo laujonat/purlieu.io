@@ -4,20 +4,17 @@ import {
   receiveBoundariesSuccess,
   receiveBoundariesErrors
 } from "../actions"
-import axios from "axios"
+import api from '../services/lyft'
 
-function* getEndpoints() {
+function* fetchBoundaries({ data }) {
   try {
-    const endPoint = yield call(
-      [axios, axios.get],
-      "http://localhost:8000/test"
-    )
-    yield put(receiveBoundariesSuccess(endPoint.data))
+    const boundaries = yield call(api.getBoundaries, data)
+    yield put(receiveBoundariesSuccess(boundaries))
   } catch (error) {
-    yield put(receiveBoundariesErrors, error)
+    yield put(receiveBoundariesErrors(error))
   }
 }
 
 export default function*() {
-  yield takeEvery(RECEIVE_BOUNDARIES, getEndpoints)
+  yield takeEvery(RECEIVE_BOUNDARIES, fetchBoundaries)
 }

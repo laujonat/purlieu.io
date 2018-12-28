@@ -13,12 +13,12 @@ const lyftReducer = (state = initialState, action) => {
 
   switch (action.type) {
     case RECEIVE_BOUNDARIES_SUCCESS:
-      newState.boundaries = [...newState.boundaries, ...action.data]
+      newState.boundaries = action.data
       return newState
     case RECEIVE_BOUNDARIES_ERROR:
       return {
         ...newState,
-        errors
+        errors: action.errors
       }
 
     default:
