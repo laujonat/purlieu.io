@@ -24,6 +24,7 @@ const mapReducer = (state = initialState, action) => {
       newState.clientLocation.address = action.data
       return newState
     case RECEIVE_CLIENT_ADDRESS_ERROR:
+    case RECEIVE_MARKER_LOCATION_ERROR:
       return {
         ...newState,
         isFetching: false
