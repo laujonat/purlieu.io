@@ -1,4 +1,4 @@
-# Moneymile
+# Purlieu.io
 
 ## Directions
 The goal is simple. Let's see how far you can go with a Ride Sharing application!  Give us a the dollar amount you're willing to spend from where you are. We will provide you a visual representation of distance based on your dollar amount.
