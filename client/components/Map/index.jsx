@@ -3,7 +3,7 @@ import { connect } from "react-redux"
 import styled from "styled-components"
 import PropTypes from "prop-types"
 import MapStyle from "./map_style"
-import { receiveClientAddress } from "../../actions"
+import { receiveClientAddress, receiveMarkerLocation } from "../../actions"
 
 const MapComponent = styled.div`
   flex: 1 1 70%;
@@ -30,8 +30,8 @@ class Map extends Component {
   }
 
   componentDidMount() {
-    this.getUserLocation()
     this.initializeMap()
+    this.getUserLocation()
   }
 
   mapOptions = center => ({
@@ -47,19 +47,15 @@ class Map extends Component {
   })
 
   initializeMap = () => {
-    const sfCenter = {
-      lat: 37.773972,
-      lng: -122.431297
-    }
-    const center = this.state.userLocation || sfCenter
+    const { location } = this.props
 
     this.map = new google.maps.Map(
       this.renderedMap.current,
-      this.mapOptions(center)
+      this.mapOptions(location)
     )
 
     this.marker = new google.maps.Marker({
-      position: center,
+      position: location,
       map: this.map,
       draggable: true
     })
@@ -67,18 +63,20 @@ class Map extends Component {
     this.marker.addListener("dragend", () =>
       this.resetMarkerPositionOnClick(this.marker)
     )
-    this.marker.addListener("click", () =>
+
+    this.marker.addListener("click", () => {
       this.resetMarkerPositionOnClick(this.marker)
-    )
+    })
+
     this.map.addListener("click", e => {
       this.marker.setPosition(e.latLng)
+      this.props.fetchMarkerAddress(location)
       this.resetMarkerPositionOnClick(this.marker)
     })
   }
 
   resetMarkerPositionOnClick = centerMarker => {
     const newPosition = centerMarker.getPosition()
-    this.geocodeLocation(newPosition)
     this.centerMap(newPosition)
   }
 
@@ -89,7 +87,7 @@ class Map extends Component {
 
   getUserLocation = () => {
     this.props.fetchClientAddress()
-    // this.centerMap(location)
+    this.centerMap(this.props.location)
   }
 
   newMarker = pos => {
@@ -119,11 +117,23 @@ const mapStateToProps = ({ entities }) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  fetchClientAddress: address => dispatch(receiveClientAddress(address))
+  fetchClientAddress: address => dispatch(receiveClientAddress(address)),
+  fetchMarkerAddress: geoLocation =>
+    dispatch(receiveMarkerLocation(geoLocation))
 })
 
+Map.defaultProps = {
+  location: {
+    lat: 37.773972,
+    lng: -122.431297
+  },
+  address: ""
+}
+
 Map.propTypes = {
-  fetchClientAddress: PropTypes.func
+  fetchClientAddress: PropTypes.func,
+  location: PropTypes.object,
+  address: PropTypes.string
 }
 
 export default connect(
