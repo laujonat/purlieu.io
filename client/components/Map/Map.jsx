@@ -5,6 +5,8 @@ import PropTypes from "prop-types"
 import MapStyle from "./map_style"
 import { receiveClientAddress, receiveMarkerLocation } from "../../actions"
 
+const google = window.google
+
 const MapComponent = styled.div`
   flex: 1 1 70%;
 `
@@ -19,8 +21,8 @@ class Map extends Component {
     super(props)
 
     this.state = {
-      userLocation: null,
-      userAddress: null
+      location: null,
+      address: null
     }
 
     this.renderedMap = React.createRef()
@@ -32,6 +34,12 @@ class Map extends Component {
   componentDidMount() {
     this.initializeMap()
     this.getUserLocation()
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.location !== this.props.location) {
+      this.centerMap(this.props.location)
+    }
   }
 
   mapOptions = center => ({
@@ -87,7 +95,6 @@ class Map extends Component {
 
   getUserLocation = () => {
     this.props.fetchClientAddress()
-    this.centerMap(this.props.location)
   }
 
   newMarker = pos => {
@@ -103,6 +110,7 @@ class Map extends Component {
   }
 
   render() {
+    console.log('location', this.props.location)
     return (
       <MapComponent>
         <MapContainer ref={this.renderedMap} />
@@ -112,8 +120,8 @@ class Map extends Component {
 }
 
 const mapStateToProps = ({ entities }) => ({
-  location: entities.map.location,
-  address: entities.map.address
+  location: entities.map.clientLocation.location,
+  address: entities.map.clientLocation.address
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -132,6 +140,7 @@ Map.defaultProps = {
 
 Map.propTypes = {
   fetchClientAddress: PropTypes.func,
+  fetchMarkerAddress: PropTypes.func,
   location: PropTypes.object,
   address: PropTypes.string
 }
