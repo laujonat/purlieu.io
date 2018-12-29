@@ -20,11 +20,6 @@ class Map extends Component {
   constructor(props) {
     super(props)
 
-    // this.state = {
-    //   location: null,
-    //   address: null
-    // }
-
     this.renderedMap = React.createRef()
     this.geocoder = new google.maps.Geocoder()
     this.directionsServiceObject = new google.maps.DirectionsService()
@@ -55,8 +50,6 @@ class Map extends Component {
   })
 
   initializeMap = () => {
-    const { location } = this.props
-
     this.map = new google.maps.Map(
       this.renderedMap.current,
       this.mapOptions(location)
@@ -68,18 +61,25 @@ class Map extends Component {
       draggable: true
     })
 
-    this.marker.addListener("dragend", () =>
+    const { location } = this.props
+    const markerFunc = e => {
       this.resetMarkerPositionOnClick(this.marker)
-    )
+      this.setMarkerAddress(e.latLng)
+    }
 
-    this.marker.addListener("click", () => {
-      this.resetMarkerPositionOnClick(this.marker)
-    })
+    this.marker.addListener("dragend", markerFunc, false)
+    this.marker.addListener("click", markerFunc, false)
 
     this.map.addListener("click", e => {
       this.marker.setPosition(e.latLng)
-      this.props.fetchMarkerAddress(location)
-      this.resetMarkerPositionOnClick(this.marker)
+      markerFunc(e)
+    })
+  }
+
+  setMarkerAddress = geoLocation => {
+    this.props.fetchMarkerAddress({
+      lat: geoLocation.lat(),
+      lng: geoLocation.lng()
     })
   }
 
@@ -125,8 +125,7 @@ const mapStateToProps = ({ entities: { map } }) => ({
 
 const mapDispatchToProps = dispatch => ({
   fetchClientAddress: address => dispatch(receiveClientAddress(address)),
-  fetchMarkerAddress: geoLocation =>
-    dispatch(receiveMarkerLocation(geoLocation))
+  fetchMarkerAddress: geoLocation => dispatch(receiveMarkerLocation(geoLocation))
 })
 
 Map.defaultProps = {
@@ -134,7 +133,7 @@ Map.defaultProps = {
     lat: 37.773972,
     lng: -122.431297
   },
-  address: ""
+  address: undefined
 }
 
 Map.propTypes = {

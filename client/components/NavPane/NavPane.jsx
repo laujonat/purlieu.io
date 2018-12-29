@@ -49,7 +49,7 @@ const DollarInput = styled.input.attrs({
 
 const DollarLabel = styled.h1`
   width: 20%;
-`;
+`
 
 const AddressInput = styled.input`
   margin-top: ${spaces.md};
@@ -109,9 +109,7 @@ class NavPane extends Component {
           value={this.state.addressInput}
           onChange={this.onChange("addressInput")}
         />
-        <SubmitButton onClick={this.onSubmit}>
-          Show Me Dah Wey
-        </SubmitButton>
+        <SubmitButton onClick={this.onSubmit}>Show Me Dah Wey</SubmitButton>
       </Container>
     )
   }
@@ -122,7 +120,8 @@ const mapStateToProps = ({ entities: { map } }) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  getBoundaries: (amount, address) => dispatch(receiveBoundaries({ amount, address }))
+  getBoundaries: (amount, address) =>
+    dispatch(receiveBoundaries({ amount, address }))
 })
 
 NavPane.propTypes = {
