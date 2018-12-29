@@ -125,7 +125,8 @@ const mapStateToProps = ({ entities: { map } }) => ({
 
 const mapDispatchToProps = dispatch => ({
   fetchClientAddress: address => dispatch(receiveClientAddress(address)),
-  fetchMarkerAddress: geoLocation => dispatch(receiveMarkerLocation(geoLocation))
+  fetchMarkerAddress: geoLocation =>
+    dispatch(receiveMarkerLocation(geoLocation))
 })
 
 Map.defaultProps = {
