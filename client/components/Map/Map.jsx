@@ -20,10 +20,10 @@ class Map extends Component {
   constructor(props) {
     super(props)
 
-    this.state = {
-      location: null,
-      address: null
-    }
+    // this.state = {
+    //   location: null,
+    //   address: null
+    // }
 
     this.renderedMap = React.createRef()
     this.geocoder = new google.maps.Geocoder()
@@ -110,7 +110,6 @@ class Map extends Component {
   }
 
   render() {
-    console.log('location', this.props.location)
     return (
       <MapComponent>
         <MapContainer ref={this.renderedMap} />
@@ -119,9 +118,9 @@ class Map extends Component {
   }
 }
 
-const mapStateToProps = ({ entities }) => ({
-  location: entities.map.clientLocation.location,
-  address: entities.map.clientLocation.address
+const mapStateToProps = ({ entities: { map } }) => ({
+  location: map.clientLocation.location,
+  address: map.clientLocation.address
 })
 
 const mapDispatchToProps = dispatch => ({

@@ -31,7 +31,8 @@ function* fetchClientLocation() {
 function* fetchMarkerAddress(geoLocation) {
   try {
     const address = yield call(api.getAddress, geoLocation.data)
-    yield put(receiveMarkerLocationSuccess(address))
+    
+    yield put(receiveMarkerLocationSuccess(address.data))
   } catch (error) {
     yield put(receiveMarkerLocationError(error))
   }
