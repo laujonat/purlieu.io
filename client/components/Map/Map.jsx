@@ -3,7 +3,9 @@ import { connect } from "react-redux"
 import styled from "styled-components"
 import PropTypes from "prop-types"
 import MapStyle from "./map_style"
-import { receiveClientAddress } from "../../actions"
+import { receiveClientAddress, receiveMarkerLocation } from "../../actions"
+
+const google = window.google
 
 const MapComponent = styled.div`
   flex: 1 1 70%;
@@ -18,11 +20,6 @@ class Map extends Component {
   constructor(props) {
     super(props)
 
-    this.state = {
-      userLocation: null,
-      userAddress: null
-    }
-
     this.renderedMap = React.createRef()
     this.geocoder = new google.maps.Geocoder()
     this.directionsServiceObject = new google.maps.DirectionsService()
@@ -30,8 +27,14 @@ class Map extends Component {
   }
 
   componentDidMount() {
-    this.getUserLocation()
     this.initializeMap()
+    this.getUserLocation()
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.location !== this.props.location) {
+      this.centerMap(this.props.location)
+    }
   }
 
   mapOptions = center => ({
@@ -47,38 +50,41 @@ class Map extends Component {
   })
 
   initializeMap = () => {
-    const sfCenter = {
-      lat: 37.773972,
-      lng: -122.431297
-    }
-    const center = this.state.userLocation || sfCenter
-
     this.map = new google.maps.Map(
       this.renderedMap.current,
-      this.mapOptions(center)
+      this.mapOptions(location)
     )
 
     this.marker = new google.maps.Marker({
-      position: center,
+      position: location,
       map: this.map,
       draggable: true
     })
 
-    this.marker.addListener("dragend", () =>
+    const { location } = this.props
+    const markerFunc = e => {
       this.resetMarkerPositionOnClick(this.marker)
-    )
-    this.marker.addListener("click", () =>
-      this.resetMarkerPositionOnClick(this.marker)
-    )
+      this.setMarkerAddress(e.latLng)
+    }
+
+    this.marker.addListener("dragend", markerFunc, false)
+    this.marker.addListener("click", markerFunc, false)
+
     this.map.addListener("click", e => {
       this.marker.setPosition(e.latLng)
-      this.resetMarkerPositionOnClick(this.marker)
+      markerFunc(e)
+    })
+  }
+
+  setMarkerAddress = geoLocation => {
+    this.props.fetchMarkerAddress({
+      lat: geoLocation.lat(),
+      lng: geoLocation.lng()
     })
   }
 
   resetMarkerPositionOnClick = centerMarker => {
     const newPosition = centerMarker.getPosition()
-    this.geocodeLocation(newPosition)
     this.centerMap(newPosition)
   }
 
@@ -89,7 +95,6 @@ class Map extends Component {
 
   getUserLocation = () => {
     this.props.fetchClientAddress()
-    // this.centerMap(location)
   }
 
   newMarker = pos => {
@@ -113,17 +118,30 @@ class Map extends Component {
   }
 }
 
-const mapStateToProps = ({ entities }) => ({
-  location: entities.map.location,
-  address: entities.map.address
+const mapStateToProps = ({ entities: { map } }) => ({
+  location: map.clientLocation.location,
+  address: map.clientLocation.address
 })
 
 const mapDispatchToProps = dispatch => ({
-  fetchClientAddress: address => dispatch(receiveClientAddress(address))
+  fetchClientAddress: address => dispatch(receiveClientAddress(address)),
+  fetchMarkerAddress: geoLocation =>
+    dispatch(receiveMarkerLocation(geoLocation))
 })
 
+Map.defaultProps = {
+  location: {
+    lat: 37.773972,
+    lng: -122.431297
+  },
+  address: undefined
+}
+
 Map.propTypes = {
-  fetchClientAddress: PropTypes.func
+  fetchClientAddress: PropTypes.func,
+  fetchMarkerAddress: PropTypes.func,
+  location: PropTypes.object,
+  address: PropTypes.string
 }
 
 export default connect(

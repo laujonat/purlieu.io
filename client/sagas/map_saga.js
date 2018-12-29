@@ -1,9 +1,11 @@
-import axios from "axios"
 import { call, put, takeEvery } from "redux-saga/effects"
 import {
   RECEIVE_CLIENT_ADDRESS,
+  RECEIVE_MARKER_LOCATION,
   receiveClientAddressSuccess,
-  receiveClientAddressErrors
+  receiveClientAddressErrors,
+  receiveMarkerLocationSuccess,
+  receiveMarkerLocationError
 } from "../actions"
 import api from "../services/map"
 
@@ -22,6 +24,25 @@ function* fetchClientLocation() {
   }
 }
 
+function* fetchMarkerAddress(geoLocation) {
+  try {
+    const address = yield call(api.getAddress, geoLocation.data)
+
+    yield put(receiveMarkerLocationSuccess(address))
+  } catch (error) {
+    yield put(receiveMarkerLocationError(error))
+  }
+}
+
+function* fetchBoundaries({ amount, address }) {
+  try {
+    yield put(receiveBoundariesSuccess())
+  } catch (error) {
+    yield put(receiveBoundariesErrors(error))
+  }
+}
+
 export default function*() {
   yield takeEvery(RECEIVE_CLIENT_ADDRESS, fetchClientLocation)
+  yield takeEvery(RECEIVE_MARKER_LOCATION, fetchMarkerAddress)
 }
