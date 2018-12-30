@@ -2,8 +2,8 @@ import React, { Component } from "react"
 import { connect } from "react-redux"
 import styled from "styled-components"
 import PropTypes from "prop-types"
-import MapStyle from "./map_style"
-import { receiveClientAddress, receiveMarkerLocation } from "../../actions"
+import MapStyle from "../../lib/styles/map_style"
+import { receiveClientLocation, receiveMarkerLocation } from "../../actions"
 import { getRecalculatedBoundaries } from "../../services/map"
 
 const google = window.google
@@ -55,6 +55,8 @@ class Map extends Component {
   })
 
   initializeMap = () => {
+    const { location } = this.props
+
     this.map = new google.maps.Map(
       this.renderedMap.current,
       this.mapOptions(location)
@@ -66,7 +68,6 @@ class Map extends Component {
       draggable: true
     })
 
-    const { location } = this.props
     const markerFunc = e => {
       this.resetMarkerPositionOnClick(this.marker)
       this.setMarkerAddress(e.latLng)
@@ -99,7 +100,7 @@ class Map extends Component {
   }
 
   getUserLocation = () => {
-    this.props.fetchClientAddress()
+    this.props.fetchClientLocation()
   }
 
   newMarker = pos => {
@@ -152,7 +153,7 @@ const mapStateToProps = ({ entities: { map, lyft } }) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  fetchClientAddress: address => dispatch(receiveClientAddress(address)),
+  fetchClientLocation: () => dispatch(receiveClientLocation()),
   fetchMarkerAddress: geoLocation =>
     dispatch(receiveMarkerLocation(geoLocation))
 })
@@ -167,7 +168,7 @@ Map.defaultProps = {
 }
 
 Map.propTypes = {
-  fetchClientAddress: PropTypes.func,
+  fetchClientLocation: PropTypes.func,
   fetchMarkerAddress: PropTypes.func,
   location: PropTypes.object,
   address: PropTypes.string,

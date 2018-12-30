@@ -1,9 +1,9 @@
 import { call, put, takeEvery } from "redux-saga/effects"
 import {
-  RECEIVE_CLIENT_ADDRESS,
+  RECEIVE_CLIENT_LOCATION,
   RECEIVE_MARKER_LOCATION,
-  receiveClientAddressSuccess,
-  receiveClientAddressErrors,
+  receiveClientLocationSuccess,
+  receiveClientLocationErrors,
   receiveMarkerLocationSuccess,
   receiveMarkerLocationError
 } from "../actions"
@@ -18,9 +18,9 @@ function* fetchClientLocation() {
       address
     }
 
-    yield put(receiveClientAddressSuccess(data))
+    yield put(receiveClientLocationSuccess(data))
   } catch (error) {
-    yield put(receiveClientAddressErrors(error))
+    yield put(receiveClientLocationErrors(error))
   }
 }
 
@@ -34,15 +34,7 @@ function* fetchMarkerAddress(geoLocation) {
   }
 }
 
-function* fetchBoundaries({ amount, address }) {
-  try {
-    yield put(receiveBoundariesSuccess())
-  } catch (error) {
-    yield put(receiveBoundariesErrors(error))
-  }
-}
-
 export default function*() {
-  yield takeEvery(RECEIVE_CLIENT_ADDRESS, fetchClientLocation)
+  yield takeEvery(RECEIVE_CLIENT_LOCATION, fetchClientLocation)
   yield takeEvery(RECEIVE_MARKER_LOCATION, fetchMarkerAddress)
 }

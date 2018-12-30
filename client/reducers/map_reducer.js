@@ -1,6 +1,6 @@
 import {
-  RECEIVE_CLIENT_ADDRESS_SUCCESS,
-  RECEIVE_CLIENT_ADDRESS_ERROR,
+  RECEIVE_CLIENT_LOCATION_SUCCESS,
+  RECEIVE_CLIENT_LOCATION_ERROR,
   RECEIVE_MARKER_LOCATION_SUCCESS,
   RECEIVE_MARKER_LOCATION_ERROR
 } from "../actions"
@@ -14,7 +14,7 @@ const mapReducer = (state = initialState, action) => {
   Object.freeze(state)
   const newState = { ...state }
   switch (action.type) {
-    case RECEIVE_CLIENT_ADDRESS_SUCCESS:
+    case RECEIVE_CLIENT_LOCATION_SUCCESS:
       return {
         ...newState,
         isFetching: false,
@@ -23,7 +23,7 @@ const mapReducer = (state = initialState, action) => {
     case RECEIVE_MARKER_LOCATION_SUCCESS:
       newState.clientLocation.address = action.data
       return newState
-    case RECEIVE_CLIENT_ADDRESS_ERROR:
+    case RECEIVE_CLIENT_LOCATION_ERROR:
     case RECEIVE_MARKER_LOCATION_ERROR:
       return {
         ...newState,
