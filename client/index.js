@@ -1,11 +1,10 @@
 import React from "react"
-import ReactDOM from "react-dom"
-import { HashRouter } from "react-router-dom"
-import Routes from "./routes"
+import reducers from "./reducers/root_reducer"
+import sagas from "./sagas"
+import { App } from "./App"
+import { configureStore } from "./configureStore"
+import { render } from "react-dom"
 
-ReactDOM.render(
-  <HashRouter>
-    <Routes />
-  </HashRouter>,
-  document.getElementById("root")
-)
+const { store } = configureStore(reducers, sagas)
+
+render(<App store={store} />, document.getElementById("root"))
