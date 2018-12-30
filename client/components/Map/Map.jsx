@@ -4,6 +4,7 @@ import styled from "styled-components"
 import PropTypes from "prop-types"
 import MapStyle from "./map_style"
 import { receiveClientAddress, receiveMarkerLocation } from "../../actions"
+import { getRecalculatedBoundaries } from "../../services/map"
 
 const google = window.google
 
@@ -34,6 +35,10 @@ class Map extends Component {
   componentDidUpdate(prevProps) {
     if (prevProps.location !== this.props.location) {
       this.centerMap(this.props.location)
+    }
+
+    if (prevProps.boundaries !== this.props.boundaries) {
+      this.drawBoundaries()
     }
   }
 
@@ -109,6 +114,28 @@ class Map extends Component {
     })
   }
 
+  drawBoundaries = async () => {
+    const { location, boundaries } = this.props
+    const recalculatedBoundaries = await getRecalculatedBoundaries(
+      location,
+      boundaries,
+      this.map
+    )
+    const bermudaPolygon = new google.maps.Polygon({
+      paths: recalculatedBoundaries,
+      strokeColor: "#f7a0ff",
+      strokeOpacity: 0.7,
+      strokeWeight: 0.5,
+      fillColor: "#f7a0ff",
+      fillOpacity: 0.35
+    })
+
+    const bounds = new google.maps.LatLngBounds()
+    recalculatedBoundaries.forEach(coord => bounds.extend(coord))
+    this.map.fitBounds(bounds)
+    bermudaPolygon.setMap(this.map)
+  }
+
   render() {
     return (
       <MapComponent>
@@ -118,9 +145,10 @@ class Map extends Component {
   }
 }
 
-const mapStateToProps = ({ entities: { map } }) => ({
+const mapStateToProps = ({ entities: { map, lyft } }) => ({
   location: map.clientLocation.location,
-  address: map.clientLocation.address
+  address: map.clientLocation.address,
+  boundaries: lyft.boundaries
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -134,14 +162,16 @@ Map.defaultProps = {
     lat: 37.773972,
     lng: -122.431297
   },
-  address: undefined
+  address: undefined,
+  boundaries: []
 }
 
 Map.propTypes = {
   fetchClientAddress: PropTypes.func,
   fetchMarkerAddress: PropTypes.func,
   location: PropTypes.object,
-  address: PropTypes.string
+  address: PropTypes.string,
+  boundaries: PropTypes.array
 }
 
 export default connect(

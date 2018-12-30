@@ -88,6 +88,15 @@ class NavPane extends Component {
     this.props.getBoundaries(dollarInput, addressInput)
   }
 
+  onSubmit = () => {
+    const { dollarInput } = this.state
+    const { location } = this.props
+    this.props.getBoundaries({
+      amount: dollarInput,
+      currentLocation: location
+    })
+  }
+
   onChange = field => e => {
     this.setState({ [field]: e.target.value })
   }
@@ -120,8 +129,8 @@ const mapStateToProps = ({ entities: { map } }) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  getBoundaries: (amount, address) =>
-    dispatch(receiveBoundaries({ amount, address }))
+  getBoundaries: ({ amount, currentLocation }) =>
+    dispatch(receiveBoundaries({ amount, currentLocation }))
 })
 
 NavPane.propTypes = {
