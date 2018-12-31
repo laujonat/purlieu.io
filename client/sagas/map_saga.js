@@ -9,7 +9,7 @@ import {
 } from "../actions"
 import api from "../services/map"
 
-function* fetchClientLocation() {
+export function* fetchClientLocation() {
   try {
     const location = yield call(api.getLocation)
     const address = yield call(api.getAddress, location)
@@ -24,7 +24,7 @@ function* fetchClientLocation() {
   }
 }
 
-function* fetchMarkerAddress(geoLocation) {
+export function* fetchMarkerAddress(geoLocation) {
   try {
     const address = yield call(api.getAddress, geoLocation.data)
 

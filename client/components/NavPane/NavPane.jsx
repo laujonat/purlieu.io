@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 import styled from "styled-components"
 import PropTypes from "prop-types"
-import InputRange from 'react-input-range';
+import { LoadingText } from "../Loading"
 import { connect } from "react-redux"
 import { spaces } from "../../lib/styles/spaces"
 import { receiveBoundaries } from "../../actions"
@@ -46,12 +46,19 @@ const Input = styled.input`
   background-color: whitesmoke;
 `
 
+const Button = styled.button`
+  cursor: pointer;
+  margin-top: ${spaces.md};
+  width: 100%;
+`
+
 const DollarInput = styled(Input).attrs({
   type: "range",
   min: 10,
   max: 400,
   step: 1
 })`
+  cursor: pointer;
 `
 
 const AddressInput = styled(Input)`
@@ -62,10 +69,7 @@ const DollarLabel = styled.h1`
   width: 20%;
 `
 
-
-const SubmitButton = styled.button`
-  margin-top: ${spaces.md};
-  width: 100%;
+const SubmitButton = styled(Button)`
   height: 50px;
   background-color: greenyellow;
   padding: 0 ${spaces.md};
@@ -101,6 +105,7 @@ class NavPane extends Component {
   }
 
   render() {
+    const { isFetching } = this.props
     return (
       <Container>
         <HeaderContainer>
@@ -118,6 +123,7 @@ class NavPane extends Component {
           onChange={this.onChange("addressInput")}
         />
         <SubmitButton onClick={this.onSubmit}>Show Me Dah Wey</SubmitButton>
+        <LoadingText active={isFetching}>Loading..</LoadingText>
       </Container>
     )
   }
@@ -125,7 +131,8 @@ class NavPane extends Component {
 
 const mapStateToProps = ({ entities: { map } }) => ({
   address: map.clientLocation.address,
-  location: map.clientLocation.location
+  location: map.clientLocation.location,
+  isFetching: map.isFetching
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -134,9 +141,10 @@ const mapDispatchToProps = dispatch => ({
 })
 
 NavPane.defaultProps = {
-  address: '', 
-  location: { },
-  getBoundaries: () => { }
+  address: "",
+  location: {},
+  getBoundaries: () => {},
+  isFetching: true
 }
 
 NavPane.propTypes = {

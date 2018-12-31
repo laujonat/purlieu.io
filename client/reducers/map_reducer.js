@@ -21,8 +21,13 @@ const mapReducer = (state = initialState, action) => {
         clientLocation: action.data
       }
     case RECEIVE_MARKER_LOCATION_SUCCESS:
-      newState.clientLocation.address = action.data
-      return newState
+      return {
+        ...newState,
+        clientLocation: {
+          ...state.clientLocation,
+          address: action.data
+        }
+      }
     case RECEIVE_CLIENT_LOCATION_ERROR:
     case RECEIVE_MARKER_LOCATION_ERROR:
       return {

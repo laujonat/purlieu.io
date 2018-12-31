@@ -164,7 +164,8 @@ Map.defaultProps = {
     lng: -122.431297
   },
   address: undefined,
-  boundaries: []
+  boundaries: [],
+  fetchMarkerAddress: () => {}
 }
 
 Map.propTypes = {
