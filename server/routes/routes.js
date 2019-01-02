@@ -9,10 +9,6 @@ router.get("/test", (req, res) => {
   res.send([{ bound: 22 }, { bound: "33" }])
 })
 
-router.get("/loctest", (req, res) => {
-  res.send({ result: "1234 Fake Street" })
-})
-
 router.get("/", (req, res) => {
   res.render("index")
 })

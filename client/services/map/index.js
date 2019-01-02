@@ -1,4 +1,4 @@
-const google = window.google
+// const google = window.google
 
 const getLocation = () =>
   new Promise((success, reject) => {

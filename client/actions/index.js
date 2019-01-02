@@ -1,9 +1,9 @@
 export const RECEIVE_BOUNDARIES = "RECEIVE_BOUNDARIES"
 export const RECEIVE_BOUNDARIES_SUCCESS = "RECEIVE_BOUNDARIES_SUCCESS"
 export const RECEIVE_BOUNDARIES_ERROR = "RECEIVE_BOUNDARIES_ERROR"
-export const RECEIVE_CLIENT_ADDRESS = "RECEIVE_CLIENT_ADDRESS"
-export const RECEIVE_CLIENT_ADDRESS_SUCCESS = "RECEIVE_CLIENT_ADDRESS_SUCCESS"
-export const RECEIVE_CLIENT_ADDRESS_ERROR = "RECEIVE_CLIENT_ADDRESS_ERROR"
+export const RECEIVE_CLIENT_LOCATION = "RECEIVE_CLIENT_LOCATION"
+export const RECEIVE_CLIENT_LOCATION_SUCCESS = "RECEIVE_CLIENT_LOCATION_SUCCESS"
+export const RECEIVE_CLIENT_LOCATION_ERROR = "RECEIVE_CLIENT_LOCATION_ERROR"
 export const RECEIVE_MARKER_LOCATION = "RECEIVE_MARKER_LOCATION"
 export const RECEIVE_MARKER_LOCATION_SUCCESS = "RECEIVE_MARKER_LOCATION_SUCCESS"
 export const RECEIVE_MARKER_LOCATION_ERROR = "RECEIVE_MARKER_LOCATION_ERROR"
@@ -40,18 +40,18 @@ export const receiveBoundaries = data => ({
   data
 })
 
-// Map Address
-export const receiveClientAddressSuccess = data => ({
-  type: RECEIVE_CLIENT_ADDRESS_SUCCESS,
+// Map Location
+export const receiveClientLocationSuccess = data => ({
+  type: RECEIVE_CLIENT_LOCATION_SUCCESS,
   data
 })
 
-export const receiveClientAddressErrors = errors => ({
-  type: RECEIVE_CLIENT_ADDRESS_ERROR,
+export const receiveClientLocationErrors = errors => ({
+  type: RECEIVE_CLIENT_LOCATION_ERROR,
   errors
 })
 
-export const receiveClientAddress = data => ({
-  type: RECEIVE_CLIENT_ADDRESS,
+export const receiveClientLocation = data => ({
+  type: RECEIVE_CLIENT_LOCATION,
   data
 })
