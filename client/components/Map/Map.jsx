@@ -3,10 +3,14 @@ import { connect } from "react-redux"
 import styled from "styled-components"
 import PropTypes from "prop-types"
 import MapStyle from "../../lib/styles/map_style"
-import { receiveClientLocation, receiveMarkerLocation } from "../../actions"
+import {
+  receiveClientLocation,
+  receiveMarkerLocation,
+  receiveDrawBoundariesPolygon
+} from "../../actions"
 import { getRecalculatedBoundaries } from "../../services/map"
 
-const google = window.google
+// const google = window.google
 
 const MapComponent = styled.div`
   flex: 1 1 70%;
@@ -83,7 +87,7 @@ class Map extends Component {
   }
 
   setMarkerAddress = geoLocation => {
-    this.props.fetchMarkerAddress({
+    this.props.setMarkerAddress({
       lat: geoLocation.lat(),
       lng: geoLocation.lng()
     })
@@ -154,8 +158,9 @@ const mapStateToProps = ({ entities: { map, lyft } }) => ({
 
 const mapDispatchToProps = dispatch => ({
   fetchClientLocation: () => dispatch(receiveClientLocation()),
-  fetchMarkerAddress: geoLocation =>
-    dispatch(receiveMarkerLocation(geoLocation))
+  setMarkerAddress: geoLocation => dispatch(receiveMarkerLocation(geoLocation)),
+  drawPolygon: (location, boundaries) =>
+    dispatch(receiveDrawBoundariesPolygon(location, boundaries))
 })
 
 Map.defaultProps = {
@@ -165,12 +170,12 @@ Map.defaultProps = {
   },
   address: undefined,
   boundaries: [],
-  fetchMarkerAddress: () => {}
+  setMarkerAddress: () => {}
 }
 
 Map.propTypes = {
   fetchClientLocation: PropTypes.func,
-  fetchMarkerAddress: PropTypes.func,
+  setMarkerAddress: PropTypes.func,
   location: PropTypes.object,
   address: PropTypes.string,
   boundaries: PropTypes.array
