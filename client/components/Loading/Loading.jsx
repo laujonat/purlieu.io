@@ -1,7 +1,8 @@
-// import React from "react"
+import React from "react"
+import PropTypes from 'prop-types'
 import styled from "styled-components"
 
-const LoadingText = styled.div`
+const Container = styled.div`
   display: none;
   justify-content: center;
 
@@ -14,5 +15,13 @@ const LoadingText = styled.div`
 `
 
 export const Loading = ({ active }) => {
-  return <LoadingText active={active}>Loading..</LoadingText>
+  return <Container active={active}>Loading..</Container>
+}
+
+Loading.defaultProps = {
+  active: false
+}
+
+Loading.propTypes = {
+  active: PropTypes.bool
 }

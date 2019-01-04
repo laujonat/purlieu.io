@@ -27,8 +27,8 @@ module.exports = {
   testURL: "http://localhost",
 
   transform: {
-    "^.+\\.js?$": "babel-jest",
-    "^.+\\.js$": "babel-jest"
+    "^.+\\.js$": "babel-jest",
+    "^.+\\.jsx$": "babel-jest"
   },
 
   transformIgnorePatterns: ["/node_modules/"]

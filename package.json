@@ -18,6 +18,7 @@
     "react-modal": "^3.4.2",
     "react-router-dom": "^4.2.2",
     "react-scripts": "^2.1.1",
+    "react-test-renderer": "^16.7.0",
     "styled-components": "^4.1.2"
   },
   "scripts": {
@@ -25,8 +26,7 @@
     "lint-fix": "yarn lint --fix && yarn prettier-fix",
     "prettier": "prettier --list-different --no-semi './**/*.{js,jsx}' './**/*.css **/*.json'",
     "prettier-fix": "prettier --write --no-semi './**/*.{js,jsx}' './**/*.css **/*.json'",
-    "test": "jest",
-    "test:coverage": "jest --coverage",
+    "test": "jest --coverage",
     "test:watch": "jest --watch --verbose",
     "watch": "webpack --watch",
     "dev": "webpack && nodemon --exec babel-node -- ./bin/www",
