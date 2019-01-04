@@ -31,5 +31,5 @@ module.exports = {
     "^.+\\.js$": "babel-jest"
   },
 
-  transformIgnorePatterns: ["<rootDir>/node_modules/"]
+  transformIgnorePatterns: ["/node_modules/"]
 }
