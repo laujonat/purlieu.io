@@ -14,7 +14,10 @@ module.exports = {
     globals: {
       artifacts: false,
       assert: false,
-      contract: false
+      contract: false,
+      shallow: true,
+      render: true,
+      mount: true
     }
   },
   parser: "babel-eslint",

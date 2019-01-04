@@ -5,7 +5,6 @@ module.exports = {
 
   coverageDirectory: "coverage",
 
-  // collectCoverage: true,
   collectCoverageFrom: ["client/**.{js, jsx}", "!client/**/index.{js,jsx}"],
 
   coveragePathIgnorePatterns: [
@@ -19,6 +18,8 @@ module.exports = {
 
   testEnvironment: "node",
 
+  setupTestFrameworkScriptFile: "./testSetup.js",
+
   testMatch: ["**/?(*.)+(spec|test).js?(x)"],
 
   testPathIgnorePatterns: ["\\\\node_modules\\\\"],
@@ -26,7 +27,8 @@ module.exports = {
   testURL: "http://localhost",
 
   transform: {
-    "^.+\\.js?$": "babel-jest"
+    "^.+\\.js?$": "babel-jest",
+    "^.+\\.js$": "babel-jest"
   },
 
   transformIgnorePatterns: ["<rootDir>/node_modules/"]
