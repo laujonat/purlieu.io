@@ -4,14 +4,12 @@ import styled from "styled-components"
 import PropTypes from "prop-types"
 import MapStyle from "../../lib/styles/map_style"
 import {
-  NEW_LOCATION,
+  fetchLocation,
   receiveClientLocation,
   receiveMarkerLocation,
   receiveDrawBoundariesPolygon
 } from "../../actions"
 import { getRecalculatedBoundaries } from "../../services/map"
-
-// const google = window.google
 
 const MapComponent = styled.div`
   flex: 1 1 70%;
@@ -163,7 +161,7 @@ const mapDispatchToProps = dispatch => ({
   setMarkerAddress: geoLocation => dispatch(receiveMarkerLocation(geoLocation)),
   drawPolygon: (location, boundaries) =>
     dispatch(receiveDrawBoundariesPolygon(location, boundaries)),
-  setFetchingState: () => dispatch({ type: NEW_LOCATION })
+  setFetchingState: () => dispatch(fetchLocation())
 })
 
 Map.defaultProps = {
