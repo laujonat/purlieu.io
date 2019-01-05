@@ -4,7 +4,7 @@ import PropTypes from "prop-types"
 import { Loading } from "../Loading"
 import { connect } from "react-redux"
 import { spaces } from "../../lib/styles/spaces"
-import { receiveBoundaries } from "../../actions"
+import { receiveBoundaries, fetchBoundaries } from "../../actions"
 
 const Container = styled.nav`
   display: flex;
@@ -96,7 +96,7 @@ class NavPane extends Component {
   onSubmit = () => {
     const { dollarInput } = this.state
     const { location } = this.props
-
+    this.props.setFetchingState()
     this.props.getBoundaries({
       amount: dollarInput,
       currentLocation: location
@@ -132,15 +132,16 @@ class NavPane extends Component {
   }
 }
 
-const mapStateToProps = ({ entities: { map } }) => ({
+const mapStateToProps = ({ entities: { map, lyft } }) => ({
   address: map.clientLocation.address,
   location: map.clientLocation.location,
-  isFetching: map.isFetching
+  isFetching: map.isFetching || lyft.isFetching
 })
 
 const mapDispatchToProps = dispatch => ({
   getBoundaries: ({ amount, currentLocation }) =>
-    dispatch(receiveBoundaries({ amount, currentLocation }))
+    dispatch(receiveBoundaries({ amount, currentLocation })),
+  setFetchingState: () => dispatch(fetchBoundaries())
 })
 
 NavPane.defaultProps = {

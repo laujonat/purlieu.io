@@ -1,6 +1,7 @@
 import {
   RECEIVE_BOUNDARIES_SUCCESS,
-  RECEIVE_BOUNDARIES_ERROR
+  RECEIVE_BOUNDARIES_ERROR,
+  FETCH_BOUNDARIES
 } from "../actions"
 
 const initialState = {
@@ -11,10 +12,13 @@ const initialState = {
 const lyftReducer = (state = initialState, action) => {
   Object.freeze(state)
   const newState = { ...state }
-
   switch (action.type) {
+    case FETCH_BOUNDARIES:
+      return {
+        ...newState,
+        isFetching: true
+      }
     case RECEIVE_BOUNDARIES_SUCCESS:
-      newState.boundaries = action.data
       return {
         ...newState,
         boundaries: action.data,

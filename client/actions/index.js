@@ -15,7 +15,17 @@ export const DRAW_BOUNDARIES_POLYGON_SUCCESS = "DRAW_BOUNDARIES_POLYGON_SUCCESS"
 export const DRAW_BOUNDARIES_POLYGON_ERROR = "DRAW_BOUNDARIES_POLYGON_ERROR"
 
 export const FETCH_LOCATION = "FETCH_LOCATION"
-export const LOCATION_CHANGE = "LOCATION_CHANGE"
+export const FETCH_BOUNDARIES = "FETCH_BOUNDARIES"
+export const NEW_BOUNDARIES = "NEW_BOUNDARIES"
+export const NEW_LOCATION = "NEW_LOCATION"
+
+export const fetchLocation = () => ({
+  type: FETCH_LOCATION
+})
+
+export const fetchBoundaries = () => ({
+  type: FETCH_BOUNDARIES
+})
 
 // Map Markers
 export const receiveMarkerLocationError = errors => ({
