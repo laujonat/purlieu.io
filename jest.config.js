@@ -5,10 +5,10 @@ module.exports = {
 
   coverageDirectory: "coverage",
 
-  collectCoverageFrom: ["client/**.{js, jsx}", "!client/**/index.{js,jsx}"],
+  collectCoverageFrom: ["client/**.{js, jsx}", "!client/*.{js,jsx}"], 
 
   coveragePathIgnorePatterns: [
-    "./client/*.{js, jsx}",
+    "client/*.{js, jsx}",
   ],
 
   moduleDirectories: ["node_modules", "client"],
