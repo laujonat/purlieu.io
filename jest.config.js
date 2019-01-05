@@ -10,7 +10,6 @@ module.exports = {
 
   coveragePathIgnorePatterns: [
     "./client/*.{js, jsx}",
-    "./client/resources/*.{js, jsx}"
   ],
 
   moduleDirectories: ["node_modules", "client"],
@@ -19,6 +18,8 @@ module.exports = {
 
   testEnvironment: "node",
 
+  setupTestFrameworkScriptFile: "<rootDir>/client/testSetup.js",
+  
   testMatch: ["**/?(*.)+(spec|test).js?(x)"],
 
   testPathIgnorePatterns: ["\\\\node_modules\\\\"],
