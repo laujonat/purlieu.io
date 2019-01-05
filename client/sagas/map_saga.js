@@ -2,6 +2,8 @@ import { call, put, takeEvery } from "redux-saga/effects"
 import {
   RECEIVE_CLIENT_LOCATION,
   RECEIVE_MARKER_LOCATION,
+  LOCATION_CHANGE,
+  FETCH_LOCATION,
   receiveClientLocationSuccess,
   receiveClientLocationErrors,
   receiveMarkerLocationSuccess,
@@ -39,7 +41,12 @@ export function* setMarkerAddress(geoLocation) {
   }
 }
 
+function* handleLocationChange() {
+  yield put({ type: FETCH_LOCATION })
+}
+
 export default function*() {
   yield takeEvery(RECEIVE_CLIENT_LOCATION, fetchClientLocation)
   yield takeEvery(RECEIVE_MARKER_LOCATION, setMarkerAddress)
+  yield takeEvery(LOCATION_CHANGE, handleLocationChange)
 }

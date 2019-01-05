@@ -2,27 +2,29 @@ import {
   RECEIVE_CLIENT_LOCATION_SUCCESS,
   RECEIVE_CLIENT_LOCATION_ERROR,
   RECEIVE_MARKER_LOCATION_SUCCESS,
-  RECEIVE_MARKER_LOCATION_ERROR
+  RECEIVE_MARKER_LOCATION_ERROR,
+  FETCH_LOCATION
 } from "../actions"
 
-const initialState = {
+export const initialState = {
   clientLocation: "",
   isFetching: true
 }
 
-const mapReducer = (state = initialState, action) => {
+export const mapReducer = (state = initialState, action) => {
   Object.freeze(state)
   const newState = { ...state }
   switch (action.type) {
-    case RECEIVE_CLIENT_LOCATION_SUCCESS:
+    case FETCH_LOCATION:
       return {
         ...newState,
-        isFetching: false,
-        clientLocation: action.data
+        isFetching: true
       }
+    case RECEIVE_CLIENT_LOCATION_SUCCESS:
     case RECEIVE_MARKER_LOCATION_SUCCESS:
       return {
         ...newState,
+        isFetching: false,
         clientLocation: action.data
       }
     case RECEIVE_CLIENT_LOCATION_ERROR:

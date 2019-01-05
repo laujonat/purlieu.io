@@ -4,6 +4,7 @@ import styled from "styled-components"
 import PropTypes from "prop-types"
 import MapStyle from "../../lib/styles/map_style"
 import {
+  LOCATION_CHANGE,
   receiveClientLocation,
   receiveMarkerLocation,
   receiveDrawBoundariesPolygon
@@ -87,6 +88,7 @@ class Map extends Component {
   }
 
   setMarkerAddress = geoLocation => {
+    this.props.setFetchingState()
     this.props.setMarkerAddress({
       lat: geoLocation.lat(),
       lng: geoLocation.lng()
@@ -160,7 +162,8 @@ const mapDispatchToProps = dispatch => ({
   fetchClientLocation: () => dispatch(receiveClientLocation()),
   setMarkerAddress: geoLocation => dispatch(receiveMarkerLocation(geoLocation)),
   drawPolygon: (location, boundaries) =>
-    dispatch(receiveDrawBoundariesPolygon(location, boundaries))
+    dispatch(receiveDrawBoundariesPolygon(location, boundaries)),
+  setFetchingState: () => dispatch({ type: LOCATION_CHANGE })
 })
 
 Map.defaultProps = {
