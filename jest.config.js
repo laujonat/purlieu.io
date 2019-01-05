@@ -5,7 +5,6 @@ module.exports = {
 
   coverageDirectory: "coverage",
 
-  // collectCoverage: true,
   collectCoverageFrom: ["client/**.{js, jsx}", "!client/**/index.{js,jsx}"],
 
   coveragePathIgnorePatterns: [
@@ -27,8 +26,9 @@ module.exports = {
   testURL: "http://localhost",
 
   transform: {
-    "^.+\\.js?$": "babel-jest"
+    "^.+\\.js$": "babel-jest",
+    "^.+\\.jsx$": "babel-jest"
   },
 
-  transformIgnorePatterns: ["<rootDir>/node_modules/"]
+  transformIgnorePatterns: ["/node_modules/"]
 }

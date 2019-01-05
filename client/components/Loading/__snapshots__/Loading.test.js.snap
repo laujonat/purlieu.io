@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Loading renders and displayed when active is true 1`] = `
+<div
+  className="sc-bdVaJa djNIHe"
+>
+  Loading..
+</div>
+`;
+
+exports[`Loading renders and not displayed when active is false 1`] = `
+<div
+  className="sc-bdVaJa eCIOyK"
+>
+  Loading..
+</div>
+`;
+
+exports[`Loading renders without crashing 1`] = `
+<div
+  className="sc-bdVaJa eCIOyK"
+>
+  Loading..
+</div>
+`;

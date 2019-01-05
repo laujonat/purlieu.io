@@ -4,7 +4,8 @@ import {
 } from "../actions"
 
 const initialState = {
-  boundaries: [{ point: 222 }, { point: 333 }]
+  boundaries: [],
+  isFetching: false
 }
 
 const lyftReducer = (state = initialState, action) => {
@@ -13,13 +14,17 @@ const lyftReducer = (state = initialState, action) => {
 
   switch (action.type) {
     case RECEIVE_BOUNDARIES_SUCCESS:
-      // newState.boundaries = [...newState.boundaries, ...action.data]
       newState.boundaries = action.data
-      return newState
+      return {
+        ...newState,
+        boundaries: action.data,
+        isFetching: false
+      }
     case RECEIVE_BOUNDARIES_ERROR:
       return {
         ...newState,
-        errors: action.errors
+        errors: action.errors,
+        isFetching: false
       }
 
     default:
