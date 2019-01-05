@@ -8,7 +8,8 @@ import {
 
 export const initialState = {
   clientLocation: "",
-  isFetching: true
+  isFetching: true,
+  errors: null
 }
 
 export const mapReducer = (state = initialState, action) => {
@@ -24,6 +25,7 @@ export const mapReducer = (state = initialState, action) => {
     case RECEIVE_MARKER_LOCATION_SUCCESS:
       return {
         ...newState,
+        errors: null,
         isFetching: false,
         clientLocation: action.data
       }
@@ -31,7 +33,8 @@ export const mapReducer = (state = initialState, action) => {
     case RECEIVE_MARKER_LOCATION_ERROR:
       return {
         ...newState,
-        isFetching: false
+        isFetching: false,
+        errors: action.errors
       }
     default:
       return state

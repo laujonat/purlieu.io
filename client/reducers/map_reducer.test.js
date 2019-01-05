@@ -20,7 +20,8 @@ describe("map reducer", () => {
     }
     expect(mapReducer(initialState, action)).toEqual({
       clientLocation: "",
-      isFetching: true
+      isFetching: true,
+      errors: null
     })
   })
 
@@ -33,7 +34,8 @@ describe("map reducer", () => {
     expect(mapReducer(initialState, action)).toEqual({
       ...initialState,
       clientLocation: action.data,
-      isFetching: false
+      isFetching: false,
+      errors: null
     })
   })
 
@@ -51,31 +53,34 @@ describe("map reducer", () => {
     expect(mapReducer(initialState, action)).toEqual({
       ...initialState,
       clientLocation: action.data,
-      isFetching: false
+      isFetching: false,
+      errors: null
     })
   })
 
   it("should handle RECEIVE_CLIENT_LOCATION_ERROR", () => {
-    const mockData = { data: "123 Street" }
+    const mockData = { errors: "123 Street" }
     const action = {
       type: RECEIVE_CLIENT_LOCATION_ERROR,
-      data: mockData.data
+      errors: mockData.errors
     }
     expect(mapReducer(initialState, action)).toEqual({
       ...initialState,
-      isFetching: false
+      isFetching: false,
+      errors: mockData.errors
     })
   })
 
   it("should handle RECEIVE_MARKER_LOCATION_ERROR", () => {
-    const mockData = { data: "junk" }
+    const mockData = { errors: "junk" }
     const action = {
       type: RECEIVE_MARKER_LOCATION_ERROR,
-      data: mockData.data
+      errors: mockData.data
     }
     expect(mapReducer(initialState, action)).toEqual({
       ...initialState,
-      isFetching: false
+      isFetching: false,
+      errors: mockData.data
     })
   })
 })

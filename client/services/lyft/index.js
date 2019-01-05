@@ -1,7 +1,5 @@
 import axios from "axios"
 
-const google = window.google
-
 const getBoundaries = ({ amount, currentLocation }) => {
   const stdDev = 2
   const defaultRadiusInMeters = 32000
