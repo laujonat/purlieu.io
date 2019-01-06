@@ -1,6 +1,6 @@
-import { combineReducers } from "redux"
-import entitiesReducer from "./entities_reducer"
+// import { combineReducers } from "redux"
+// import entitiesReducer from "./entities_reducer"
 
-export default combineReducers({
-  entities: entitiesReducer
-})
+// export default combineReducers({
+//   entities: entitiesReducer
+// })
