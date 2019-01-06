@@ -24,3 +24,13 @@ export const receiveBoundariesErrors = errors => ({
   type: RECEIVE_BOUNDARIES_ERROR,
   errors
 })
+
+export const receiveBoundaries = data => ({
+  type: RECEIVE_BOUNDARIES,
+  data
+})
+
+export const receiveDrawBoundariesPolygon = data => ({
+  type: DRAW_BOUNDARIES_POLYGON,
+  data
+})

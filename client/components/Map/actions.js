@@ -8,6 +8,7 @@ export const RECEIVE_MARKER_LOCATION_ERROR = "RECEIVE_MARKER_LOCATION_ERROR"
 
 // fetching
 export const NEW_LOCATION = "NEW_LOCATION"
+export const FETCH_LOCATION = "FETCH_LOCATION"
 
 export const fetchLocation = () => ({
   type: FETCH_LOCATION
