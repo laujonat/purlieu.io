@@ -9,15 +9,15 @@ import {
   receiveMarkerLocation
 } from "./actions"
 
-import { receiveDrawBoundariesPolygon } from "../../lyft/actions"
+import { receiveDrawPolygon } from "./actions"
 
-import { getRecalculatedBoundaries } from "../../services/map"
+// import { getRecalculatedBoundaries } from "../../services/map"
 
-const MapComponent = styled.div`
+const Container = styled.div`
   flex: 1 1 70%;
 `
 
-const MapContainer = styled.div`
+const MapComponent = styled.div`
   height: 100%;
   width: 100%;
 `
@@ -121,33 +121,18 @@ class Map extends Component {
     })
   }
 
-  drawBoundaries = async () => {
+  drawBoundaries = () => {    
     const { location, boundaries } = this.props
-    const recalculatedBoundaries = await getRecalculatedBoundaries(
-      location,
-      boundaries,
-      this.map
-    )
-    const bermudaPolygon = new google.maps.Polygon({
-      paths: recalculatedBoundaries,
-      strokeColor: "#f7a0ff",
-      strokeOpacity: 0.7,
-      strokeWeight: 0.5,
-      fillColor: "#f7a0ff",
-      fillOpacity: 0.35
-    })
-
-    const bounds = new google.maps.LatLngBounds()
-    recalculatedBoundaries.forEach(coord => bounds.extend(coord))
-    this.map.fitBounds(bounds)
-    bermudaPolygon.setMap(this.map)
+  
+    this.props.setFetchingState()
+    this.props.drawPolygon(location, boundaries, this.map)
   }
 
   render() {
     return (
-      <MapComponent>
-        <MapContainer ref={this.renderedMap} />
-      </MapComponent>
+      <Container>
+        <MapComponent ref={this.renderedMap} />
+      </Container>
     )
   }
 }
@@ -161,8 +146,8 @@ const mapStateToProps = ({ map, lyft }) => ({
 const mapDispatchToProps = dispatch => ({
   fetchClientLocation: () => dispatch(receiveClientLocation()),
   setMarkerAddress: geoLocation => dispatch(receiveMarkerLocation(geoLocation)),
-  drawPolygon: (location, boundaries) =>
-    dispatch(receiveDrawBoundariesPolygon(location, boundaries)),
+  drawPolygon: (location, boundaries, map) =>
+    dispatch(receiveDrawPolygon({ location, boundaries, map })),
   setFetchingState: () => dispatch(fetchLocation())
 })
 

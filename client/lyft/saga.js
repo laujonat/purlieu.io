@@ -1,12 +1,12 @@
 import { call, put, takeEvery } from "redux-saga/effects"
 import {
   RECEIVE_BOUNDARIES,
-  DRAW_BOUNDARIES_POLYGON,
   NEW_BOUNDARIES,
   receiveBoundariesSuccess,
   receiveBoundariesErrors,
   fetchBoundaries
 } from "./actions"
+
 import api from "../services/lyft"
 
 function* generateBoundaries({ data }) {
@@ -18,14 +18,11 @@ function* generateBoundaries({ data }) {
   }
 }
 
-function* drawPolygonFlow(location, boundaries) {}
-
 function* spawnBoundaries() {
   yield put(fetchBoundaries())
 }
 
 export default function*() {
   yield takeEvery(NEW_BOUNDARIES, spawnBoundaries),
-    yield takeEvery(RECEIVE_BOUNDARIES, generateBoundaries),
-    yield takeEvery(DRAW_BOUNDARIES_POLYGON, drawPolygonFlow)
+  yield takeEvery(RECEIVE_BOUNDARIES, generateBoundaries)
 }

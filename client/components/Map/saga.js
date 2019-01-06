@@ -3,10 +3,13 @@ import {
   RECEIVE_CLIENT_LOCATION,
   RECEIVE_MARKER_LOCATION,
   NEW_LOCATION,
+  DRAW_POLYGON,
   receiveClientLocationSuccess,
   receiveClientLocationErrors,
   receiveMarkerLocationSuccess,
   receiveMarkerLocationError,
+  receiveDrawPolygonSuccess,
+  receiveDrawPolygonError,
   fetchLocation
 } from "../Map/actions"
 import api from "../../services/map"
@@ -45,8 +48,34 @@ function* handleLocationChange() {
   yield put(fetchLocation())
 }
 
+function* drawPolygonFlow({ data }) {
+  try {
+    const boundaries = yield call(api.getRecalculatedBoundaries, data)
+
+    const bermudaPolygon = new google.maps.Polygon({
+      paths: boundaries,
+      strokeColor: "#f7a0ff",
+      strokeOpacity: 0.7,
+      strokeWeight: 0.5,
+      fillColor: "#f7a0ff",
+      fillOpacity: 0.35
+    })
+
+    const bounds = new google.maps.LatLngBounds()
+    boundaries.forEach(coord => bounds.extend(coord))
+    data.map.fitBounds(bounds)
+    bermudaPolygon.setMap(data.map)
+
+    yield put(receiveDrawPolygonSuccess(boundaries))
+  } catch (error) {
+    yield put(receiveDrawPolygonError(error))
+  }
+}
+
+
 export default function*() {
   yield takeEvery(RECEIVE_CLIENT_LOCATION, fetchClientLocation)
   yield takeEvery(RECEIVE_MARKER_LOCATION, setMarkerAddress)
   yield takeEvery(NEW_LOCATION, handleLocationChange)
+  yield takeEvery(DRAW_POLYGON, drawPolygonFlow)
 }

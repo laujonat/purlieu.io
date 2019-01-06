@@ -6,7 +6,8 @@ import {
 
 const initialState = {
   boundaries: [],
-  isFetching: false
+  isFetching: false,
+  errors: null
 }
 
 const reducer = (state = initialState, action) => {
@@ -22,13 +23,14 @@ const reducer = (state = initialState, action) => {
       return {
         ...newState,
         boundaries: action.data,
-        isFetching: false
+        isFetching: false,
+        errors: null
       }
     case RECEIVE_BOUNDARIES_ERROR:
       return {
         ...newState,
-        errors: action.errors,
-        isFetching: false
+        isFetching: false,
+        errors: action.errors
       }
 
     default:

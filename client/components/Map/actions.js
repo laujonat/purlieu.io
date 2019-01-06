@@ -6,6 +6,11 @@ export const RECEIVE_MARKER_LOCATION = "RECEIVE_MARKER_LOCATION"
 export const RECEIVE_MARKER_LOCATION_SUCCESS = "RECEIVE_MARKER_LOCATION_SUCCESS"
 export const RECEIVE_MARKER_LOCATION_ERROR = "RECEIVE_MARKER_LOCATION_ERROR"
 
+
+export const DRAW_POLYGON = "DRAW_POLYGON"
+export const DRAW_POLYGON_SUCCESS = "DRAW_POLYGON_SUCCESS"
+export const DRAW_POLYGON_ERROR = "DRAW_POLYGON_ERROR"
+
 // fetching
 export const NEW_LOCATION = "NEW_LOCATION"
 export const FETCH_LOCATION = "FETCH_LOCATION"
@@ -45,3 +50,21 @@ export const receiveMarkerLocation = data => ({
   type: RECEIVE_MARKER_LOCATION,
   data
 })
+
+export const receiveDrawPolygonError = errors => ({
+  type: DRAW_POLYGON_ERROR,
+  errors
+})
+
+// Markers
+export const receiveDrawPolygonSuccess = data => ({
+  type: DRAW_POLYGON_SUCCESS,
+  data
+})
+
+export const receiveDrawPolygon = data => ({
+  type: DRAW_POLYGON,
+  data
+})
+
+
