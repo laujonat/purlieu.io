@@ -1,15 +1,15 @@
-import { mapReducer, initialState } from "./map_reducer"
+import { reducer, initialState } from "./reducer"
 import {
   FETCH_LOCATION,
   RECEIVE_CLIENT_LOCATION_SUCCESS,
   RECEIVE_MARKER_LOCATION_SUCCESS,
   RECEIVE_CLIENT_LOCATION_ERROR,
   RECEIVE_MARKER_LOCATION_ERROR
-} from "../actions"
+} from "./actions"
 
 describe("map reducer", () => {
   it("should return the initial state", () => {
-    expect(mapReducer(initialState, {})).toEqual(initialState)
+    expect(reducer(initialState, {})).toEqual(initialState)
   })
 
   it("should handle FETCH_LOCATION", () => {
@@ -18,7 +18,7 @@ describe("map reducer", () => {
       type: FETCH_LOCATION,
       data: mockData.data
     }
-    expect(mapReducer(initialState, action)).toEqual({
+    expect(reducer(initialState, action)).toEqual({
       clientLocation: "",
       isFetching: true,
       errors: null
@@ -31,7 +31,7 @@ describe("map reducer", () => {
       type: RECEIVE_CLIENT_LOCATION_SUCCESS,
       data: mockData.data
     }
-    expect(mapReducer(initialState, action)).toEqual({
+    expect(reducer(initialState, action)).toEqual({
       ...initialState,
       clientLocation: action.data,
       isFetching: false,
@@ -50,7 +50,7 @@ describe("map reducer", () => {
       type: RECEIVE_MARKER_LOCATION_SUCCESS,
       data: mockData.data
     }
-    expect(mapReducer(initialState, action)).toEqual({
+    expect(reducer(initialState, action)).toEqual({
       ...initialState,
       clientLocation: action.data,
       isFetching: false,
@@ -64,7 +64,7 @@ describe("map reducer", () => {
       type: RECEIVE_CLIENT_LOCATION_ERROR,
       errors: mockData.errors
     }
-    expect(mapReducer(initialState, action)).toEqual({
+    expect(reducer(initialState, action)).toEqual({
       ...initialState,
       isFetching: false,
       errors: mockData.errors
@@ -77,7 +77,7 @@ describe("map reducer", () => {
       type: RECEIVE_MARKER_LOCATION_ERROR,
       errors: mockData.data
     }
-    expect(mapReducer(initialState, action)).toEqual({
+    expect(reducer(initialState, action)).toEqual({
       ...initialState,
       isFetching: false,
       errors: mockData.data

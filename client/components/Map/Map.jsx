@@ -6,9 +6,11 @@ import MapStyle from "../../lib/styles/map_style"
 import {
   fetchLocation,
   receiveClientLocation,
-  receiveMarkerLocation,
-  receiveDrawBoundariesPolygon
-} from "../../actions"
+  receiveMarkerLocation
+} from "./actions"
+
+import { receiveDrawBoundariesPolygon } from "../../lyft/actions"
+
 import { getRecalculatedBoundaries } from "../../services/map"
 
 const MapComponent = styled.div`
@@ -150,7 +152,7 @@ class Map extends Component {
   }
 }
 
-const mapStateToProps = ({ entities: { map, lyft } }) => ({
+const mapStateToProps = ({ map, lyft }) => ({
   location: map.clientLocation.location,
   address: map.clientLocation.address,
   boundaries: lyft.boundaries

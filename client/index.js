@@ -1,5 +1,5 @@
 import React from "react"
-import reducers from "./reducers/root_reducer"
+import reducers from "./reducers"
 import sagas from "./sagas"
 import { App } from "./App"
 import { configureStore } from "./configureStore"

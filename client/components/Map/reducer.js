@@ -4,7 +4,7 @@ import {
   RECEIVE_MARKER_LOCATION_SUCCESS,
   RECEIVE_MARKER_LOCATION_ERROR,
   FETCH_LOCATION
-} from "../actions"
+} from "./actions"
 
 export const initialState = {
   clientLocation: "",
@@ -12,7 +12,7 @@ export const initialState = {
   errors: null
 }
 
-export const mapReducer = (state = initialState, action) => {
+export const reducer = (state = initialState, action) => {
   Object.freeze(state)
   const newState = { ...state }
   switch (action.type) {
@@ -41,4 +41,4 @@ export const mapReducer = (state = initialState, action) => {
   }
 }
 
-export default mapReducer
+export default reducer

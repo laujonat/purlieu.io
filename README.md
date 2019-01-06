@@ -25,9 +25,10 @@ yarn dev
 ```
 
 ## Testing 
+If you are snapshot testing, make sure you commit: `yarn update:snapshot`
 ```
 yarn test 
-yarn --watch 
+yarn test:watch
 ```
 
 ### Setup

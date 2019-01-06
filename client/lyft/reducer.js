@@ -2,14 +2,14 @@ import {
   RECEIVE_BOUNDARIES_SUCCESS,
   RECEIVE_BOUNDARIES_ERROR,
   FETCH_BOUNDARIES
-} from "../actions"
+} from "./actions"
 
 const initialState = {
   boundaries: [],
   isFetching: false
 }
 
-const lyftReducer = (state = initialState, action) => {
+const reducer = (state = initialState, action) => {
   Object.freeze(state)
   const newState = { ...state }
   switch (action.type) {
@@ -36,4 +36,4 @@ const lyftReducer = (state = initialState, action) => {
   }
 }
 
-export default lyftReducer
+export default reducer

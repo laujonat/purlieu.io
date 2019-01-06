@@ -6,7 +6,7 @@ import {
   receiveBoundariesSuccess,
   receiveBoundariesErrors,
   fetchBoundaries
-} from "../actions"
+} from "./actions"
 import api from "../services/lyft"
 
 function* generateBoundaries({ data }) {

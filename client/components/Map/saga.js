@@ -8,8 +8,8 @@ import {
   receiveMarkerLocationSuccess,
   receiveMarkerLocationError,
   fetchLocation
-} from "../actions"
-import api from "../services/map"
+} from "../Map/actions"
+import api from "../../services/map"
 
 export function* fetchClientLocation() {
   try {
