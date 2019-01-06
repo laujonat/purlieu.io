@@ -41,7 +41,7 @@ export function* setMarkerAddress(geoLocation) {
   }
 }
 
-function* handleLocationChange() {
+export function* handleLocationChange() {
   yield put(fetchLocation())
 }
 
