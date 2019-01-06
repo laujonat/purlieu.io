@@ -1,7 +1,6 @@
 const express = require("express")
 const axios = require("axios")
 const router = express.Router()
-const bodyParser = require("body-parser")
 const Lyft = require("lyft-node")
 require("dotenv").config()
 

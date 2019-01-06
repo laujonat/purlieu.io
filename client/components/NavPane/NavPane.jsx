@@ -1,10 +1,10 @@
 import React, { Component } from "react"
 import styled from "styled-components"
 import PropTypes from "prop-types"
-import { LoadingText } from "../Loading"
+import { Loading } from "../Loading"
 import { connect } from "react-redux"
 import { spaces } from "../../lib/styles/spaces"
-import { receiveBoundaries } from "../../actions"
+import { receiveBoundaries, fetchBoundaries } from "../../actions"
 
 const Container = styled.nav`
   display: flex;
@@ -87,13 +87,16 @@ class NavPane extends Component {
 
   componentDidUpdate(prevProps) {
     if (prevProps.address !== this.props.address) {
-      this.setState({ addressInput: this.props.address })
+      this.setState({
+        addressInput: this.props.address
+      })
     }
   }
 
   onSubmit = () => {
     const { dollarInput } = this.state
     const { location } = this.props
+    this.props.setFetchingState()
     this.props.getBoundaries({
       amount: dollarInput,
       currentLocation: location
@@ -123,21 +126,22 @@ class NavPane extends Component {
           onChange={this.onChange("addressInput")}
         />
         <SubmitButton onClick={this.onSubmit}>Show Me Dah Wey</SubmitButton>
-        <LoadingText active={isFetching}>Loading..</LoadingText>
+        <Loading active={isFetching}>Loading..</Loading>
       </Container>
     )
   }
 }
 
-const mapStateToProps = ({ entities: { map } }) => ({
+const mapStateToProps = ({ entities: { map, lyft } }) => ({
   address: map.clientLocation.address,
   location: map.clientLocation.location,
-  isFetching: map.isFetching
+  isFetching: map.isFetching || lyft.isFetching
 })
 
 const mapDispatchToProps = dispatch => ({
   getBoundaries: ({ amount, currentLocation }) =>
-    dispatch(receiveBoundaries({ amount, currentLocation }))
+    dispatch(receiveBoundaries({ amount, currentLocation })),
+  setFetchingState: () => dispatch(fetchBoundaries())
 })
 
 NavPane.defaultProps = {

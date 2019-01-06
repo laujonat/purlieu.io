@@ -1,12 +1,31 @@
 export const RECEIVE_BOUNDARIES = "RECEIVE_BOUNDARIES"
 export const RECEIVE_BOUNDARIES_SUCCESS = "RECEIVE_BOUNDARIES_SUCCESS"
 export const RECEIVE_BOUNDARIES_ERROR = "RECEIVE_BOUNDARIES_ERROR"
+
 export const RECEIVE_CLIENT_LOCATION = "RECEIVE_CLIENT_LOCATION"
 export const RECEIVE_CLIENT_LOCATION_SUCCESS = "RECEIVE_CLIENT_LOCATION_SUCCESS"
 export const RECEIVE_CLIENT_LOCATION_ERROR = "RECEIVE_CLIENT_LOCATION_ERROR"
+
 export const RECEIVE_MARKER_LOCATION = "RECEIVE_MARKER_LOCATION"
 export const RECEIVE_MARKER_LOCATION_SUCCESS = "RECEIVE_MARKER_LOCATION_SUCCESS"
 export const RECEIVE_MARKER_LOCATION_ERROR = "RECEIVE_MARKER_LOCATION_ERROR"
+
+export const DRAW_BOUNDARIES_POLYGON = "DRAW_BOUNDARIES_POLYGON"
+export const DRAW_BOUNDARIES_POLYGON_SUCCESS = "DRAW_BOUNDARIES_POLYGON_SUCCESS"
+export const DRAW_BOUNDARIES_POLYGON_ERROR = "DRAW_BOUNDARIES_POLYGON_ERROR"
+
+export const FETCH_LOCATION = "FETCH_LOCATION"
+export const FETCH_BOUNDARIES = "FETCH_BOUNDARIES"
+export const NEW_BOUNDARIES = "NEW_BOUNDARIES"
+export const NEW_LOCATION = "NEW_LOCATION"
+
+export const fetchLocation = () => ({
+  type: FETCH_LOCATION
+})
+
+export const fetchBoundaries = () => ({
+  type: FETCH_BOUNDARIES
+})
 
 // Map Markers
 export const receiveMarkerLocationError = errors => ({
@@ -53,5 +72,21 @@ export const receiveClientLocationErrors = errors => ({
 
 export const receiveClientLocation = data => ({
   type: RECEIVE_CLIENT_LOCATION,
+  data
+})
+
+// Polygon
+export const receiveDrawBoundariesPolygonSuccess = data => ({
+  type: DRAW_BOUNDARIES_POLYGON_SUCCESS,
+  data
+})
+
+export const receiveDrawBoundariesPolygonErrors = errors => ({
+  type: DRAW_BOUNDARIES_POLYGON_ERROR,
+  errors
+})
+
+export const receiveDrawBoundariesPolygon = data => ({
+  type: DRAW_BOUNDARIES_POLYGON,
   data
 })
