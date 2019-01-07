@@ -9,18 +9,18 @@ import {
   receiveMarkerLocation
 } from "./actions"
 
-import { receiveDrawBoundariesPolygon } from "../../lyft/actions"
+import { receiveDrawPolygon } from "../../boundaries/actions"
 
-import { getRecalculatedBoundaries } from "../../services/map"
-
-const MapComponent = styled.div`
+const Container = styled.div`
   flex: 1 1 70%;
 `
 
-const MapContainer = styled.div`
+const MapComponent = styled.div`
   height: 100%;
   width: 100%;
 `
+
+const google = global.google
 
 class Map extends Component {
   constructor(props) {
@@ -42,7 +42,7 @@ class Map extends Component {
       this.centerMap(this.props.location)
     }
 
-    if (prevProps.boundaries !== this.props.boundaries) {
+    if (prevProps.polygonList !== this.props.polygonList) {
       this.drawBoundaries()
     }
   }
@@ -88,7 +88,6 @@ class Map extends Component {
   }
 
   setMarkerAddress = geoLocation => {
-    this.props.setFetchingState()
     this.props.setMarkerAddress({
       lat: geoLocation.lat(),
       lng: geoLocation.lng()
@@ -121,48 +120,35 @@ class Map extends Component {
     })
   }
 
-  drawBoundaries = async () => {
-    const { location, boundaries } = this.props
-    const recalculatedBoundaries = await getRecalculatedBoundaries(
+  drawBoundaries = () => {
+    const { location, polygonList } = this.props
+    this.props.drawPolygon(
       location,
-      boundaries,
+      polygonList[polygonList.length - 1].boundaries,
       this.map
     )
-    const bermudaPolygon = new google.maps.Polygon({
-      paths: recalculatedBoundaries,
-      strokeColor: "#f7a0ff",
-      strokeOpacity: 0.7,
-      strokeWeight: 0.5,
-      fillColor: "#f7a0ff",
-      fillOpacity: 0.35
-    })
-
-    const bounds = new google.maps.LatLngBounds()
-    recalculatedBoundaries.forEach(coord => bounds.extend(coord))
-    this.map.fitBounds(bounds)
-    bermudaPolygon.setMap(this.map)
   }
 
   render() {
     return (
-      <MapComponent>
-        <MapContainer ref={this.renderedMap} />
-      </MapComponent>
+      <Container>
+        <MapComponent ref={this.renderedMap} />
+      </Container>
     )
   }
 }
 
-const mapStateToProps = ({ map, lyft }) => ({
+const mapStateToProps = ({ map, polygonList }) => ({
   location: map.clientLocation.location,
   address: map.clientLocation.address,
-  boundaries: lyft.boundaries
+  polygonList
 })
 
 const mapDispatchToProps = dispatch => ({
   fetchClientLocation: () => dispatch(receiveClientLocation()),
   setMarkerAddress: geoLocation => dispatch(receiveMarkerLocation(geoLocation)),
-  drawPolygon: (location, boundaries) =>
-    dispatch(receiveDrawBoundariesPolygon(location, boundaries)),
+  drawPolygon: (location, boundaries, map) =>
+    dispatch(receiveDrawPolygon({ location, boundaries, map })),
   setFetchingState: () => dispatch(fetchLocation())
 })
 
@@ -171,17 +157,19 @@ Map.defaultProps = {
     lat: 37.773972,
     lng: -122.431297
   },
-  address: undefined,
-  boundaries: [],
-  setMarkerAddress: () => {}
+  address: "",
+  polygonList: [],
+  setMarkerAddress: () => {},
+  drawPolygon: () => {}
 }
 
 Map.propTypes = {
   fetchClientLocation: PropTypes.func,
   setMarkerAddress: PropTypes.func,
+  drawPolygon: PropTypes.func,
   location: PropTypes.object,
   address: PropTypes.string,
-  boundaries: PropTypes.array
+  polygonList: PropTypes.array
 }
 
 export default connect(

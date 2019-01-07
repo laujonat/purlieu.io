@@ -4,7 +4,7 @@ import PropTypes from "prop-types"
 import { Loading } from "../Loading"
 import { connect } from "react-redux"
 import { spaces } from "../../lib/styles/spaces"
-import { receiveBoundaries, fetchBoundaries } from "../../lyft/actions"
+import { receiveBoundaries, fetchBoundaries } from "../../boundaries/actions"
 
 const Container = styled.nav`
   display: flex;
@@ -95,11 +95,13 @@ class NavPane extends Component {
 
   onSubmit = () => {
     const { dollarInput } = this.state
-    const { location } = this.props
-    this.props.setFetchingState()
+    const { location, address } = this.props
     this.props.getBoundaries({
       amount: dollarInput,
-      currentLocation: location
+      geoLocation: {
+        location,
+        address
+      }
     })
   }
 
@@ -132,15 +134,15 @@ class NavPane extends Component {
   }
 }
 
-const mapStateToProps = ({ map, lyft }) => ({
+const mapStateToProps = ({ map }) => ({
   address: map.clientLocation.address,
   location: map.clientLocation.location,
-  isFetching: map.isFetching || lyft.isFetching
+  isFetching: map.isFetching
 })
 
 const mapDispatchToProps = dispatch => ({
-  getBoundaries: ({ amount, currentLocation }) =>
-    dispatch(receiveBoundaries({ amount, currentLocation })),
+  getBoundaries: ({ amount, geoLocation }) =>
+    dispatch(receiveBoundaries({ amount, geoLocation, carrier: "lyft" })),
   setFetchingState: () => dispatch(fetchBoundaries())
 })
 
@@ -154,7 +156,8 @@ NavPane.defaultProps = {
 NavPane.propTypes = {
   getBoundaries: PropTypes.func,
   address: PropTypes.string,
-  location: PropTypes.object
+  location: PropTypes.object,
+  isFetching: PropTypes.bool
 }
 
 export default connect(

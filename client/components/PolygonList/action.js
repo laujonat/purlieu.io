@@ -14,7 +14,7 @@ export const fetchBoundaries = () => ({
   type: FETCH_BOUNDARIES
 })
 
-// Lyft Boundaries
+// Boundaries
 export const receiveBoundariesSuccess = data => ({
   type: RECEIVE_BOUNDARIES_SUCCESS,
   data
