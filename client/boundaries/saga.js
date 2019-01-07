@@ -1,10 +1,8 @@
 import { call, put, takeEvery } from "redux-saga/effects"
 import {
   RECEIVE_BOUNDARIES,
-  NEW_BOUNDARIES,
   receiveBoundariesSuccess,
   receiveBoundariesErrors,
-  fetchBoundaries
 } from "./actions"
 
 import api from "../services"
@@ -18,11 +16,6 @@ function* generateBoundaries({ data }) {
   }
 }
 
-function* spawnBoundaries() {
-  yield put(fetchBoundaries())
-}
-
 export default function*() {
-  yield takeEvery(NEW_BOUNDARIES, spawnBoundaries),
-    yield takeEvery(RECEIVE_BOUNDARIES, generateBoundaries)
+  yield takeEvery(RECEIVE_BOUNDARIES, generateBoundaries)
 }

@@ -1,10 +1,7 @@
 import { reducer, initialState } from "./reducer"
 import {
-  FETCH_LOCATION,
   RECEIVE_CLIENT_LOCATION_SUCCESS,
-  RECEIVE_MARKER_LOCATION_SUCCESS,
-  RECEIVE_CLIENT_LOCATION_ERROR,
-  RECEIVE_MARKER_LOCATION_ERROR
+  RECEIVE_MARKER_LOCATION_SUCCESS
 } from "./actions"
 
 describe("map reducer", () => {
@@ -12,75 +9,28 @@ describe("map reducer", () => {
     expect(reducer(initialState, {})).toEqual(initialState)
   })
 
-  it("should handle FETCH_LOCATION", () => {
-    const mockData = { data: "stuff" }
-    const action = {
-      type: FETCH_LOCATION,
-      data: mockData.data
-    }
-    expect(reducer(initialState, action)).toEqual({
-      clientLocation: "",
-      isFetching: true,
-      errors: null
-    })
-  })
-
   it("should handle RECEIVE_CLIENT_LOCATION_SUCCESS", () => {
-    const mockData = { data: "123 Street" }
     const action = {
       type: RECEIVE_CLIENT_LOCATION_SUCCESS,
-      data: mockData.data
+      data: {
+        address: "123 Street"
+      }
     }
-    expect(reducer(initialState, action)).toEqual({
-      ...initialState,
-      clientLocation: action.data,
-      isFetching: false,
-      errors: null
-    })
+    expect(reducer(initialState, action)).toEqual(
+      Object.assign({}, initialState, action.data)
+    )
   })
 
-  it("should handle RECEIVE_CLIENT_LOCATION_SUCCESS", () => {
-    const mockData = {
+  it("should handle RECEIVE_MARKER_LOCATION_SUCCESS", () => {
+    const action = {
+      type: RECEIVE_MARKER_LOCATION_SUCCESS,
       data: {
         lat: -12.333,
         lng: 11.234
       }
     }
-    const action = {
-      type: RECEIVE_MARKER_LOCATION_SUCCESS,
-      data: mockData.data
-    }
-    expect(reducer(initialState, action)).toEqual({
-      ...initialState,
-      clientLocation: action.data,
-      isFetching: false,
-      errors: null
-    })
-  })
-
-  it("should handle RECEIVE_CLIENT_LOCATION_ERROR", () => {
-    const mockData = { errors: "123 Street" }
-    const action = {
-      type: RECEIVE_CLIENT_LOCATION_ERROR,
-      errors: mockData.errors
-    }
-    expect(reducer(initialState, action)).toEqual({
-      ...initialState,
-      isFetching: false,
-      errors: mockData.errors
-    })
-  })
-
-  it("should handle RECEIVE_MARKER_LOCATION_ERROR", () => {
-    const mockData = { errors: "junk" }
-    const action = {
-      type: RECEIVE_MARKER_LOCATION_ERROR,
-      errors: mockData.data
-    }
-    expect(reducer(initialState, action)).toEqual({
-      ...initialState,
-      isFetching: false,
-      errors: mockData.data
-    })
+    expect(reducer(initialState, action)).toEqual(
+      Object.assign({}, initialState, action.data)
+    )
   })
 })
