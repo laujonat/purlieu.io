@@ -42,7 +42,7 @@ class Map extends Component {
       this.centerMap(this.props.location)
     }
 
-    if (prevProps.boundaries !== this.props.boundaries) {
+    if (prevProps.polygonList !== this.props.polygonList) {
       this.drawBoundaries()
     }
   }
@@ -121,8 +121,12 @@ class Map extends Component {
   }
 
   drawBoundaries = () => {
-    const { location, boundaries } = this.props
-    this.props.drawPolygon(location, boundaries[0].boundaries, this.map)
+    const { location, polygonList } = this.props
+    this.props.drawPolygon(
+      location,
+      polygonList[polygonList.length - 1].boundaries,
+      this.map
+    )
   }
 
   render() {
@@ -134,10 +138,10 @@ class Map extends Component {
   }
 }
 
-const mapStateToProps = ({ map, boundaries }) => ({
+const mapStateToProps = ({ map, polygonList }) => ({
   location: map.clientLocation.location,
   address: map.clientLocation.address,
-  boundaries: boundaries
+  polygonList
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -153,7 +157,8 @@ Map.defaultProps = {
     lat: 37.773972,
     lng: -122.431297
   },
-  address: undefined,
+  address: "",
+  polygonList: [],
   setMarkerAddress: () => {},
   drawPolygon: () => {}
 }
@@ -164,7 +169,7 @@ Map.propTypes = {
   drawPolygon: PropTypes.func,
   location: PropTypes.object,
   address: PropTypes.string,
-  boundaries: PropTypes.array
+  polygonList: PropTypes.array
 }
 
 export default connect(
