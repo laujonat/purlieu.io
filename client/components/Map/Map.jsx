@@ -9,9 +9,7 @@ import {
   receiveMarkerLocation
 } from "./actions"
 
-import { receiveDrawPolygon } from "./actions"
-
-// import { getRecalculatedBoundaries } from "../../services/map"
+import { receiveDrawPolygon } from "../../boundaries/actions"
 
 const Container = styled.div`
   flex: 1 1 70%;
@@ -121,9 +119,9 @@ class Map extends Component {
     })
   }
 
-  drawBoundaries = () => {    
+  drawBoundaries = () => {
     const { location, boundaries } = this.props
-  
+
     this.props.setFetchingState()
     this.props.drawPolygon(location, boundaries, this.map)
   }
@@ -137,10 +135,10 @@ class Map extends Component {
   }
 }
 
-const mapStateToProps = ({ map, lyft }) => ({
+const mapStateToProps = ({ map, boundaries }) => ({
   location: map.clientLocation.location,
   address: map.clientLocation.address,
-  boundaries: lyft.boundaries
+  boundaries: boundaries
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -157,7 +155,6 @@ Map.defaultProps = {
     lng: -122.431297
   },
   address: undefined,
-  boundaries: [],
   setMarkerAddress: () => {}
 }
 

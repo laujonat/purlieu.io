@@ -3,15 +3,19 @@ import {
   RECEIVE_CLIENT_LOCATION,
   RECEIVE_MARKER_LOCATION,
   NEW_LOCATION,
-  DRAW_POLYGON,
   receiveClientLocationSuccess,
   receiveClientLocationErrors,
   receiveMarkerLocationSuccess,
   receiveMarkerLocationError,
-  receiveDrawPolygonSuccess,
-  receiveDrawPolygonError,
   fetchLocation
 } from "../Map/actions"
+
+import {
+  DRAW_POLYGON,
+  receiveDrawPolygonSuccess,
+  receiveDrawPolygonError
+} from "../../boundaries/actions"
+
 import api from "../../services/map"
 
 export function* fetchClientLocation() {
@@ -71,7 +75,6 @@ function* drawPolygonFlow({ data }) {
     yield put(receiveDrawPolygonError(error))
   }
 }
-
 
 export default function*() {
   yield takeEvery(RECEIVE_CLIENT_LOCATION, fetchClientLocation)

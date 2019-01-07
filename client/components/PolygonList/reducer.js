@@ -5,7 +5,7 @@ import {
 } from "./actions"
 
 export const initialState = {
-  clientLocation: "",
+  polygonList: {},
   isFetching: true,
   errors: null
 }
@@ -20,8 +20,6 @@ export const reducer = (state = initialState, action) => {
         isFetching: true
       }
     case DRAW_POLYGON_SUCCESS:
-    case RECEIVE_CLIENT_LOCATION_SUCCESS:
-    case RECEIVE_MARKER_LOCATION_SUCCESS:
       return {
         ...newState,
         errors: null,
@@ -29,8 +27,6 @@ export const reducer = (state = initialState, action) => {
         clientLocation: action.data
       }
     case DRAW_POLYGON_ERROR:
-    case RECEIVE_CLIENT_LOCATION_ERROR:
-    case RECEIVE_MARKER_LOCATION_ERROR:
       return {
         ...newState,
         isFetching: false,

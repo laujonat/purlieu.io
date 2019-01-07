@@ -1,8 +1,8 @@
-import lyftSagas from "./lyft/saga"
+import boundariesSagas from "./boundaries/saga"
 import mapSagas from "./components/Map/saga"
 import { fork } from "redux-saga/effects"
 
 export default function* rootSaga() {
   yield fork(mapSagas)
-  yield fork(lyftSagas)
+  yield fork(boundariesSagas)
 }

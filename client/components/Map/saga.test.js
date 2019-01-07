@@ -1,7 +1,11 @@
 import { testSaga } from "redux-saga-test-plan"
 import { handleLocationChange, fetchClientLocation } from "./saga"
 
-import { FETCH_LOCATION, receiveClientLocationSuccess } from "./actions"
+import {
+  FETCH_LOCATION,
+  receiveClientLocationSuccess,
+  receiveClientLocationErrors
+} from "./actions"
 import api from "../../services/map"
 
 describe("handleLocationChange saga", () => {
@@ -32,7 +36,19 @@ describe("fetchClientLocation saga", () => {
   })
 
   describe("unsuccessfully fetching client location", () => {
-    it("calls receiveClientLocationErrors", () => {})
+    it("calls receiveClientLocationErrors", () => {
+      const location = { lat: 122.222, lng: -12.333 }
+      const error = { errors: {} }
+      testSaga(fetchClientLocation)
+        .next()
+        .call(api.getLocation)
+        .next(location)
+        .call(api.getAddress, location)
+        .throw(error)
+        .put(receiveClientLocationErrors(error))
+        .next()
+        .isDone()
+    })
   })
 
   describe("successfully setting marker address", () => {

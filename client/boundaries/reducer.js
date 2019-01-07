@@ -4,11 +4,7 @@ import {
   FETCH_BOUNDARIES
 } from "./actions"
 
-const initialState = {
-  boundaries: [],
-  isFetching: false,
-  errors: null
-}
+const initialState = []
 
 const reducer = (state = initialState, action) => {
   Object.freeze(state)
@@ -20,12 +16,7 @@ const reducer = (state = initialState, action) => {
         isFetching: true
       }
     case RECEIVE_BOUNDARIES_SUCCESS:
-      return {
-        ...newState,
-        boundaries: action.data,
-        isFetching: false,
-        errors: null
-      }
+      return Object.assign({}, ...newState, action.data)
     case RECEIVE_BOUNDARIES_ERROR:
       return {
         ...newState,

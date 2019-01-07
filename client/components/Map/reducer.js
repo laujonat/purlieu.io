@@ -3,8 +3,6 @@ import {
   RECEIVE_CLIENT_LOCATION_ERROR,
   RECEIVE_MARKER_LOCATION_SUCCESS,
   RECEIVE_MARKER_LOCATION_ERROR,
-  DRAW_POLYGON_SUCCESS,
-  DRAW_POLYGON_ERROR,
   FETCH_LOCATION
 } from "./actions"
 
@@ -23,7 +21,6 @@ export const reducer = (state = initialState, action) => {
         ...newState,
         isFetching: true
       }
-    case DRAW_POLYGON_SUCCESS:
     case RECEIVE_CLIENT_LOCATION_SUCCESS:
     case RECEIVE_MARKER_LOCATION_SUCCESS:
       return {
@@ -32,7 +29,6 @@ export const reducer = (state = initialState, action) => {
         isFetching: false,
         clientLocation: action.data
       }
-    case DRAW_POLYGON_ERROR:
     case RECEIVE_CLIENT_LOCATION_ERROR:
     case RECEIVE_MARKER_LOCATION_ERROR:
       return {

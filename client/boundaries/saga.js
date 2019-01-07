@@ -7,7 +7,7 @@ import {
   fetchBoundaries
 } from "./actions"
 
-import api from "../services/lyft"
+import api from "../services"
 
 function* generateBoundaries({ data }) {
   try {
@@ -24,5 +24,5 @@ function* spawnBoundaries() {
 
 export default function*() {
   yield takeEvery(NEW_BOUNDARIES, spawnBoundaries),
-  yield takeEvery(RECEIVE_BOUNDARIES, generateBoundaries)
+    yield takeEvery(RECEIVE_BOUNDARIES, generateBoundaries)
 }
