@@ -9,7 +9,7 @@
   "environments": {
     "test": {
       "scripts": {
-        "test": "eslint --ignore-pattern !.eslintrc.js .eslintrc.js"
+        "test": "eslint --ignore-pattern !.eslintrc.js"
       }
     }
   }
