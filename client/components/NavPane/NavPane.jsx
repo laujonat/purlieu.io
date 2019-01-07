@@ -95,11 +95,13 @@ class NavPane extends Component {
 
   onSubmit = () => {
     const { dollarInput } = this.state
-    const { location } = this.props
-    this.props.setFetchingState()
+    const { location, address } = this.props
     this.props.getBoundaries({
       amount: dollarInput,
-      currentLocation: location
+      geoLocation: {
+        location,
+        address
+      }
     })
   }
 
@@ -108,7 +110,6 @@ class NavPane extends Component {
   }
 
   render() {
-    const { isFetching } = this.props
     return (
       <Container>
         <HeaderContainer>
@@ -126,7 +127,7 @@ class NavPane extends Component {
           onChange={this.onChange("addressInput")}
         />
         <SubmitButton onClick={this.onSubmit}>Show Me Dah Wey</SubmitButton>
-        <Loading active={isFetching}>Loading..</Loading>
+        {/* <Loading active={isFetching}>Loading..</Loading> */}
       </Container>
     )
   }
@@ -138,8 +139,8 @@ const mapStateToProps = ({ map }) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  getBoundaries: ({ amount, currentLocation }) =>
-    dispatch(receiveBoundaries({ amount, currentLocation })),
+  getBoundaries: ({ amount, geoLocation }) =>
+    dispatch(receiveBoundaries({ amount, geoLocation, carrier: "lyft" })),
   setFetchingState: () => dispatch(fetchBoundaries())
 })
 

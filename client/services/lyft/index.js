@@ -1,5 +1,7 @@
 import axios from "axios"
 
+const google = global.google
+
 const getRideEstimate = async (
   start,
   end,

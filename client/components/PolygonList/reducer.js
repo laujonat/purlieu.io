@@ -1,37 +1,13 @@
-import {
-  DRAW_POLYGON_SUCCESS,
-  DRAW_POLYGON_ERROR,
-  FETCH_LOCATION
-} from "./actions"
+import { RECEIVE_BOUNDARIES_SUCCESS } from "../../boundaries/actions"
 
-export const initialState = {
-  polygonList: {},
-  isFetching: true,
-  errors: null
-}
+const initialState = []
 
-export const reducer = (state = initialState, action) => {
+const reducer = (state = initialState, action) => {
   Object.freeze(state)
-  const newState = { ...state }
+  const newState = [...state]
   switch (action.type) {
-    case FETCH_LOCATION:
-      return {
-        ...newState,
-        isFetching: true
-      }
-    case DRAW_POLYGON_SUCCESS:
-      return {
-        ...newState,
-        errors: null,
-        isFetching: false,
-        clientLocation: action.data
-      }
-    case DRAW_POLYGON_ERROR:
-      return {
-        ...newState,
-        isFetching: false,
-        errors: action.errors
-      }
+    case RECEIVE_BOUNDARIES_SUCCESS:
+      return [...newState, action.data]
     default:
       return state
   }

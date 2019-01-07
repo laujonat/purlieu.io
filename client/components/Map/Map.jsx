@@ -20,6 +20,8 @@ const MapComponent = styled.div`
   width: 100%;
 `
 
+const google = global.google
+
 class Map extends Component {
   constructor(props) {
     super(props)
@@ -86,7 +88,6 @@ class Map extends Component {
   }
 
   setMarkerAddress = geoLocation => {
-    this.props.setFetchingState()
     this.props.setMarkerAddress({
       lat: geoLocation.lat(),
       lng: geoLocation.lng()
@@ -121,9 +122,7 @@ class Map extends Component {
 
   drawBoundaries = () => {
     const { location, boundaries } = this.props
-
-    this.props.setFetchingState()
-    this.props.drawPolygon(location, boundaries, this.map)
+    this.props.drawPolygon(location, boundaries[0].boundaries, this.map)
   }
 
   render() {
@@ -155,12 +154,14 @@ Map.defaultProps = {
     lng: -122.431297
   },
   address: undefined,
-  setMarkerAddress: () => {}
+  setMarkerAddress: () => {},
+  drawPolygon: () => {}
 }
 
 Map.propTypes = {
   fetchClientLocation: PropTypes.func,
   setMarkerAddress: PropTypes.func,
+  drawPolygon: PropTypes.func,
   location: PropTypes.object,
   address: PropTypes.string,
   boundaries: PropTypes.array

@@ -12,7 +12,7 @@ import api from "../services"
 function* generateBoundaries({ data }) {
   try {
     const boundaries = yield call(api.getBoundaries, data)
-    yield put(receiveBoundariesSuccess(boundaries))
+    yield put(receiveBoundariesSuccess({ ...data, boundaries }))
   } catch (error) {
     yield put(receiveBoundariesErrors(error))
   }
