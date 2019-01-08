@@ -4,12 +4,10 @@ import styled from "styled-components"
 import PropTypes from "prop-types"
 import MapStyle from "../../lib/styles/map_style"
 import {
-  fetchLocation,
   receiveClientLocation,
-  receiveMarkerLocation
+  receiveMarkerLocation,
+  receiveDrawPolygon
 } from "./actions"
-
-import { receiveDrawPolygon } from "../../boundaries/actions"
 
 const Container = styled.div`
   flex: 1 1 70%;
@@ -148,8 +146,7 @@ const mapDispatchToProps = dispatch => ({
   fetchClientLocation: () => dispatch(receiveClientLocation()),
   setMarkerAddress: geoLocation => dispatch(receiveMarkerLocation(geoLocation)),
   drawPolygon: (location, boundaries, map) =>
-    dispatch(receiveDrawPolygon({ location, boundaries, map })),
-  setFetchingState: () => dispatch(fetchLocation())
+    dispatch(receiveDrawPolygon({ location, boundaries, map }))
 })
 
 Map.defaultProps = {
