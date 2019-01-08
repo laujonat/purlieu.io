@@ -13,7 +13,7 @@ router.get("/test", (req, res) => {
   res.send([{ bound: 22 }, { bound: "33" }])
 })
 
-router.get("*", (req, res) => {
+router.get("/", (req, res) => {
   res.render("index")
 })
 

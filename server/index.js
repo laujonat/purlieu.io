@@ -1,5 +1,5 @@
 const http = require("http")
-const app = require("../app/index")
+const app = require("../app/index.js")
 
 const log = message => {
   process.stdout.write(`${message}\n`)
