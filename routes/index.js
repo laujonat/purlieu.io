@@ -1,16 +1,16 @@
 const express = require("express")
 const axios = require("axios")
-const router = express.Router()
-const bodyParser = require("body-parser")
 const Lyft = require("lyft-node")
-require("dotenv").config()
+const dotenv = require("dotenv")
+const router = express.Router()
 
-router.get("/test", (req, res) => {
-  res.send([{ bound: 22 }, { bound: "33" }])
+dotenv.config({
+  silent: true
 })
 
-router.get("/loctest", (req, res) => {
-  res.send({ result: "1234 Fake Street" })
+// Need to find a way to move this to a test
+router.get("/test", (req, res) => {
+  res.send([{ bound: 22 }, { bound: "33" }])
 })
 
 router.get("/", (req, res) => {

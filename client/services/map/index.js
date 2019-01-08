@@ -1,4 +1,4 @@
-const google = window.google
+const google = global.google
 
 const getLocation = () =>
   new Promise((success, reject) => {
@@ -33,7 +33,7 @@ const getAddress = geoLocation =>
     geocoder.geocode({ location: geoLocation }, successCallback)
   })
 
-export const getRecalculatedBoundaries = (location, boundaries, map) => {
+const getRecalculatedBoundaries = ({ location, boundaries, map }) => {
   const currentPos = new google.maps.LatLng(location)
   const boundariesArray = []
   const recalculatedBoundaries = []
@@ -115,7 +115,8 @@ const landOrWater = (position, map) =>
 
 const api = {
   getLocation,
-  getAddress
+  getAddress,
+  getRecalculatedBoundaries
 }
 
 export default api

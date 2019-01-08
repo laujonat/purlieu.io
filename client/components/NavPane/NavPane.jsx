@@ -1,9 +1,10 @@
 import React, { Component } from "react"
 import styled from "styled-components"
 import PropTypes from "prop-types"
+import { Loading } from "../Loading"
 import { connect } from "react-redux"
 import { spaces } from "../../lib/styles/spaces"
-import { receiveBoundaries } from "../../actions"
+import { receiveBoundaries } from "../../boundaries/actions"
 
 const Container = styled.nav`
   display: flex;
@@ -36,32 +37,39 @@ const DollarInputContainer = styled.div`
   justify-content: space-between;
 `
 
-const DollarInput = styled.input.attrs({
+const Input = styled.input`
+  flex: 1;
+  margin-top: ${spaces.md};
+  padding: 0 ${spaces.md};
+  height: 50px;
+  width: 100%;
+  background-color: whitesmoke;
+`
+
+const Button = styled.button`
+  cursor: pointer;
+  margin-top: ${spaces.md};
+  width: 100%;
+`
+
+const DollarInput = styled(Input).attrs({
   type: "range",
   min: 10,
   max: 400,
   step: 1
 })`
-  flex: 1;
-  height: 50px;
-  background-color: whitesmoke;
+  cursor: pointer;
+`
+
+const AddressInput = styled(Input)`
+  flex: none;
 `
 
 const DollarLabel = styled.h1`
   width: 20%;
 `
 
-const AddressInput = styled.input`
-  margin-top: ${spaces.md};
-  width: 100%;
-  height: 50px;
-  background-color: whitesmoke;
-  padding: 0 ${spaces.md};
-`
-
-const SubmitButton = styled.button`
-  margin-top: ${spaces.md};
-  width: 100%;
+const SubmitButton = styled(Button)`
   height: 50px;
   background-color: greenyellow;
   padding: 0 ${spaces.md};
@@ -79,16 +87,21 @@ class NavPane extends Component {
 
   componentDidUpdate(prevProps) {
     if (prevProps.address !== this.props.address) {
-      this.setState({ addressInput: this.props.address })
+      this.setState({
+        addressInput: this.props.address
+      })
     }
   }
 
   onSubmit = () => {
     const { dollarInput } = this.state
-    const { location } = this.props
+    const { location, address } = this.props
     this.props.getBoundaries({
       amount: dollarInput,
-      currentLocation: location
+      geoLocation: {
+        location,
+        address
+      }
     })
   }
 
@@ -97,6 +110,7 @@ class NavPane extends Component {
   }
 
   render() {
+    const { isFetching } = this.props
     return (
       <Container>
         <HeaderContainer>
@@ -114,25 +128,35 @@ class NavPane extends Component {
           onChange={this.onChange("addressInput")}
         />
         <SubmitButton onClick={this.onSubmit}>Show Me Dah Wey</SubmitButton>
+        <Loading active={isFetching}>Loading..</Loading>
       </Container>
     )
   }
 }
 
-const mapStateToProps = ({ entities: { map } }) => ({
-  address: map.clientLocation.address,
-  location: map.clientLocation.location
+const mapStateToProps = ({ map }) => ({
+  address: map.address,
+  location: map.location,
+  isFetching: map.isFetching
 })
 
 const mapDispatchToProps = dispatch => ({
-  getBoundaries: ({ amount, currentLocation }) =>
-    dispatch(receiveBoundaries({ amount, currentLocation }))
+  getBoundaries: ({ amount, geoLocation }) =>
+    dispatch(receiveBoundaries({ amount, geoLocation, carrier: "lyft" }))
 })
+
+NavPane.defaultProps = {
+  address: "",
+  location: {},
+  getBoundaries: () => {},
+  isFetching: true
+}
 
 NavPane.propTypes = {
   getBoundaries: PropTypes.func,
   address: PropTypes.string,
-  location: PropTypes.object
+  location: PropTypes.object,
+  isFetching: PropTypes.bool
 }
 
 export default connect(

@@ -1,31 +1,6 @@
 import axios from "axios"
 
-const google = window.google
-
-const getBoundaries = ({ amount, currentLocation }) => {
-  const stdDev = 2
-  const defaultRadiusInMeters = 32000
-  let directions = []
-
-  for (let i = 0; i < 360; i += 45) {
-    directions.push(i)
-  }
-
-  const rideEstimates = []
-  directions.forEach(direction => {
-    const googleGeometry = google.maps.geometry.spherical
-    const start = new google.maps.LatLng(currentLocation)
-    const end = googleGeometry.computeOffset(
-      start,
-      defaultRadiusInMeters,
-      direction
-    )
-    rideEstimates.push(
-      getRideEstimate(start, end, amount, stdDev, direction, "lyft")
-    )
-  })
-  return Promise.all(rideEstimates).then(results => results)
-}
+const google = global.google
 
 const getRideEstimate = async (
   start,
@@ -89,7 +64,7 @@ const getRideEstimate = async (
 }
 
 const api = {
-  getBoundaries
+  getRideEstimate
 }
 
 export default api
