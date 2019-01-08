@@ -7,9 +7,9 @@ export const receiveTestSuccess = data => ({
   data
 })
 
-export const receiveTestErrors = errors => ({
+export const receiveTestErrors = data => ({
   type: RECEIVE_TEST_ERROR,
-  errors
+  data
 })
 
 export const receiveTest = data => ({

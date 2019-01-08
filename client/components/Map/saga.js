@@ -2,21 +2,18 @@ import { call, put, takeEvery } from "redux-saga/effects"
 import {
   RECEIVE_CLIENT_LOCATION,
   RECEIVE_MARKER_LOCATION,
-  NEW_LOCATION,
+  DRAW_POLYGON,
   receiveClientLocationSuccess,
   receiveClientLocationErrors,
   receiveMarkerLocationSuccess,
   receiveMarkerLocationError,
-  fetchLocation
-} from "../Map/actions"
-
-import {
-  DRAW_POLYGON,
   receiveDrawPolygonSuccess,
   receiveDrawPolygonError
-} from "../../boundaries/actions"
+} from "../Map/actions"
 
 import api from "../../services/map"
+
+const google = global.google
 
 export function* fetchClientLocation() {
   try {
@@ -48,11 +45,7 @@ export function* setMarkerAddress(geoLocation) {
   }
 }
 
-export function* handleLocationChange() {
-  yield put(fetchLocation())
-}
-
-function* drawPolygonFlow({ data }) {
+function* drawPolygon({ data }) {
   try {
     const boundaries = yield call(api.getRecalculatedBoundaries, data)
 
@@ -79,6 +72,5 @@ function* drawPolygonFlow({ data }) {
 export default function*() {
   yield takeEvery(RECEIVE_CLIENT_LOCATION, fetchClientLocation)
   yield takeEvery(RECEIVE_MARKER_LOCATION, setMarkerAddress)
-  yield takeEvery(NEW_LOCATION, handleLocationChange)
-  yield takeEvery(DRAW_POLYGON, drawPolygonFlow)
+  yield takeEvery(DRAW_POLYGON, drawPolygon)
 }

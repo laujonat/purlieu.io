@@ -4,7 +4,7 @@ import PropTypes from "prop-types"
 import { Loading } from "../Loading"
 import { connect } from "react-redux"
 import { spaces } from "../../lib/styles/spaces"
-import { receiveBoundaries, fetchBoundaries } from "../../boundaries/actions"
+import { receiveBoundaries } from "../../boundaries/actions"
 
 const Container = styled.nav`
   display: flex;
@@ -135,15 +135,14 @@ class NavPane extends Component {
 }
 
 const mapStateToProps = ({ map }) => ({
-  address: map.clientLocation.address,
-  location: map.clientLocation.location,
+  address: map.address,
+  location: map.location,
   isFetching: map.isFetching
 })
 
 const mapDispatchToProps = dispatch => ({
   getBoundaries: ({ amount, geoLocation }) =>
-    dispatch(receiveBoundaries({ amount, geoLocation, carrier: "lyft" })),
-  setFetchingState: () => dispatch(fetchBoundaries())
+    dispatch(receiveBoundaries({ amount, geoLocation, carrier: "lyft" }))
 })
 
 NavPane.defaultProps = {
