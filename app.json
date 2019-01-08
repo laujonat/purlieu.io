@@ -1,0 +1,16 @@
+{
+  "name": "purlieu.io",
+  "description": "Ride sharing polygonal distance projection application",
+  "keywords": [
+    "HTML5",
+    "Google Maps"
+  ],
+  "repository": "https://github.com/laujonat/purlieu.io",
+  "environments": {
+    "test": {
+      "scripts": {
+        "test": "eslint --ignore-pattern !.eslintrc.js"
+      }
+    }
+  }
+}

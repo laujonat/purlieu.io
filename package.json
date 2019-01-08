@@ -22,7 +22,7 @@
     "styled-components": "^4.1.2"
   },
   "scripts": {
-    "lint": "eslint --ignore-pattern !.eslintrc.js .eslintrc.js *.js",
+    "lint": "eslint --ignore-pattern !.eslintrc.js .eslintrc.js",
     "lint-fix": "yarn lint --fix && yarn prettier-fix",
     "prettier": "prettier --list-different --no-semi './**/*.{js,jsx}' './**/*.css **/*.json'",
     "prettier-fix": "prettier --write --no-semi './**/*.{js,jsx}' './**/*.css **/*.json'",
@@ -48,9 +48,10 @@
     "cors": "^2.8.5",
     "enzyme": "^3.8.0",
     "enzyme-adapter-react-16": "^1.7.1",
-    "eslint": "4.x",
+    "eslint": "5.9.0",
     "eslint-config-prettier": "^3.3.0",
-    "eslint-plugin-prettier": "^3.0.0",
+    "eslint-plugin-html": "^5.0.0",
+    "eslint-plugin-prettier": "^3.0.1",
     "eslint-plugin-react": "^7.11.1",
     "jest": "^23.6.0",
     "prettier": "^1.15.3",
@@ -67,17 +68,40 @@
     "verbose": true,
     "clearMocks": true,
     "coverageDirectory": "coverage",
-    "collectCoverageFrom": [ "client/**.{js, jsx}", "!client/*.{js,jsx}", "!client/lib/**.{js,jsx}"],
-    "coveragePathIgnorePatterns": ["client/*.{js, jsx}"],
-    "moduleDirectories": ["node_modules", "client"],
-    "moduleFileExtensions": ["js", "json", "jsx", "node"],
+    "collectCoverageFrom": [
+      "client/**.{js, jsx}",
+      "!client/*.{js,jsx}",
+      "!client/lib/**.{js,jsx}"
+    ],
+    "coveragePathIgnorePatterns": [
+      "client/*.{js, jsx}"
+    ],
+    "moduleDirectories": [
+      "node_modules",
+      "client"
+    ],
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "jsx",
+      "node"
+    ],
     "testEnvironment": "node",
     "setupTestFrameworkScriptFile": "<rootDir>/client/testSetup.js",
-    "testMatch": [ "**/?(*.)+(spec|test).js?(x)" ],
-    "testPathIgnorePatterns": [ "\\\\node_modules\\\\" ],
+    "testMatch": [
+      "**/?(*.)+(spec|test).js?(x)"
+    ],
+    "testPathIgnorePatterns": [
+      "\\\\node_modules\\\\"
+    ],
     "testURL": "http://localhost",
-    "transform": { "^.+\\.js$": "babel-jest", "^.+\\.jsx$": "babel-jest" },
-    "transformIgnorePatterns": [ "/node_modules/" ]
+    "transform": {
+      "^.+\\.js$": "babel-jest",
+      "^.+\\.jsx$": "babel-jest"
+    },
+    "transformIgnorePatterns": [
+      "/node_modules/"
+    ]
   },
   "description": "Distance projection project",
   "main": "./client/index.js",
