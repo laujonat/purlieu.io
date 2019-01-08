@@ -4,7 +4,7 @@ import {
 } from "./actions"
 
 export const initialState = {
-  isFetching: true,
+  isFetching: true
 }
 
 export const reducer = (state = initialState, action) => {

@@ -1,14 +1,19 @@
 const express = require("express")
 const axios = require("axios")
-const router = express.Router()
 const Lyft = require("lyft-node")
-require("dotenv").config()
+const dotenv = require("dotenv")
+const router = express.Router()
 
+dotenv.config({
+  silent: true
+})
+
+// Need to find a way to move this to a test
 router.get("/test", (req, res) => {
   res.send([{ bound: 22 }, { bound: "33" }])
 })
 
-router.get("/", (req, res) => {
+router.get("*", (req, res) => {
   res.render("index")
 })
 

@@ -6,6 +6,11 @@
     "Google Maps"
   ],
   "repository": "https://github.com/laujonat/purlieu.io",
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+   }
+  ],
   "environments": {
     "test": {
       "scripts": {

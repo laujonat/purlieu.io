@@ -2,7 +2,7 @@ import { call, put, takeEvery } from "redux-saga/effects"
 import {
   RECEIVE_BOUNDARIES,
   receiveBoundariesSuccess,
-  receiveBoundariesErrors,
+  receiveBoundariesErrors
 } from "./actions"
 
 import api from "../services"

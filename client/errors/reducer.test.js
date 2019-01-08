@@ -4,9 +4,7 @@ import {
   RECEIVE_MARKER_LOCATION_ERROR,
   DRAW_POLYGON_ERROR
 } from "../components/Map/actions"
-import {
-  RECEIVE_BOUNDARIES_ERROR
-} from "../boundaries/actions"
+import { RECEIVE_BOUNDARIES_ERROR } from "../boundaries/actions"
 
 describe("errors reducer", () => {
   it("should handle RECEIVE_CLIENT_LOCATION_ERROR", () => {
@@ -66,12 +64,12 @@ describe("errors reducer", () => {
     })
 
     action = {
-      type: 'RANDOM_SUCCESS'
+      type: "RANDOM_SUCCESS"
     }
     expect(reducer(errorState, action)).toEqual(errorState)
 
     action = {
-      type: 'DRAW_POLYGON_SUCCESS'
+      type: "DRAW_POLYGON_SUCCESS"
     }
     expect(reducer(errorState, action)).toEqual(initialState)
   })

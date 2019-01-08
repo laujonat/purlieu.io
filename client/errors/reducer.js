@@ -9,7 +9,7 @@ import {
 
 import {
   RECEIVE_BOUNDARIES_SUCCESS,
-  RECEIVE_BOUNDARIES_ERROR,
+  RECEIVE_BOUNDARIES_ERROR
 } from "../boundaries/actions"
 
 export const initialState = {}
@@ -20,16 +20,16 @@ export const reducer = (state = initialState, action) => {
   switch (action.type) {
     case RECEIVE_CLIENT_LOCATION_SUCCESS:
       delete newState[RECEIVE_CLIENT_LOCATION_ERROR]
-      return newState;
+      return newState
     case RECEIVE_MARKER_LOCATION_SUCCESS:
       delete newState[RECEIVE_MARKER_LOCATION_ERROR]
-      return newState;
+      return newState
     case RECEIVE_BOUNDARIES_SUCCESS:
       delete newState[RECEIVE_BOUNDARIES_ERROR]
-      return newState;
+      return newState
     case DRAW_POLYGON_SUCCESS:
       delete newState[DRAW_POLYGON_ERROR]
-      return newState;
+      return newState
     case RECEIVE_CLIENT_LOCATION_ERROR:
     case RECEIVE_MARKER_LOCATION_ERROR:
     case RECEIVE_BOUNDARIES_ERROR:
