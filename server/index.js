@@ -56,7 +56,7 @@ const onListening = () => {
     typeof addr === "string" ? addr : addr.port
   }`
   log(`Server is listening on ${bind}`)
-  log(`Visit: http://localhost:${addr.port}`)
+  // log(`Visit: http://localhost:${addr.port}`)
 }
 
 server.on("error", onError)
