@@ -110,7 +110,7 @@ class NavPane extends Component {
   }
 
   render() {
-    const { isFetching } = this.props
+    const { isLoading } = this.props
     return (
       <Container>
         <HeaderContainer>
@@ -128,16 +128,16 @@ class NavPane extends Component {
           onChange={this.onChange("addressInput")}
         />
         <SubmitButton onClick={this.onSubmit}>Show Me Dah Wey</SubmitButton>
-        <Loading active={isFetching}>Loading..</Loading>
+        <Loading active={isLoading}>Loading..</Loading>
       </Container>
     )
   }
 }
 
-const mapStateToProps = ({ map }) => ({
+const mapStateToProps = ({ map, loading }) => ({
   address: map.address,
   location: map.location,
-  isFetching: map.isFetching
+  isLoading: Object.keys(loading).length > 0
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -148,15 +148,13 @@ const mapDispatchToProps = dispatch => ({
 NavPane.defaultProps = {
   address: "",
   location: {},
-  getBoundaries: () => {},
-  isFetching: true
+  getBoundaries: () => {}
 }
 
 NavPane.propTypes = {
   getBoundaries: PropTypes.func,
   address: PropTypes.string,
-  location: PropTypes.object,
-  isFetching: PropTypes.bool
+  location: PropTypes.object
 }
 
 export default connect(
