@@ -1,46 +1,41 @@
 import React from "react"
-import { shallow,} from "enzyme"
-import NavPane, { 
-  mapStateToProps, 
-  mapDispatchToProps 
-} from "./NavPane"
+import { shallow } from "enzyme"
+import NavPane from "./NavPane"
 
-const requiredProps = {
-  getBoundaries: () => {},
+const props = {
   address: "",
   location: {},
-  isFetching: true
-};
+  isFetching: true,
+  getBoundaries: jest.fn()
+}
 
-describe("<NavPane />", () => {
-  describe("with required props", () => {
-    it("renders the component", () => {
-      const wrapper = shallow(<NavPane {...requiredProps} />);
-      expect(wrapper).toHaveLength(1);
-    });
+describe("NavPane", () => {
+  it("renders the component", () => {
+    const wrapper = shallow(<NavPane />)
+    expect(wrapper).toMatchSnapshot();
+  })
 
-    it('calls "onSubmit()" on button click', () => {
-      const getBoundaries = jest.fn()
-      const props = {
-        ...requiredProps,
-        location: { lat: 123, lng: 333 },
-        address: "123 Fake Street",
-        getBoundaries: jest.fn()
-      }
-      const { location, address } = props;
-      const wrapper = shallow(<NavPane {...props} />)
-      const spy = jest.spyOn(wrapper.instance(), 'onSubmit');
-
-      wrapper.find('button').simulate('click');
-      expect(spy).toHaveBeenCalled();
-    });
-
-    describe("componentDidUpdate", () => {
-      it("updates state", () => {
-        const wrapper = shallow(<NavPane {...requiredProps} />);
-        wrapper.setProps({ address: "123 different" });
-        expect(wrapper.state.addressInput).toEqual(wrapper.props.address)
+  describe("onSubmit", () => {
+    it("calls getBoundaries", () => {
+      const wrapper = shallow(<NavPane.WrappedComponent { ...props } />)
+      wrapper.setState({ dollarInput: 10 })
+      wrapper.instance().onSubmit()
+      const { address, location, getBoundaries } = props
+      expect(getBoundaries).toHaveBeenCalledWith({
+        amount: wrapper.state().dollarInput,
+        geoLocation: {
+          location,
+          address
+        }
       })
-    });
+    })
+  })
+
+  describe("componentDidUpdate", () => {
+    it("updates state", () => {
+      const wrapper = shallow(<NavPane {...props} />);
+      wrapper.setProps({ address: "123 different" });
+      expect(wrapper.state.addressInput).toEqual(wrapper.props.address)
+    })
   })
 })
