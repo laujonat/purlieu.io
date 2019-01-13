@@ -3,10 +3,7 @@ import {
   RECEIVE_MARKER_LOCATION_SUCCESS
 } from "./actions"
 
-export const initialState = {
-  address: null,
-  location: null
-}
+export const initialState = {}
 
 export const reducer = (state = initialState, action) => {
   Object.freeze(state)
