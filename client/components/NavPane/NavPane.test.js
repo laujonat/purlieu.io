@@ -5,22 +5,24 @@ import NavPane from "./NavPane"
 const props = {
   address: "",
   location: {},
-  isFetching: true,
-  getBoundaries: jest.fn()
+  isFetching: true
 }
 
 describe("NavPane", () => {
   it("renders the component", () => {
     const wrapper = shallow(<NavPane />)
-    expect(wrapper).toMatchSnapshot();
+    expect(wrapper).toMatchSnapshot()
   })
 
   describe("onSubmit", () => {
     it("calls getBoundaries", () => {
-      const wrapper = shallow(<NavPane.WrappedComponent { ...props } />)
+      const getBoundaries = jest.fn()
+      const wrapper = shallow(
+        <NavPane.WrappedComponent {...props} getBoundaries={getBoundaries} />
+      )
       wrapper.setState({ dollarInput: 10 })
       wrapper.instance().onSubmit()
-      const { address, location, getBoundaries } = props
+      const { address, location } = props
       expect(getBoundaries).toHaveBeenCalledWith({
         amount: wrapper.state().dollarInput,
         geoLocation: {
@@ -33,8 +35,8 @@ describe("NavPane", () => {
 
   describe("componentDidUpdate", () => {
     it("updates state", () => {
-      const wrapper = shallow(<NavPane {...props} />);
-      wrapper.setProps({ address: "123 different" });
+      const wrapper = shallow(<NavPane {...props} />)
+      wrapper.setProps({ address: "123 different" })
       expect(wrapper.state.addressInput).toEqual(wrapper.props.address)
     })
   })
