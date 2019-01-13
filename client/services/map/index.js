@@ -3,13 +3,14 @@ const google = global.google
 const getLocation = () =>
   new Promise((success, reject) => {
     const successCallback = position => {
-      const geoLocation = {
+      const parsedLocation = {
         lat: position.coords.latitude,
         lng: position.coords.longitude
       }
 
-      success(geoLocation)
+      success(parsedLocation)
     }
+
     const errorCallback = error => {
       reject(error)
     }
@@ -20,22 +21,17 @@ const getLocation = () =>
     })
   })
 
-const getAddress = geoLocation => {
-  if (
-    !(geoLocation.hasOwnProperty("lat") && geoLocation.hasOwnProperty("lng"))
-  ) {
-    throw "Invalid Geolocation"
-  }
-
-  return new Promise((success, reject) => {
-    const callback = (results, status) => {
-      status === "OK" ? success(results[0].formatted_address) : reject(status)
+const getAddress = geoLocation =>
+  new Promise(success => {
+    const successCallback = (results, status) => {
+      if (status === "OK") {
+        success(results[0].formatted_address)
+      }
     }
 
     const geocoder = new google.maps.Geocoder()
-    geocoder.geocode({ location: geoLocation }, callback)
+    geocoder.geocode({ location: geoLocation }, successCallback)
   })
-}
 
 const getRecalculatedBoundaries = ({ location, boundaries, map }) => {
   const currentPos = new google.maps.LatLng(location)

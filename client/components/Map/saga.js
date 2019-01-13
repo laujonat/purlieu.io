@@ -35,9 +35,10 @@ export function* setMarkerAddress(geoLocation) {
   try {
     const address = yield call(api.getAddress, location)
     const data = {
-      location,
-      address
+      address,
+      location
     }
+
     yield put(receiveMarkerLocationSuccess(data))
   } catch (error) {
     yield put(receiveMarkerLocationError(error))
