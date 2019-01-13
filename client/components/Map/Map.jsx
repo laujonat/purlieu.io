@@ -59,7 +59,6 @@ class Map extends Component {
 
   initializeMap = () => {
     const { location } = this.props
-    console.log(location)
     this.map = new google.maps.Map(
       this.renderedMap.current,
       this.mapOptions(location)
@@ -104,18 +103,6 @@ class Map extends Component {
 
   getUserLocation = () => {
     this.props.fetchClientLocation()
-  }
-
-  newMarker = pos => {
-    new google.maps.Marker({
-      position: pos,
-      map: this.map,
-      title: `${pos.lat()}, ${pos.lng()}`,
-      icon: {
-        url: "http://maps.google.com/mapfiles/ms/icons/red-dot.png",
-        scaledSize: new google.maps.Size(20, 20)
-      }
-    })
   }
 
   drawBoundaries = () => {
