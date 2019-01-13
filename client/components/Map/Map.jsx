@@ -59,7 +59,7 @@ class Map extends Component {
 
   initializeMap = () => {
     const { location } = this.props
-
+    console.log(location)
     this.map = new google.maps.Map(
       this.renderedMap.current,
       this.mapOptions(location)
