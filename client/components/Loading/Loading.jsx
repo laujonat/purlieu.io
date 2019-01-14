@@ -14,9 +14,7 @@ const Container = styled.div`
   `}
 `
 
-export const Loading = ({ active }) => {
-  return <Container active={active}>Loading..</Container>
-}
+export const Loading = ({ active }) => <Container active={active}>Loading..</Container>
 
 Loading.defaultProps = {
   active: false

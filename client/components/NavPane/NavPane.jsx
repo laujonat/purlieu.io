@@ -3,7 +3,7 @@ import styled from "styled-components"
 import PropTypes from "prop-types"
 import { Loading } from "../Loading"
 import { connect } from "react-redux"
-import { spaces } from "../../lib/styles/spaces"
+import { spaces } from "../../lib/styles"
 import { receiveBoundaries } from "../../boundaries/actions"
 
 const Container = styled.nav`
@@ -117,16 +117,10 @@ class NavPane extends Component {
           <Header>purlieu.io</Header>
         </HeaderContainer>
         <DollarInputContainer>
-          <DollarInput
-            value={this.state.dollarInput}
-            onChange={this.onChange("dollarInput")}
-          />
+          <DollarInput value={this.state.dollarInput} onChange={this.onChange("dollarInput")} />
           <DollarLabel>{`$${this.state.dollarInput}`}</DollarLabel>
         </DollarInputContainer>
-        <AddressInput
-          value={this.state.addressInput}
-          onChange={this.onChange("addressInput")}
-        />
+        <AddressInput value={this.state.addressInput} onChange={this.onChange("addressInput")} />
         <SubmitButton onClick={this.onSubmit}>Show Me Dah Wey</SubmitButton>
         <Loading active={isLoading}>Loading..</Loading>
       </Container>
@@ -141,8 +135,7 @@ const mapStateToProps = ({ map, loading }) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  getBoundaries: ({ amount, geoLocation }) =>
-    dispatch(receiveBoundaries({ amount, geoLocation, carrier: "lyft" }))
+  getBoundaries: ({ amount, geoLocation }) => dispatch(receiveBoundaries({ amount, geoLocation, carrier: "lyft" }))
 })
 
 NavPane.defaultProps = {
@@ -154,7 +147,8 @@ NavPane.defaultProps = {
 NavPane.propTypes = {
   getBoundaries: PropTypes.func,
   address: PropTypes.string,
-  location: PropTypes.object
+  location: PropTypes.object,
+  isLoading: PropTypes.bool
 }
 
 export default connect(

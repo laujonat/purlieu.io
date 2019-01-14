@@ -1,7 +1,5 @@
 import lyftApi from "./lyft"
-
 const carriers = { lyft: "lyft" }
-
 const google = global.google
 
 const getBoundaries = ({ amount, geoLocation, carrier, rideType = "lyft" }) => {
@@ -17,11 +15,7 @@ const getBoundaries = ({ amount, geoLocation, carrier, rideType = "lyft" }) => {
   directions.forEach(direction => {
     const googleGeometry = google.maps.geometry.spherical
     const start = new google.maps.LatLng(geoLocation.location)
-    const end = googleGeometry.computeOffset(
-      start,
-      defaultRadiusInMeters,
-      direction
-    )
+    const end = googleGeometry.computeOffset(start, defaultRadiusInMeters, direction)
 
     let api = lyftApi
     switch (carrier) {
@@ -31,9 +25,7 @@ const getBoundaries = ({ amount, geoLocation, carrier, rideType = "lyft" }) => {
       default:
         api = null
     }
-    rideEstimates.push(
-      api.getRideEstimate(start, end, amount, stdDev, direction, rideType)
-    )
+    rideEstimates.push(api.getRideEstimate(start, end, amount, stdDev, direction, rideType))
   })
   return Promise.all(rideEstimates).then(results => results)
 }

@@ -2,12 +2,9 @@ import React, { Component } from "react"
 import { connect } from "react-redux"
 import styled from "styled-components"
 import PropTypes from "prop-types"
-import MapStyle from "../../lib/styles/map_style"
-import {
-  receiveClientLocation,
-  receiveMarkerLocation,
-  receiveDrawPolygon
-} from "./actions"
+// import { colors, mapStyle } from "../../lib/styles"
+import { mapOptions, createMarker } from "../../lib/map"
+import { receiveClientLocation, receiveMarkerLocation, receiveDrawPolygon } from "./actions"
 
 const Container = styled.div`
   flex: 1 1 70%;
@@ -45,25 +42,9 @@ class Map extends Component {
     }
   }
 
-  mapOptions = center => ({
-    center: center,
-    zoom: 13,
-    zoomControl: false,
-    mapTypeControl: false,
-    scaleControl: false,
-    streetViewControl: false,
-    rotateControl: false,
-    fullscreenControl: false,
-    styles: MapStyle
-  })
-
   initializeMap = () => {
     const { location } = this.props
-    console.log(location)
-    this.map = new google.maps.Map(
-      this.renderedMap.current,
-      this.mapOptions(location)
-    )
+    this.map = new google.maps.Map(this.renderedMap.current, mapOptions(location))
 
     this.marker = new google.maps.Marker({
       position: location,
@@ -106,25 +87,11 @@ class Map extends Component {
     this.props.fetchClientLocation()
   }
 
-  newMarker = pos => {
-    new google.maps.Marker({
-      position: pos,
-      map: this.map,
-      title: `${pos.lat()}, ${pos.lng()}`,
-      icon: {
-        url: "http://maps.google.com/mapfiles/ms/icons/red-dot.png",
-        scaledSize: new google.maps.Size(20, 20)
-      }
-    })
-  }
-
   drawBoundaries = () => {
-    const { location, polygonList } = this.props
-    this.props.drawPolygon(
-      location,
-      polygonList[polygonList.length - 1].boundaries,
-      this.map
-    )
+    const { markers, polygonList } = this.props
+    const location = markers[markers.length - 1]
+    createMarker(location, this.map)
+    this.props.drawPolygon(location, polygonList[polygonList.length - 1].boundaries, this.map)
   }
 
   render() {
@@ -136,7 +103,8 @@ class Map extends Component {
   }
 }
 
-const mapStateToProps = ({ map, polygonList }) => ({
+const mapStateToProps = ({ map, polygonList, boundaries }) => ({
+  markers: boundaries.markers,
   location: map.location,
   address: map.address,
   polygonList
@@ -145,8 +113,7 @@ const mapStateToProps = ({ map, polygonList }) => ({
 const mapDispatchToProps = dispatch => ({
   fetchClientLocation: () => dispatch(receiveClientLocation()),
   setMarkerAddress: geoLocation => dispatch(receiveMarkerLocation(geoLocation)),
-  drawPolygon: (location, boundaries, map) =>
-    dispatch(receiveDrawPolygon({ location, boundaries, map }))
+  drawPolygon: (location, boundaries, map) => dispatch(receiveDrawPolygon({ location, boundaries, map }))
 })
 
 Map.defaultProps = {
@@ -157,7 +124,8 @@ Map.defaultProps = {
   address: "",
   polygonList: [],
   setMarkerAddress: () => {},
-  drawPolygon: () => {}
+  drawPolygon: () => {},
+  markers: []
 }
 
 Map.propTypes = {
@@ -166,7 +134,8 @@ Map.propTypes = {
   drawPolygon: PropTypes.func,
   location: PropTypes.object,
   address: PropTypes.string,
-  polygonList: PropTypes.array
+  polygonList: PropTypes.array,
+  markers: PropTypes.array
 }
 
 export default connect(

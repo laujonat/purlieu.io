@@ -1,13 +1,9 @@
 import { call, put, takeEvery } from "redux-saga/effects"
-import {
-  RECEIVE_BOUNDARIES,
-  receiveBoundariesSuccess,
-  receiveBoundariesErrors
-} from "./actions"
+import { RECEIVE_BOUNDARIES, receiveBoundariesSuccess, receiveBoundariesErrors } from "./actions"
 
 import api from "../services"
 
-function* generateBoundaries({ data }) {
+export function* generateBoundaries({ data }) {
   try {
     const boundaries = yield call(api.getBoundaries, data)
     yield put(receiveBoundariesSuccess({ ...data, boundaries }))
