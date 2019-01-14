@@ -1,3 +1,3 @@
-export const colors = {
+export default {
   lightBlue: "#68c9ed"
 }

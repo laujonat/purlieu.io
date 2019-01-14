@@ -2,7 +2,7 @@ import React, { Component } from "react"
 import { connect } from "react-redux"
 import styled from "styled-components"
 import PropTypes from "prop-types"
-import MapStyle from "../../lib/styles/map_style"
+import { colors, mapStyle } from "../../lib/styles"
 import {
   receiveClientLocation,
   receiveMarkerLocation,
@@ -54,7 +54,7 @@ class Map extends Component {
     streetViewControl: false,
     rotateControl: false,
     fullscreenControl: false,
-    styles: MapStyle
+    styles: mapStyle
   })
 
   initializeMap = () => {
@@ -105,8 +105,24 @@ class Map extends Component {
     this.props.fetchClientLocation()
   }
 
+  createMarker = position => {
+    new google.maps.Marker({
+      position,
+      icon: {
+        path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
+        scale: 5,
+        strokeWeight: 2,
+        fillOpacity: 1.0,
+        fillColor: colors.lightBlue
+      },
+      map: this.map
+    })
+  }
+
   drawBoundaries = () => {
-    const { location, polygonList } = this.props
+    const { markers, polygonList } = this.props
+    const location = markers[markers.length - 1]
+    this.createMarker(location)
     this.props.drawPolygon(
       location,
       polygonList[polygonList.length - 1].boundaries,
@@ -123,7 +139,8 @@ class Map extends Component {
   }
 }
 
-const mapStateToProps = ({ map, polygonList }) => ({
+const mapStateToProps = ({ map, polygonList, boundaries }) => ({
+  markers: boundaries.markers,
   location: map.location,
   address: map.address,
   polygonList
@@ -144,7 +161,8 @@ Map.defaultProps = {
   address: "",
   polygonList: [],
   setMarkerAddress: () => {},
-  drawPolygon: () => {}
+  drawPolygon: () => {},
+  markers: []
 }
 
 Map.propTypes = {
@@ -153,7 +171,8 @@ Map.propTypes = {
   drawPolygon: PropTypes.func,
   location: PropTypes.object,
   address: PropTypes.string,
-  polygonList: PropTypes.array
+  polygonList: PropTypes.array,
+  markers: PropTypes.array
 }
 
 export default connect(

@@ -1,5 +1,5 @@
 const google = global.google
-import { colors } from "../../lib/styles/colors"
+// import { colors } from "../../lib/styles/colors"
 
 const getLocation = () =>
   new Promise((success, reject) => {
@@ -38,19 +38,19 @@ const getAddress = geoLocation => {
   })
 }
 
-const newMarker = (pos, map) => {
-  new google.maps.Marker({
-    position: pos,
-    icon: {
-      path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
-      scale: 5,
-      strokeWeight: 2,
-      fillOpacity: 1.0,
-      fillColor: colors.lightBlue
-    },
-    map: map
-  })
-}
+// const newMarker = (pos, map) => {
+//   new google.maps.Marker({
+//     position: pos,
+//     icon: {
+//       path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
+//       scale: 5,
+//       strokeWeight: 2,
+//       fillOpacity: 1.0,
+//       fillColor: colors.lightBlue
+//     },
+//     map: map
+//   })
+// }
 
 const getRecalculatedBoundaries = ({ location, boundaries, map }) => {
   const currentPos = new google.maps.LatLng(location)
@@ -68,9 +68,7 @@ const getRecalculatedBoundaries = ({ location, boundaries, map }) => {
     )
   })
 
-  return Promise.all(recalculatedBoundaries).then(results => {
-    return newMarker(location, map), results
-  })
+  return Promise.all(recalculatedBoundaries).then(results => results)
 }
 
 const recalculateBoundary = async (position, boundary, map, direction) => {

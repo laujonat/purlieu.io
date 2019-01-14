@@ -1,7 +1,5 @@
 import lyftApi from "./lyft"
-
 const carriers = { lyft: "lyft" }
-
 const google = global.google
 
 const getBoundaries = ({ amount, geoLocation, carrier, rideType = "lyft" }) => {

@@ -3,7 +3,7 @@ import styled from "styled-components"
 import PropTypes from "prop-types"
 import { Loading } from "../Loading"
 import { connect } from "react-redux"
-import { spaces } from "../../lib/styles/spaces"
+import { spaces } from "../../lib/styles"
 import { receiveBoundaries } from "../../boundaries/actions"
 
 const Container = styled.nav`

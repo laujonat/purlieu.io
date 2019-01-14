@@ -8,6 +8,7 @@ import {
 import api from "../services"
 
 function* generateBoundaries({ data }) {
+  console.log("DATA", data)
   try {
     const boundaries = yield call(api.getBoundaries, data)
     yield put(receiveBoundariesSuccess({ ...data, boundaries }))
