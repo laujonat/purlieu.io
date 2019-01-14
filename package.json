@@ -23,7 +23,7 @@
   },
   "scripts": {
     "build": "webpack",
-    "lint": "eslint --ignore-pattern !.eslintrc.js .eslintrc.js",
+    "lint": "eslint --ignore-pattern .eslintrc.js",
     "lint-fix": "yarn lint --fix && yarn prettier-fix",
     "prettier": "prettier --list-different --no-semi './**/*.{js,jsx}' './**/*.css **/*.json'",
     "prettier-fix": "prettier --write --no-semi './**/*.{js,jsx}' './**/*.css **/*.json'",
@@ -108,6 +108,6 @@
   "description": "Distance projection project",
   "main": "./client/index.js",
   "repository": "https://github.com/laujonat/purlieu.io.git",
-  "author": "Jonathan Lau",
+  "author": "Jonathan Lau, Andre Le",
   "license": "MIT"
 }

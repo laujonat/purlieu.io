@@ -1,12 +1,10 @@
 import { RECEIVE_BOUNDARIES_SUCCESS } from "./actions"
-import { pipe } from "rxjs";
 
-const initialState = {
+export const initialState = {
   markers: []
 }
 
-const reducer = (state = initialState, action) => {
-  console.log(action)
+export const reducer = (state = initialState, action) => {
   Object.freeze(state)
   const newState = { ...state }
   switch (action.type) {
