@@ -14,7 +14,7 @@
   "environments": {
     "test": {
       "scripts": {
-        "test": "eslint --ignore-pattern !.eslintrc.js"
+        "test": "eslint 'client/**/*.{js,jsx}'"
       }
     }
   }
