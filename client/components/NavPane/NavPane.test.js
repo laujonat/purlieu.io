@@ -17,9 +17,7 @@ describe("NavPane", () => {
   describe("onSubmit", () => {
     it("calls getBoundaries", () => {
       const getBoundaries = jest.fn()
-      const wrapper = shallow(
-        <NavPane.WrappedComponent {...props} getBoundaries={getBoundaries} />
-      )
+      const wrapper = shallow(<NavPane.WrappedComponent {...props} getBoundaries={getBoundaries} />)
       wrapper.setState({ dollarInput: 10 })
       wrapper.instance().onSubmit()
       const { address, location } = props

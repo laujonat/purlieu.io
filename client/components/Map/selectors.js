@@ -1,3 +1,1 @@
-const currentMarkers = state => {
-  return "hello"
-}
+const currentMarkers = state => "hello"

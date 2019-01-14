@@ -8,7 +8,7 @@ export const reducer = (state = initialState, action) => {
   Object.freeze(state)
   const newState = { ...state }
   switch (action.type) {
-    case RECEIVE_BOUNDARIES_SUCCESS:
+    case RECEIVE_BOUNDARIES_SUCCESS: {
       const {
         geoLocation: { location }
       } = action.data
@@ -16,6 +16,7 @@ export const reducer = (state = initialState, action) => {
         ...newState,
         markers: [...newState.markers, location]
       }
+    }
     default:
       return state
   }

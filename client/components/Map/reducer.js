@@ -1,7 +1,4 @@
-import {
-  RECEIVE_CLIENT_LOCATION_SUCCESS,
-  RECEIVE_MARKER_LOCATION_SUCCESS
-} from "./actions"
+import { RECEIVE_CLIENT_LOCATION_SUCCESS, RECEIVE_MARKER_LOCATION_SUCCESS } from "./actions"
 
 export const initialState = {}
 

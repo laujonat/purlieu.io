@@ -1,10 +1,6 @@
 import { testSaga } from "redux-saga-test-plan"
 import { generateBoundaries } from "./saga"
-import {
-  RECEIVE_BOUNDARIES,
-  receiveBoundariesSuccess,
-  receiveBoundariesErrors
-} from "./actions"
+import { RECEIVE_BOUNDARIES, receiveBoundariesSuccess, receiveBoundariesErrors } from "./actions"
 import api from "../services"
 
 describe("generateBoundaries saga", () => {
