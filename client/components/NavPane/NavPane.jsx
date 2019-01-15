@@ -5,6 +5,7 @@ import { Loading } from "../Loading"
 import { connect } from "react-redux"
 import { spaces } from "../../lib/styles"
 import { receiveBoundaries } from "../../boundaries/actions"
+import PolygonList from "../PolygonList"
 
 const Container = styled.nav`
   display: flex;
@@ -123,6 +124,7 @@ class NavPane extends Component {
         <AddressInput value={this.state.addressInput} onChange={this.onChange("addressInput")} />
         <SubmitButton onClick={this.onSubmit}>Show Me Dah Wey</SubmitButton>
         <Loading active={isLoading}>Loading..</Loading>
+        <PolygonList />
       </Container>
     )
   }

@@ -2,7 +2,6 @@ import React, { Component } from "react"
 import { connect } from "react-redux"
 import styled from "styled-components"
 import PropTypes from "prop-types"
-// import { colors, mapStyle } from "../../lib/styles"
 import { mapOptions, createMarker } from "../../lib/map"
 import { receiveClientLocation, receiveMarkerLocation, receiveDrawPolygon } from "./actions"
 
