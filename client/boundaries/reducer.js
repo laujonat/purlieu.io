@@ -1,4 +1,4 @@
-import { RECEIVE_BOUNDARIES_SUCCESS } from "./actions"
+import { RECEIVE_BOUNDARIES_SUCCESS, DRAW_POLYGON_SUCCESS } from "./actions"
 
 export const initialState = {
   markers: []
