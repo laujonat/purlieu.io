@@ -4,13 +4,9 @@ import PropTypes from "prop-types"
 import styled from "styled-components"
 import PolygonCard from "./PolygonCard"
 
-import { deletePolygonCard } from "./actions"
-
 const ListContainer = styled.ul`
   flex-basis: 70%;
   margin: 10px 0;
-  border: 1px solid black;
-  overflow-y: scroll;
 `
 
 class PolygonList extends PureComponent {
@@ -26,9 +22,7 @@ const mapStateToProps = ({ polygonList }) => ({
   polygonList
 })
 
-const mapDispatchToProps = dispatch => ({
-  // deletePolygon: index => dispatch(deletePolygonCard(index))
-})
+const mapDispatchToProps = dispatch => ({})
 
 PolygonList.propTypes = {
   polygonList: PropTypes.array

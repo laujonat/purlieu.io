@@ -3,7 +3,7 @@ import styled from "styled-components"
 import PropTypes from "prop-types"
 import { Loading } from "../Loading"
 import { connect } from "react-redux"
-import { spaces } from "../../lib/styles"
+import { spaces, colors } from "../../lib/styles"
 import { receiveBoundaries } from "../../boundaries/actions"
 import PolygonList from "../PolygonList"
 
@@ -13,7 +13,7 @@ const Container = styled.nav`
   flex: 1 1 auto;
   height: 100vh;
   text-align: center;
-  background: #fff;
+  background-color: ${colors.purplishGrey};
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
   padding: ${spaces.md};
   min-width: 250px;
@@ -24,8 +24,9 @@ const HeaderContainer = styled.div`
   justify-content: center;
   align-items: center;
   height: 100px;
+  background-color: whitesmoke;
+  box-shadow: 5px 4px 19px -4px rgba(0, 0, 0, 0.34);
   align-items: center;
-  background-color: #f0f0f5;
   font-weight: 600;
 `
 
@@ -137,7 +138,8 @@ const mapStateToProps = ({ map, loading }) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  getBoundaries: ({ amount, geoLocation }) => dispatch(receiveBoundaries({ amount, geoLocation, carrier: "lyft" }))
+  getBoundaries: ({ amount, geoLocation }) =>
+    dispatch(receiveBoundaries({ amount, geoLocation, rideType: "lyft", carrier: "lyft" }))
 })
 
 NavPane.defaultProps = {
