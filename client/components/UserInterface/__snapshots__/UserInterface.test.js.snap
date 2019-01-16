@@ -47,20 +47,23 @@ ShallowWrapper {
       "$$typeof": Symbol(react.forward_ref),
       "attrs": Array [],
       "componentStyle": ComponentStyle {
-        "componentId": "sc-VigVT",
+        "componentId": "sc-cSHVUG",
         "isStatic": true,
         "rules": Array [
           "
   display: flex;
   z-index: -1;
   font-family: \\"Source Code Pro\\", monospace;
+  font-size: ",
+          "1em",
+          ";
 ",
         ],
       },
       "displayName": "styled.div",
       "foldedComponentIds": Array [],
       "render": [Function],
-      "styledComponentId": "sc-VigVT",
+      "styledComponentId": "sc-cSHVUG",
       "target": "div",
       "toString": [Function],
       "warnTooManyClasses": [Function],
@@ -103,20 +106,23 @@ ShallowWrapper {
         "$$typeof": Symbol(react.forward_ref),
         "attrs": Array [],
         "componentStyle": ComponentStyle {
-          "componentId": "sc-VigVT",
+          "componentId": "sc-cSHVUG",
           "isStatic": true,
           "rules": Array [
             "
   display: flex;
   z-index: -1;
   font-family: \\"Source Code Pro\\", monospace;
+  font-size: ",
+            "1em",
+            ";
 ",
           ],
         },
         "displayName": "styled.div",
         "foldedComponentIds": Array [],
         "render": [Function],
-        "styledComponentId": "sc-VigVT",
+        "styledComponentId": "sc-cSHVUG",
         "target": "div",
         "toString": [Function],
         "warnTooManyClasses": [Function],

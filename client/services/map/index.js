@@ -1,5 +1,4 @@
 const google = global.google
-// import { colors } from "../../lib/styles/colors"
 
 const getLocation = () =>
   new Promise((success, reject) => {
@@ -35,20 +34,6 @@ const getAddress = geoLocation => {
     geocoder.geocode({ location: geoLocation }, callback)
   })
 }
-
-// const newMarker = (pos, map) => {
-//   new google.maps.Marker({
-//     position: pos,
-//     icon: {
-//       path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
-//       scale: 5,
-//       strokeWeight: 2,
-//       fillOpacity: 1.0,
-//       fillColor: colors.lightBlue
-//     },
-//     map: map
-//   })
-// }
 
 const getRecalculatedBoundaries = ({ location, boundaries, map }) => {
   const currentPos = new google.maps.LatLng(location)
