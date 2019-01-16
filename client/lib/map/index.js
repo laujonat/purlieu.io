@@ -14,9 +14,10 @@ export const mapOptions = center => ({
   styles: mapStyle
 })
 
-export const createMarker = (position, map) => {
+export const createMarker = (position, map, drop) =>
   new google.maps.Marker({
     position,
+    animation: drop === "drop" ? google.maps.Animation.DROP : null,
     icon: {
       path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
       scale: 5,
@@ -26,9 +27,20 @@ export const createMarker = (position, map) => {
     },
     map: map
   })
-}
+
+export const createPolygon = (boundaries, map, color = "#f7a0ff") =>
+  new google.maps.Polygon({
+    paths: boundaries,
+    strokeColor: color,
+    strokeOpacity: 0.7,
+    strokeWeight: 0.5,
+    fillColor: color,
+    fillOpacity: 0.35,
+    map
+  })
 
 export default {
   mapOptions,
-  createMarker
+  createMarker,
+  createPolygon
 }

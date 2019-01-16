@@ -1,3 +1,5 @@
+export const RECEIVE_MAP = "RECEIVE_MAP"
+
 export const RECEIVE_CLIENT_LOCATION = "RECEIVE_CLIENT_LOCATION"
 export const RECEIVE_CLIENT_LOCATION_SUCCESS = "RECEIVE_CLIENT_LOCATION_SUCCESS"
 export const RECEIVE_CLIENT_LOCATION_ERROR = "RECEIVE_CLIENT_LOCATION_ERROR"
@@ -9,6 +11,12 @@ export const RECEIVE_MARKER_LOCATION_ERROR = "RECEIVE_MARKER_LOCATION_ERROR"
 export const DRAW_POLYGON = "DRAW_POLYGON"
 export const DRAW_POLYGON_SUCCESS = "DRAW_POLYGON_SUCCESS"
 export const DRAW_POLYGON_ERROR = "DRAW_POLYGON_ERROR"
+
+// Map
+export const receiveMap = data => ({
+  type: RECEIVE_MAP,
+  data
+})
 
 // Map geoLocation
 export const receiveClientLocation = () => ({

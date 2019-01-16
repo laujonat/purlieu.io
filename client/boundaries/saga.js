@@ -6,7 +6,14 @@ import api from "../services"
 export function* generateBoundaries({ data }) {
   try {
     const boundaries = yield call(api.getBoundaries, data)
-    yield put(receiveBoundariesSuccess({ ...data, boundaries }))
+    yield put(
+      receiveBoundariesSuccess({
+        amount: data.amount,
+        location: data.location,
+        address: data.address,
+        boundaries
+      })
+    )
   } catch (error) {
     yield put(receiveBoundariesErrors(error))
   }

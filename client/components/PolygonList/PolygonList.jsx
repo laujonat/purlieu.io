@@ -10,7 +10,7 @@ const ListContainer = styled.ul`
 `
 
 class PolygonList extends PureComponent {
-  renderCard = (card, index) => <PolygonCard key={index} card={card} />
+  renderCard = (card, index) => <PolygonCard key={index} card={{ ...card, index }} />
 
   render() {
     const { polygonList } = this.props

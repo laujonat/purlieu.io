@@ -10,7 +10,8 @@ const Container = styled.div`
     active &&
     `
     color: blue;
-    display: block;
+    display: flex;
+    flex: 1;
   `}
 `
 
