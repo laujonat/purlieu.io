@@ -6,7 +6,8 @@ import logger from "redux-logger"
 const sagaMiddleware = createSagaMiddleware()
 
 export const configureStore = (reducer, sagas, initialState) => {
-  const middlewares = applyMiddleware(sagaMiddleware, logger)
+  const middlewares =
+    process.env.NODE_ENV === "production" ? applyMiddleware(sagaMiddleware) : applyMiddleware(sagaMiddleware, logger)
 
   const store = createStore(reducer, initialState, composeWithDevTools(compose(middlewares)))
 
