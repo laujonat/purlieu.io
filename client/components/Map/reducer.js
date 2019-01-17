@@ -1,5 +1,6 @@
 import {
   RECEIVE_MAP,
+  RECEIVE_MARKER_DROP,
   RECEIVE_CLIENT_LOCATION_SUCCESS,
   RECEIVE_MARKER_LOCATION_SUCCESS,
   DRAW_POLYGON_SUCCESS
@@ -33,19 +34,19 @@ export const reducer = (state = initialState, action) => {
         ...action.data
       }
     case RECEIVE_BOUNDARIES: {
-      const { location, address, map } = action.data
-      const marker = createMarker(location, map, "drop")
-      MarkerAddressIndexMap[address] = newState.markers.length
-      setTimeout(() => marker.setAnimation(google.maps.Animation.BOUNCE), 300)
+      // const { locat} = action.data
+      // const marker = createMarker(location, map, "drop")
+      // MarkerAddressIndexMap[address] = newState.markers.length
+      // setTimeout(() => marker.setAnimation(google.maps.Animation.BOUNCE), 300)
       return {
         ...newState,
-        markers: [...newState.markers, marker]
+        // markers: [...newState.markers, marker]
       }
     }
     case DRAW_POLYGON_SUCCESS: {
-      const { address, polygon } = action.data
-      const index = MarkerAddressIndexMap[address]
-      newState.markers[index].setAnimation(null)
+      const { polygon } = action.data
+      // const index = MarkerAddressIndexMap[address]
+      // newState.markers[index].setAnimation(null)
       return {
         ...newState,
         polygons: [...newState.polygons, polygon]

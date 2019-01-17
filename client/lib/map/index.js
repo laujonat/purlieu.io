@@ -14,7 +14,7 @@ export const mapOptions = center => ({
   styles: mapStyle
 })
 
-export const createMarker = (position, map, drop) =>
+export const createMarker = (position, map, drop = "drop") =>
   new google.maps.Marker({
     position,
     animation: drop === "drop" ? google.maps.Animation.DROP : null,
