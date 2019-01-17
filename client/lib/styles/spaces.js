@@ -1,4 +1,7 @@
+const base = 1
 export default {
-  sm: "8px",
-  md: "16px"
+  xxSmall: `${base * 0.5}em`,
+  xSMargin: `${base * 0.875}em`,
+  smMargin: `${base}em`,
+  mdMargin: `${base * 2}em`
 }

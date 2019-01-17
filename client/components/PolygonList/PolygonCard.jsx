@@ -1,10 +1,10 @@
 import React from "react"
-import { connect } from "react-redux"
 import PropTypes from "prop-types"
-import { fonts } from "../../lib/styles"
 import styled from "styled-components"
-import { Loading } from "../Loading"
+import { connect } from "react-redux"
 import { deletePolygonCard } from "../PolygonList/actions"
+import { fonts, spaces } from "../../lib/styles"
+import { Loading } from "../Loading"
 
 const Container = styled.div`
   display: flex;
@@ -12,6 +12,7 @@ const Container = styled.div`
   flex: 1;
   margin-top: 10px;
   background-color: white;
+  box-shadow: 0px 3px 8px 1px rgba(87, 82, 87, 0.2);
   font-size: ${fonts.small};
 `
 
@@ -56,6 +57,8 @@ const Row = styled.div`
 
 const Item = styled.div`
   margin: 1em 0;
+  border-radius: 2px;
+
   ${({ amount }) =>
     amount &&
     `
@@ -105,13 +108,20 @@ const Item = styled.div`
   ${({ deleteButton }) =>
     deleteButton &&
     `
+    flex-basis: 15%;
+    width: 10%;
+    margin: ${spaces.xSmallMargin};
+    padding: 0.5em 1.5em;
     border-radius: 5px;
     background-color: red;
-    color: white
-    height: 15%;
-    width: 10%;
-    margin-right: 5%
-  `}
+    font-weight: 600;
+    color: white;
+    cursor: pointer;
+    
+      &:hover {
+        opacity: 0.7;
+      }
+   `}
 `
 
 const PolygonCard = ({ card, isLoading, deletePolygon }) => {

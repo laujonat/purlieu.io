@@ -6,10 +6,11 @@ import api from "../services"
 describe("generateBoundaries saga", () => {
   const action = {
     data: {
-      geoLocation: {
-        address: "2300 16th St, San Francisco, CA 94103, USA",
-        location: { lat: 37.766536409213685, lng: -122.40799396807859 }
-      }
+      amount: 10,
+      address: "2300 16th St, San Francisco, CA 94103, USA",
+      location: { lat: 37.766536409213685, lng: -122.40799396807859 },
+      rideType: "lyft",
+      carrier: "Lyft"
     }
   }
   const { data } = action

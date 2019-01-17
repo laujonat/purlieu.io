@@ -15,7 +15,7 @@ const Container = styled.nav`
   text-align: center;
   background-color: ${colors.purplishGrey};
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-  padding: ${spaces.md};
+  padding: ${spaces.mdMargin};
   min-width: 250px;
 `
 
@@ -25,7 +25,7 @@ const HeaderContainer = styled.div`
   align-items: center;
   height: 100px;
   background-color: whitesmoke;
-  box-shadow: 5px 4px 19px -4px rgba(0, 0, 0, 0.34);
+  box-shadow: 0px 3px 8px 1px rgba(87, 82, 87, 0.2);
   align-items: center;
   font-weight: 600;
 `
@@ -41,8 +41,8 @@ const DollarInputContainer = styled.div`
 
 const Input = styled.input`
   flex: 1;
-  margin-top: ${spaces.md};
-  padding: 0 ${spaces.md};
+  margin-top: ${spaces.mdMargin};
+  padding: 0 ${spaces.mdMargin};
   height: 50px;
   width: 100%;
   background-color: whitesmoke;
@@ -50,7 +50,7 @@ const Input = styled.input`
 
 const Button = styled.button`
   cursor: pointer;
-  margin-top: ${spaces.md};
+  margin-top: ${spaces.mdMargin};
   width: 100%;
 `
 
@@ -74,7 +74,7 @@ const DollarLabel = styled.h1`
 const SubmitButton = styled(Button)`
   height: 50px;
   background-color: greenyellow;
-  padding: 0 ${spaces.md};
+  padding: 0 ${spaces.mdMargin};
 `
 
 class NavPane extends Component {
@@ -97,12 +97,14 @@ class NavPane extends Component {
 
   onSubmit = () => {
     const { dollarInput } = this.state
-    const { location, address, map } = this.props
+    const { location, address, map, carrier, rideType } = this.props
     this.props.getBoundaries({
-      amount: dollarInput,
-      location,
       address,
-      map
+      amount: dollarInput,
+      carrier,
+      location,
+      map,
+      rideType
     })
   }
 
@@ -122,7 +124,7 @@ class NavPane extends Component {
           <DollarLabel>{`$${this.state.dollarInput}`}</DollarLabel>
         </DollarInputContainer>
         <AddressInput value={this.state.addressInput} onChange={this.onChange("addressInput")} />
-        <SubmitButton onClick={this.onSubmit}>Show Me Dah Wey</SubmitButton>
+        <SubmitButton onClick={this.onSubmit}>Compute</SubmitButton>
         <Loading active={isLoading}>Loading..</Loading>
         <PolygonList />
       </Container>
@@ -146,6 +148,8 @@ NavPane.defaultProps = {
   address: "",
   location: {},
   map: {},
+  carrier: "Lyft",
+  rideType: "lyft",
   isLoading: false,
   getBoundaries: () => {}
 }
@@ -155,7 +159,9 @@ NavPane.propTypes = {
   address: PropTypes.string,
   map: PropTypes.object,
   location: PropTypes.object,
-  isLoading: PropTypes.bool
+  isLoading: PropTypes.bool,
+  carrier: PropTypes.string,
+  rideType: PropTypes.string
 }
 
 export default connect(
