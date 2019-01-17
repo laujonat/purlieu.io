@@ -12,8 +12,7 @@ import {
 } from "../Map/actions"
 
 import api from "../../services/map"
-
-const google = global.google
+import { createPolygon } from "../../lib/map"
 
 export function* fetchClientLocation() {
   try {
@@ -47,22 +46,9 @@ export function* setMarkerAddress(geoLocation) {
 function* drawPolygon({ data }) {
   try {
     const boundaries = yield call(api.getRecalculatedBoundaries, data)
+    const polygon = createPolygon(boundaries, data.map)
 
-    const bermudaPolygon = new google.maps.Polygon({
-      paths: boundaries,
-      strokeColor: "#f7a0ff",
-      strokeOpacity: 0.7,
-      strokeWeight: 0.5,
-      fillColor: "#f7a0ff",
-      fillOpacity: 0.35
-    })
-
-    const bounds = new google.maps.LatLngBounds()
-    boundaries.forEach(coord => bounds.extend(coord))
-    data.map.fitBounds(bounds)
-    bermudaPolygon.setMap(data.map)
-
-    yield put(receiveDrawPolygonSuccess(boundaries))
+    yield put(receiveDrawPolygonSuccess({ address: data.address, polygon }))
   } catch (error) {
     yield put(receiveDrawPolygonError(error))
   }

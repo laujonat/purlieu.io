@@ -4,6 +4,7 @@ import PropTypes from "prop-types"
 import { fonts } from "../../lib/styles"
 import styled from "styled-components"
 import { Loading } from "../Loading"
+import { deletePolygonCard } from "../PolygonList/actions"
 
 const Container = styled.div`
   display: flex;
@@ -16,7 +17,6 @@ const Container = styled.div`
 
 const Row = styled.div`
   display: flex;
-
   ${({ top }) =>
     top &&
     `
@@ -49,13 +49,13 @@ const Row = styled.div`
     bottom &&
     `
     flex: 1 1 20%;
-    text-align: center;
+    align-items: center;
+    justify-content: flex-end;
   `};
 `
 
 const Item = styled.div`
   margin: 1em 0;
-
   ${({ amount }) =>
     amount &&
     `
@@ -101,15 +101,26 @@ const Item = styled.div`
     white-space: nowrap;
     text-align:left;
   `};
+
+  ${({ deleteButton }) =>
+    deleteButton &&
+    `
+    border-radius: 5px;
+    background-color: red;
+    color: white
+    height: 15%;
+    width: 10%;
+    margin-right: 5%
+  `}
 `
 
-const PolygonCard = ({ card, isLoading }) => {
-  const { amount, carrier, rideType, geoLocation } = card
+const PolygonCard = ({ card, isLoading, deletePolygon }) => {
+  const { index, amount, carrier, rideType, address, location } = card
   return (
     <Container>
       <Row top>
         <Item address>📍</Item>
-        <Item address>{geoLocation.address}</Item>
+        <Item address>{address}</Item>
       </Row>
       <Row mid>
         <Row midLeft>
@@ -119,16 +130,17 @@ const PolygonCard = ({ card, isLoading }) => {
         <Row midRight>
           <Item geoLocation>
             <Item coord>
-              <Item>{`Lat: ${geoLocation.location.lat}`}</Item>
-              <Item>{`Lng: ${geoLocation.location.lng}`}</Item>
+              <Item>{`Lat: ${location.lat}`}</Item>
+              <Item>{`Lng: ${location.lng}`}</Item>
             </Item>
             <Item amount>${amount}</Item>
           </Item>
         </Row>
       </Row>
       <Row bottom>
-        <Item>
-          <Loading active={isLoading}>Loading...</Loading>
+        <Loading active={isLoading}>Loading...</Loading>
+        <Item deleteButton onClick={() => deletePolygon(index)}>
+          X
         </Item>
       </Row>
     </Container>
@@ -139,11 +151,14 @@ const mapStateToProps = ({ loading }) => ({
   isLoading: Object.keys(loading).length > 0
 })
 
-const mapDispatchToProps = dispatch => ({})
+const mapDispatchToProps = dispatch => ({
+  deletePolygon: index => dispatch(deletePolygonCard(index))
+})
 
 PolygonCard.propTypes = {
   card: PropTypes.object.isRequired,
-  isLoading: PropTypes.bool
+  isLoading: PropTypes.bool,
+  deletePolygon: PropTypes.func.isRequired
 }
 
 export default connect(

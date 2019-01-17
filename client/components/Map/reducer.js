@@ -1,14 +1,66 @@
-import { RECEIVE_CLIENT_LOCATION_SUCCESS, RECEIVE_MARKER_LOCATION_SUCCESS } from "./actions"
+import {
+  RECEIVE_MAP,
+  RECEIVE_CLIENT_LOCATION_SUCCESS,
+  RECEIVE_MARKER_LOCATION_SUCCESS,
+  DRAW_POLYGON_SUCCESS
+} from "./actions"
+import { RECEIVE_BOUNDARIES } from "../../boundaries/actions"
+import { DELETE_POLYGON_CARD } from "../../components/PolygonList/actions"
+import { createMarker } from "../../lib/map"
 
-export const initialState = {}
+export const initialState = {
+  markers: [],
+  polygons: []
+}
+
+const MarkerAddressIndexMap = {}
+
+const google = global.google
 
 export const reducer = (state = initialState, action) => {
   Object.freeze(state)
   const newState = { ...state }
   switch (action.type) {
+    case RECEIVE_MAP:
+      return {
+        ...newState,
+        map: action.data
+      }
     case RECEIVE_CLIENT_LOCATION_SUCCESS:
     case RECEIVE_MARKER_LOCATION_SUCCESS:
-      return Object.assign({}, newState, action.data)
+      return {
+        ...newState,
+        ...action.data
+      }
+    case RECEIVE_BOUNDARIES: {
+      const { location, address, map } = action.data
+      const marker = createMarker(location, map, "drop")
+      MarkerAddressIndexMap[address] = newState.markers.length
+      setTimeout(() => marker.setAnimation(google.maps.Animation.BOUNCE), 300)
+      return {
+        ...newState,
+        markers: [...newState.markers, marker]
+      }
+    }
+    case DRAW_POLYGON_SUCCESS: {
+      const { address, polygon } = action.data
+      const index = MarkerAddressIndexMap[address]
+      newState.markers[index].setAnimation(null)
+      return {
+        ...newState,
+        polygons: [...newState.polygons, polygon]
+      }
+    }
+    case DELETE_POLYGON_CARD:
+      newState.markers[action.data].setMap(null)
+      newState.polygons[action.data].setMap(null)
+      newState.markers.splice(action.data, 1)
+      newState.polygons.splice(action.data, 1)
+      return {
+        ...newState,
+        markers: newState.markers,
+        polygons: newState.polygons
+      }
     default:
       return state
   }

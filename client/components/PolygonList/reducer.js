@@ -1,4 +1,5 @@
 import { RECEIVE_BOUNDARIES_SUCCESS } from "../../boundaries/actions"
+import { DELETE_POLYGON_CARD } from "./actions"
 
 const initialState = []
 
@@ -8,6 +9,9 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     case RECEIVE_BOUNDARIES_SUCCESS:
       return [...newState, action.data]
+    case DELETE_POLYGON_CARD:
+      newState.splice(action.data, 1)
+      return newState
     default:
       return state
   }

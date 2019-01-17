@@ -97,13 +97,12 @@ class NavPane extends Component {
 
   onSubmit = () => {
     const { dollarInput } = this.state
-    const { location, address } = this.props
+    const { location, address, map } = this.props
     this.props.getBoundaries({
       amount: dollarInput,
-      geoLocation: {
-        location,
-        address
-      }
+      location,
+      address,
+      map
     })
   }
 
@@ -134,23 +133,27 @@ class NavPane extends Component {
 const mapStateToProps = ({ map, loading }) => ({
   address: map.address,
   location: map.location,
+  map: map.map,
   isLoading: Object.keys(loading).length > 0
 })
 
 const mapDispatchToProps = dispatch => ({
-  getBoundaries: ({ amount, geoLocation }) =>
-    dispatch(receiveBoundaries({ amount, geoLocation, rideType: "lyft", carrier: "lyft" }))
+  getBoundaries: ({ amount, location, address, map }) =>
+    dispatch(receiveBoundaries({ amount, location, address, map, rideType: "lyft", carrier: "lyft" }))
 })
 
 NavPane.defaultProps = {
   address: "",
   location: {},
+  map: {},
+  isLoading: false,
   getBoundaries: () => {}
 }
 
 NavPane.propTypes = {
   getBoundaries: PropTypes.func,
   address: PropTypes.string,
+  map: PropTypes.object,
   location: PropTypes.object,
   isLoading: PropTypes.bool
 }
