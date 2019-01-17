@@ -3,7 +3,7 @@ import styled from "styled-components"
 import PropTypes from "prop-types"
 import { Loading } from "../Loading"
 import { connect } from "react-redux"
-import { spaces, colors } from "../../lib/styles"
+import { spaces, colors, media } from "../../lib/styles"
 import { receiveBoundaries } from "../../boundaries/actions"
 import PolygonList from "../PolygonList"
 
@@ -17,6 +17,9 @@ const Container = styled.nav`
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
   padding: ${spaces.md};
   min-width: 250px;
+
+  ${media.tablet`flex-basis: 1 1 30vh; height: 50%;`}
+  ${media.mobileM`flex-basis: 1 1 30vh; height: 50%;`}
 `
 
 const HeaderContainer = styled.div`
