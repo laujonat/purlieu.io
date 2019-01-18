@@ -8,18 +8,14 @@ import { receiveMap, receiveClientLocation, receiveMarkerLocation, receiveDrawPo
 
 const Container = styled.div`
   flex: 1 1 70%;
-
-  ${media.tablet`
-    height: 50%;
-  `}
-  ${media.mobileM`
-    height: 50%; 
-  `}
 `
 
 const MapComponent = styled.div`
   height: 100%;
   width: 100%;
+
+  ${media.tablet`height: 100%`}
+  ${media.mobileM`height: 100%;`}
 `
 
 const google = global.google

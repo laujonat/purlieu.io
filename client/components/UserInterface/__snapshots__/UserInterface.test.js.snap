@@ -57,6 +57,35 @@ ShallowWrapper {
   font-size: ",
           "1em",
           ";
+
+  ",
+          "
+    @media (max-width: ",
+          "48",
+          "em) {
+      ",
+          "
+      flex-direction: column;
+      height: 50em;
+   ",
+          "
+    }
+  ",
+          "
+  ",
+          "
+    @media (max-width: ",
+          "23.4375",
+          "em) {
+      ",
+          "
+      flex-direction: column;
+      height: 50em;
+   ",
+          "
+    }
+  ",
+          "
 ",
         ],
       },
@@ -116,6 +145,35 @@ ShallowWrapper {
   font-size: ",
             "1em",
             ";
+
+  ",
+            "
+    @media (max-width: ",
+            "48",
+            "em) {
+      ",
+            "
+      flex-direction: column;
+      height: 50em;
+   ",
+            "
+    }
+  ",
+            "
+  ",
+            "
+    @media (max-width: ",
+            "23.4375",
+            "em) {
+      ",
+            "
+      flex-direction: column;
+      height: 50em;
+   ",
+            "
+    }
+  ",
+            "
 ",
           ],
         },

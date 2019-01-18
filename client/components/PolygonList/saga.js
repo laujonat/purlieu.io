@@ -1,4 +1,4 @@
-import { call, put, takeEvery } from "redux-saga/effects"
+import { takeEvery } from "redux-saga/effects"
 import { RECEIVE_POLYGON_CARD } from "./actions"
 
 function* addPolygonCard({ data }) {}
