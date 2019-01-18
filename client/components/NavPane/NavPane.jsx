@@ -55,6 +55,9 @@ const Button = styled.button`
   cursor: pointer;
   margin-top: ${spaces.mdMargin};
   width: 100%;
+
+  ${media.tablet`flex-basis: 10em;`}
+  ${media.mobileM`flex-basis: 10em;`}
 `
 
 const DollarInput = styled(Input).attrs({

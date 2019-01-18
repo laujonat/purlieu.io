@@ -21,7 +21,6 @@ describe("generateBoundaries saga", () => {
     it("calls receiveBoundariesSuccess", () => {
       const boundaries = [{ lat: 123, lng: -123 }, { lat: 343.2, lng: -23.33 }]
       const marker = { setAnimation: jest.fn() }
-      const map = {}
       testSaga(generateBoundaries, action)
         .next()
         .call(createMarker, data.location, data.map)
@@ -49,7 +48,6 @@ describe("generateBoundaries saga", () => {
   describe("unsuccessfully fetching boundaries from marker location", () => {
     it("calls receiveBoundariesError", () => {
       const marker = { setAnimation: jest.fn(), setMap: jest.fn() }
-      const map = {}
       const error = { errors: {} }
       testSaga(generateBoundaries, action)
         .next()

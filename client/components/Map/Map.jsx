@@ -3,6 +3,7 @@ import { connect } from "react-redux"
 import styled from "styled-components"
 import PropTypes from "prop-types"
 import { mapOptions } from "../../lib/map"
+import { media } from "../../lib/styles"
 import { receiveMap, receiveClientLocation, receiveMarkerLocation, receiveDrawPolygon } from "./actions"
 
 const Container = styled.div`
@@ -12,6 +13,9 @@ const Container = styled.div`
 const MapComponent = styled.div`
   height: 100%;
   width: 100%;
+
+  ${media.tablet`height: 100%`}
+  ${media.mobileM`height: 100%;`}
 `
 
 const google = global.google
