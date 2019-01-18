@@ -3,10 +3,18 @@ import { connect } from "react-redux"
 import styled from "styled-components"
 import PropTypes from "prop-types"
 import { mapOptions } from "../../lib/map"
+import { media } from "../../lib/styles"
 import { receiveMap, receiveClientLocation, receiveMarkerLocation, receiveDrawPolygon } from "./actions"
 
 const Container = styled.div`
   flex: 1 1 70%;
+
+  ${media.tablet`
+    height: 50%;
+  `}
+  ${media.mobileM`
+    height: 50%; 
+  `}
 `
 
 const MapComponent = styled.div`
