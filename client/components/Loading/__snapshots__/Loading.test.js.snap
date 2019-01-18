@@ -2,7 +2,7 @@
 
 exports[`Loading renders and displayed when active is true 1`] = `
 <div
-  className="sc-bdVaJa djNIHe"
+  className="sc-bdVaJa ktVWfM"
 >
   Loading..
 </div>

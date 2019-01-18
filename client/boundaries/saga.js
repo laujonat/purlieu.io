@@ -11,6 +11,8 @@ export function* generateBoundaries({ data }) {
         amount: data.amount,
         location: data.location,
         address: data.address,
+        rideType: data.rideType,
+        carrier: data.carrier,
         boundaries
       })
     )

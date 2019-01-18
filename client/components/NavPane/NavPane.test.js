@@ -23,10 +23,11 @@ describe("NavPane", () => {
       const { address, location } = props
       expect(getBoundaries).toHaveBeenCalledWith({
         amount: wrapper.state().dollarInput,
-        geoLocation: {
-          location,
-          address
-        }
+        location,
+        address,
+        rideType: "lyft",
+        carrier: "Lyft",
+        map: {}
       })
     })
   })
