@@ -1,5 +1,4 @@
 export const RECEIVE_MAP = "RECEIVE_MAP"
-export const RECEIVE_MARKER_DROP = "RECEIVE_MARKER_DROP"
 
 export const RECEIVE_CLIENT_LOCATION = "RECEIVE_CLIENT_LOCATION"
 export const RECEIVE_CLIENT_LOCATION_SUCCESS = "RECEIVE_CLIENT_LOCATION_SUCCESS"
@@ -16,11 +15,6 @@ export const DRAW_POLYGON_ERROR = "DRAW_POLYGON_ERROR"
 // Map
 export const receiveMap = data => ({
   type: RECEIVE_MAP,
-  data
-})
-
-export const receiveMarkerDrop = data => ({
-  type: RECEIVE_MARKER_DROP,
   data
 })
 

@@ -1,20 +1,16 @@
 import {
   RECEIVE_MAP,
-  RECEIVE_MARKER_DROP,
   RECEIVE_CLIENT_LOCATION_SUCCESS,
   RECEIVE_MARKER_LOCATION_SUCCESS,
   DRAW_POLYGON_SUCCESS
 } from "./actions"
-import { RECEIVE_BOUNDARIES } from "../../boundaries/actions"
 import { DELETE_POLYGON_CARD } from "../../components/PolygonList/actions"
-import { createMarker } from "../../lib/map"
+import { RECEIVE_BOUNDARIES_SUCCESS } from "../../boundaries/actions"
 
 export const initialState = {
   markers: [],
   polygons: []
 }
-
-const MarkerAddressIndexMap = {}
 
 const google = global.google
 
@@ -33,20 +29,15 @@ export const reducer = (state = initialState, action) => {
         ...newState,
         ...action.data
       }
-    case RECEIVE_BOUNDARIES: {
-      // const { locat} = action.data
-      // const marker = createMarker(location, map, "drop")
-      // MarkerAddressIndexMap[address] = newState.markers.length
-      // setTimeout(() => marker.setAnimation(google.maps.Animation.BOUNCE), 300)
+    case RECEIVE_BOUNDARIES_SUCCESS: {
+      const { marker } = action.data
       return {
         ...newState,
-        // markers: [...newState.markers, marker]
+        markers: [...newState.markers, marker]
       }
     }
     case DRAW_POLYGON_SUCCESS: {
       const { polygon } = action.data
-      // const index = MarkerAddressIndexMap[address]
-      // newState.markers[index].setAnimation(null)
       return {
         ...newState,
         polygons: [...newState.polygons, polygon]
