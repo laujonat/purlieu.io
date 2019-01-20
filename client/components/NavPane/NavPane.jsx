@@ -4,8 +4,9 @@ import PropTypes from "prop-types"
 import { Loading } from "../Loading"
 import { connect } from "react-redux"
 import { spaces, colors, media } from "../../lib/styles"
-import { receiveBoundaries } from "../../boundaries/actions"
 import PolygonList from "../PolygonList"
+import { receiveBoundaries } from "../../boundaries/actions"
+import { receivePolygonCard } from "../PolygonList/actions"
 
 const Container = styled.nav`
   display: flex;
@@ -104,7 +105,7 @@ class NavPane extends Component {
   onSubmit = () => {
     const { dollarInput } = this.state
     const { location, address, map, carrier, rideType } = this.props
-    this.props.getBoundaries({
+    this.props.requestBoundaries({
       address,
       amount: dollarInput,
       carrier,
@@ -131,7 +132,7 @@ class NavPane extends Component {
         </DollarInputContainer>
         <AddressInput value={this.state.addressInput} onChange={this.onChange("addressInput")} />
         <SubmitButton onClick={this.onSubmit}>Compute</SubmitButton>
-        <Loading active={isLoading}>Loading..</Loading>
+        {/* <Loading active={isLoading}>Loading..</Loading> */}
         <PolygonList />
       </Container>
     )
@@ -146,8 +147,10 @@ const mapStateToProps = ({ map, loading }) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  getBoundaries: ({ amount, location, address, map }) =>
-    dispatch(receiveBoundaries({ amount, location, address, map, rideType: "lyft", carrier: "lyft" }))
+  requestBoundaries: ({ amount, location, address, map }) => {
+    dispatch(receivePolygonCard({ amount, location, address, map, rideType: "lyft", carrier: "lyft" }))
+    dispatch(receiveBoundaries())
+  }
 })
 
 NavPane.defaultProps = {
@@ -157,11 +160,11 @@ NavPane.defaultProps = {
   carrier: "Lyft",
   rideType: "lyft",
   isLoading: false,
-  getBoundaries: () => {}
+  requestBoundaries: () => {}
 }
 
 NavPane.propTypes = {
-  getBoundaries: PropTypes.func,
+  requestBoundaries: PropTypes.func,
   address: PropTypes.string,
   map: PropTypes.object,
   location: PropTypes.object,
