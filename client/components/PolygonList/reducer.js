@@ -1,12 +1,11 @@
-import { RECEIVE_BOUNDARIES_SUCCESS } from "../../boundaries/actions"
-import { DELETE_POLYGON_CARD, RECEIVE_POLYGON_CARD } from "./actions"
+import { DELETE_POLYGON_CARD, RECEIVE_POLYGON_CARD_SUCCESS } from "./actions"
 const initialState = []
 
 const reducer = (state = initialState, action) => {
   Object.freeze(state)
   const newState = [...state]
   switch (action.type) {
-    case RECEIVE_POLYGON_CARD:
+    case RECEIVE_POLYGON_CARD_SUCCESS:
       return [...newState, action.data]
     case DELETE_POLYGON_CARD:
       newState.splice(action.data, 1)

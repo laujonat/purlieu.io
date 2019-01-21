@@ -3,7 +3,8 @@ import { delay } from "redux-saga"
 import { RECEIVE_BOUNDARIES, receiveBoundariesSuccess, receiveBoundariesErrors } from "./actions"
 import api from "../services"
 import { createMarker } from "../lib/map"
-import { selectCurrentCard } from "./selectors"
+import { selectCurrentCard } from "../components/PolygonList/selectors"
+import { selectMap } from "../components/Map/selectors"
 
 const google = global.google
 
@@ -12,15 +13,16 @@ export function* dropMarker(marker) {
   marker.setAnimation(google.maps.Animation.BOUNCE)
 }
 
-export function* generateBoundaries() {
+export function* generateBoundaries({ data }) {
   let marker
   try {
-    const current = yield select(selectCurrentCard)
+    const card = yield select(selectCurrentCard, data)
+    const map = yield select(selectMap)
 
-    marker = yield call(createMarker, current.location, current.map)
+    marker = yield call(createMarker, card.location, map)
     yield fork(dropMarker, marker)
 
-    const boundaries = yield call(api.getBoundaries, current)
+    const boundaries = yield call(api.getBoundaries, card)
     marker.setAnimation(null)
 
     yield put(
