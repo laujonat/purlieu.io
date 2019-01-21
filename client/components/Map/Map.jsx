@@ -41,10 +41,10 @@ class Map extends Component {
     }
 
     if (prevProps.mapPolygons.length !== this.props.mapPolygons.length) {
-      const { drawPolygon, location, polygonList } = this.props
+      const { drawPolygon, location, mapPolygons } = this.props
       drawPolygon({
         location,
-        boundaries: polygonList[polygonList.length - 1].boundaries,
+        boundaries: mapPolygons[mapPolygons.length - 1],
         map: this.map
       })
     }
@@ -136,10 +136,11 @@ Map.propTypes = {
   fetchClientLocation: PropTypes.func,
   setMarkerAddress: PropTypes.func,
   drawPolygon: PropTypes.func,
-  setMap: PropTypes.func,
   location: PropTypes.object,
   address: PropTypes.string,
-  polygonList: PropTypes.array
+  mapPolygons: PropTypes.array,
+  polygonList: PropTypes.array,
+  setMap: PropTypes.func
 }
 
 export default connect(

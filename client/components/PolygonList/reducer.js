@@ -8,10 +8,6 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     case RECEIVE_POLYGON_CARD:
       return [...newState, action.data]
-    case RECEIVE_BOUNDARIES_SUCCESS:
-      const currentCard = newState.slice(-1)[0]
-      currentCard.boundaries = action.data.boundaries
-      return [...newState, currentCard]
     case DELETE_POLYGON_CARD:
       newState.splice(action.data, 1)
       return newState
