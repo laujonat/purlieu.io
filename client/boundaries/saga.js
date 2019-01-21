@@ -3,7 +3,7 @@ import { delay } from "redux-saga"
 import { RECEIVE_BOUNDARIES, receiveBoundariesSuccess, receiveBoundariesErrors } from "./actions"
 import api from "../services"
 import { createMarker } from "../lib/map"
-import { getPolygonListId } from "./selectors"
+import { selectCurrentCard } from "./selectors"
 
 const google = global.google
 
@@ -15,21 +15,16 @@ export function* dropMarker(marker) {
 export function* generateBoundaries() {
   let marker
   try {
-    const current = yield select(getPolygonListId)
+    const current = yield select(selectCurrentCard)
 
-    marker = yield call(createMarker, current[0].location, current[0].map)
+    marker = yield call(createMarker, current.location, current.map)
     yield fork(dropMarker, marker)
 
-    const boundaries = yield call(api.getBoundaries, current[0], marker)
+    const boundaries = yield call(api.getBoundaries, current)
     marker.setAnimation(null)
 
     yield put(
       receiveBoundariesSuccess({
-        amount: current[0].amount,
-        location: current[0].location,
-        address: current[0].address,
-        rideType: current[0].rideType,
-        carrier: current[0].carrier,
         marker,
         boundaries
       })

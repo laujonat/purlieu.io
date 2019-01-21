@@ -1,1 +1,1 @@
-export const getPolygonListId = state => state.polygonList
+export const selectCurrentCard = state => state.polygonList.slice(-1)[0]

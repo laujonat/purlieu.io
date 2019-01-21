@@ -30,17 +30,17 @@ export const reducer = (state = initialState, action) => {
         ...action.data
       }
     case RECEIVE_BOUNDARIES_SUCCESS: {
-      const { marker } = action.data
+      const { marker, boundaries } = action.data
+
       return {
         ...newState,
+        polygons: [...newState.polygons, boundaries],
         markers: [...newState.markers, marker]
       }
     }
     case DRAW_POLYGON_SUCCESS: {
-      const { polygon } = action.data
       return {
-        ...newState,
-        polygons: [...newState.polygons, polygon]
+        ...newState
       }
     }
     case DELETE_POLYGON_CARD:
