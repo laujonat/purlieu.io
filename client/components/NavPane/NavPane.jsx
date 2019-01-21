@@ -105,7 +105,7 @@ class NavPane extends Component {
   onSubmit = () => {
     const { dollarInput } = this.state
     const { location, address, map, carrier, rideType } = this.props
-    this.props.requestBoundaries({
+    this.props.addPolygon({
       address,
       amount: dollarInput,
       carrier,
@@ -147,10 +147,8 @@ const mapStateToProps = ({ map, loading }) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  requestBoundaries: ({ amount, location, address, map }) => {
+  addPolygon: ({ amount, location, address, map }) =>
     dispatch(receivePolygonCard({ amount, location, address, map, rideType: "lyft", carrier: "lyft" }))
-    dispatch(receiveBoundaries())
-  }
 })
 
 NavPane.defaultProps = {
@@ -160,11 +158,11 @@ NavPane.defaultProps = {
   carrier: "Lyft",
   rideType: "lyft",
   isLoading: false,
-  requestBoundaries: () => {}
+  addPolygon: () => {}
 }
 
 NavPane.propTypes = {
-  requestBoundaries: PropTypes.func,
+  addPolygon: PropTypes.func,
   address: PropTypes.string,
   map: PropTypes.object,
   location: PropTypes.object,

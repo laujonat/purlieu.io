@@ -1,8 +1,9 @@
-import React from "react"
+import React, { Component } from "react"
 import PropTypes from "prop-types"
 import styled from "styled-components"
 import { connect } from "react-redux"
 import { deletePolygonCard } from "../PolygonList/actions"
+import { receiveBoundaries } from "../../boundaries/actions"
 import { fonts, spaces } from "../../lib/styles"
 import { Loading } from "../Loading"
 
@@ -124,37 +125,45 @@ const Item = styled.div`
    `}
 `
 
-const PolygonCard = ({ card, isLoading, deletePolygon }) => {
-  const { index, amount, carrier, rideType, address, location } = card
-  return (
-    <Container>
-      <Row top>
-        <Item address>📍</Item>
-        <Item address>{address}</Item>
-      </Row>
-      <Row mid>
-        <Row midLeft>
-          <Item carrier>{carrier}</Item>
-          <Item rideType>Type: {rideType}</Item>
+class PolygonCard extends Component {
+  componentDidMount() {
+    console.log("props", this.props)
+    this.props.getBoundaries(this.props.card.index)
+  }
+
+  render() {
+    const { card, isLoading, deletePolygon } = this.props
+    const { index, amount, carrier, rideType, address, location } = card
+    return (
+      <Container>
+        <Row top>
+          <Item address>📍</Item>
+          <Item address>{address}</Item>
         </Row>
-        <Row midRight>
-          <Item geoLocation>
-            <Item coord>
-              <Item>{`Lat: ${location.lat}`}</Item>
-              <Item>{`Lng: ${location.lng}`}</Item>
+        <Row mid>
+          <Row midLeft>
+            <Item carrier>{carrier}</Item>
+            <Item rideType>Type: {rideType}</Item>
+          </Row>
+          <Row midRight>
+            <Item geoLocation>
+              <Item coord>
+                <Item>{`Lat: ${location.lat}`}</Item>
+                <Item>{`Lng: ${location.lng}`}</Item>
+              </Item>
+              <Item amount>${amount}</Item>
             </Item>
-            <Item amount>${amount}</Item>
+          </Row>
+        </Row>
+        <Row bottom>
+          <Loading active={isLoading}>Loading...</Loading>
+          <Item deleteButton onClick={() => deletePolygon(index)}>
+            X
           </Item>
         </Row>
-      </Row>
-      <Row bottom>
-        <Loading active={isLoading}>Loading...</Loading>
-        <Item deleteButton onClick={() => deletePolygon(index)}>
-          X
-        </Item>
-      </Row>
-    </Container>
-  )
+      </Container>
+    )
+  }
 }
 
 const mapStateToProps = ({ loading }) => ({
@@ -162,13 +171,15 @@ const mapStateToProps = ({ loading }) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
+  getBoundaries: index => dispatch(receiveBoundaries(index)),
   deletePolygon: index => dispatch(deletePolygonCard(index))
 })
 
 PolygonCard.propTypes = {
   card: PropTypes.object.isRequired,
   isLoading: PropTypes.bool,
-  deletePolygon: PropTypes.func.isRequired
+  deletePolygon: PropTypes.func.isRequired,
+  getBoundaries: PropTypes.func.isRequired
 }
 
 export default connect(

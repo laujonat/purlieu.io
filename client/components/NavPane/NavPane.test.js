@@ -16,12 +16,12 @@ describe("NavPane", () => {
 
   describe("onSubmit", () => {
     it("calls getBoundaries", () => {
-      const getBoundaries = jest.fn()
-      const wrapper = shallow(<NavPane.WrappedComponent {...props} getBoundaries={getBoundaries} />)
+      const addPolygon = jest.fn()
+      const wrapper = shallow(<NavPane.WrappedComponent {...props} addPolygon={addPolygon} />)
       wrapper.setState({ dollarInput: 10 })
       wrapper.instance().onSubmit()
       const { address, location } = props
-      expect(getBoundaries).toHaveBeenCalledWith({
+      expect(addPolygon).toHaveBeenCalledWith({
         amount: wrapper.state().dollarInput,
         location,
         address,
