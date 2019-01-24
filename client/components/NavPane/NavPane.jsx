@@ -4,8 +4,8 @@ import PropTypes from "prop-types"
 import { Loading } from "../Loading"
 import { connect } from "react-redux"
 import { spaces, colors, media } from "../../lib/styles"
-import { receiveBoundaries } from "../../boundaries/actions"
 import PolygonList from "../PolygonList"
+import { receivePolygonCard } from "../PolygonList/actions"
 
 const Container = styled.nav`
   display: flex;
@@ -104,7 +104,7 @@ class NavPane extends Component {
   onSubmit = () => {
     const { dollarInput } = this.state
     const { location, address, map, carrier, rideType } = this.props
-    this.props.getBoundaries({
+    this.props.addPolygon({
       address,
       amount: dollarInput,
       carrier,
@@ -146,8 +146,8 @@ const mapStateToProps = ({ map, loading }) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  getBoundaries: ({ amount, location, address, map }) =>
-    dispatch(receiveBoundaries({ amount, location, address, map, rideType: "lyft", carrier: "lyft" }))
+  addPolygon: ({ amount, location, address, map }) =>
+    dispatch(receivePolygonCard({ amount, location, address, map, rideType: "lyft", carrier: "lyft" }))
 })
 
 NavPane.defaultProps = {
@@ -157,11 +157,11 @@ NavPane.defaultProps = {
   carrier: "Lyft",
   rideType: "lyft",
   isLoading: false,
-  getBoundaries: () => {}
+  addPolygon: () => {}
 }
 
 NavPane.propTypes = {
-  getBoundaries: PropTypes.func,
+  addPolygon: PropTypes.func,
   address: PropTypes.string,
   map: PropTypes.object,
   location: PropTypes.object,

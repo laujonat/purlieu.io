@@ -1,8 +1,8 @@
 import { call, put, takeEvery } from "redux-saga/effects"
 import {
+  DRAW_POLYGON,
   RECEIVE_CLIENT_LOCATION,
   RECEIVE_MARKER_LOCATION,
-  DRAW_POLYGON,
   receiveClientLocationSuccess,
   receiveClientLocationErrors,
   receiveMarkerLocationSuccess,
@@ -48,7 +48,7 @@ function* drawPolygon({ data }) {
     const boundaries = yield call(api.getRecalculatedBoundaries, data)
     const polygon = createPolygon(boundaries, data.map)
 
-    yield put(receiveDrawPolygonSuccess({ address: data.address, polygon }))
+    yield put(receiveDrawPolygonSuccess({ polygon }))
   } catch (error) {
     yield put(receiveDrawPolygonError(error))
   }
