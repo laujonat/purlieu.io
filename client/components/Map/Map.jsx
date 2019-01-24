@@ -108,7 +108,7 @@ class Map extends Component {
 const mapStateToProps = ({ map, polygonList }) => ({
   location: map.location,
   address: map.address,
-  mapPolygons: map.polygons,
+  mapPolygons: map.boundaries,
   polygonList
 })
 
