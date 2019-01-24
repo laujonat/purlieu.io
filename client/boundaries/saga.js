@@ -32,7 +32,9 @@ export function* generateBoundaries({ data }) {
       })
     )
   } catch (error) {
-    marker.setMap(null)
+    if (marker) {
+      marker.setMap(null)
+    }
     yield put(receiveBoundariesErrors(error))
   }
 }

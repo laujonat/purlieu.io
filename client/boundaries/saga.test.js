@@ -1,4 +1,6 @@
-import { testSaga } from "redux-saga-test-plan"
+import { testSaga, expectSaga } from "redux-saga-test-plan"
+import { select } from "redux-saga/effects"
+import * as matchers from "redux-saga-test-plan/matchers"
 import { generateBoundaries, dropMarker } from "./saga"
 import { receiveBoundariesSuccess, receiveBoundariesErrors } from "./actions"
 import { createMarker } from "../lib/map"
@@ -16,37 +18,23 @@ describe("generateBoundaries saga", () => {
     carrier: "lyft"
   }
 
-  const map = {
-    maps: {
-      LatLng: jest.fn(),
-      Map: function() {
-        return { addListener: jest.fn() }
-      },
-      event: { trigger: jest.fn() }
-    }
-  }
+  const map = () => {}
 
   describe("successfully fetching boundaries from marker location", () => {
     it("calls receiveBoundariesSuccess", () => {
       const boundaries = [{ lat: 123, lng: -123 }, { lat: 343.2, lng: -23.33 }]
-      const marker = { setAnimation: jest.fn() }
-      const { data } = action
+      const marker = { setAnimation: jest.fn(), setMap: jest.fn() }
 
-      testSaga(generateBoundaries, action)
-        .next()
-        .select(selectCurrentCard, data)
-        .next(card)
-        .select(selectMap)
-        .next(map.maps.Map)
-        .call(createMarker, card.location, map.maps.Map)
-        .next(marker)
-        .fork(dropMarker, marker)
-        .next()
-        .call(api.getBoundaries, card)
-        .next(boundaries)
+      return expectSaga(generateBoundaries, action)
+        .provide([
+          [select(selectCurrentCard), card],
+          [select(selectMap), map],
+          [matchers.call.fn(createMarker), marker],
+          [matchers.fork.fn(dropMarker)],
+          [matchers.call.fn(api.getBoundaries), boundaries],
+        ])
         .put(receiveBoundariesSuccess({ marker, boundaries }))
-        .next()
-        .isDone()
+        .run()
     })
   })
 
@@ -54,14 +42,13 @@ describe("generateBoundaries saga", () => {
     it("calls receiveBoundariesError", () => {
       const marker = { setAnimation: jest.fn(), setMap: jest.fn() }
       const error = { errors: {} }
-      const { data } = action
       testSaga(generateBoundaries, action)
         .next()
         .select(selectCurrentCard, data)
         .next(card)
         .select(selectMap)
-        .next(map.maps.Map)
-        .call(createMarker, card.location, map.maps.Map)
+        .next(map)
+        .call(createMarker, card.location, map)
         .next(marker)
         .fork(dropMarker, marker)
         .next()
