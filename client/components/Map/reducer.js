@@ -9,6 +9,7 @@ import { RECEIVE_BOUNDARIES_SUCCESS } from "../../boundaries/actions"
 
 export const initialState = {
   markers: [],
+  boundaries: [],
   polygons: []
 }
 
@@ -34,18 +35,21 @@ export const reducer = (state = initialState, action) => {
 
       return {
         ...newState,
-        polygons: [...newState.polygons, boundaries],
+        boundaries: [...newState.boundaries, boundaries],
         markers: [...newState.markers, marker]
       }
     }
     case DRAW_POLYGON_SUCCESS: {
+      const { polygon } = action.data
       return {
-        ...newState
+        ...newState,
+        polygons: [...newState.polygons, polygon]
       }
     }
     case DELETE_POLYGON_CARD:
       newState.markers[action.data].setMap(null)
       newState.polygons[action.data].setMap(null)
+      delete newState.boundaries[action.data]
       newState.markers.splice(action.data, 1)
       newState.polygons.splice(action.data, 1)
       return {

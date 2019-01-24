@@ -9,6 +9,7 @@ const reducer = (state = initialState, action) => {
       return [...newState, action.data]
     case DELETE_POLYGON_CARD:
       newState.splice(action.data, 1)
+      console.log("NEWSTATE", newState)
       return newState
     default:
       return state
