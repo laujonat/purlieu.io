@@ -16,6 +16,7 @@ describe("generateBoundaries saga", () => {
     carrier: "lyft"
   }
 
+  // need to find a google maps mock
   const map = {
     maps: {
       LatLng: jest.fn(),

@@ -5,8 +5,9 @@ import { Loading } from "../Loading"
 import { connect } from "react-redux"
 import { spaces, colors, media } from "../../lib/styles"
 import PolygonList from "../PolygonList"
-import Dropdown from "./Dropdown"
+import Dropdown from "../Dropdown"
 import { receivePolygonCard } from "../PolygonList/actions"
+import { Carriers, CarrierToRideTypesMap, RideTypeToTitleMap } from "../../lib/carriers"
 
 const Container = styled.nav`
   display: flex;
@@ -45,8 +46,7 @@ const DollarInputContainer = styled.div`
 
 const Input = styled.input`
   flex: 1;
-  margin-top: ${spaces.mdMargin};
-  padding: 0 ${spaces.mdMargin};
+  /* margin-top: ${spaces.mdMargin}; */
   height: 50px;
   width: 100%;
   background-color: whitesmoke;
@@ -90,7 +90,9 @@ class NavPane extends Component {
 
     this.state = {
       dollarInput: 10,
-      addressInput: ""
+      addressInput: "",
+      selectedCarrier: "Lyft",
+      rideType: ""
     }
   }
 
@@ -131,9 +133,15 @@ class NavPane extends Component {
           <DollarLabel>{`$${this.state.dollarInput}`}</DollarLabel>
         </DollarInputContainer>
         <AddressInput value={this.state.addressInput} onChange={this.onChange("addressInput")} />
+        <Dropdown
+          carrierLabel={"Select Carrier"}
+          list={Carriers}
+          onChange={this.onChange("selectedCarrier")}
+          selectedCarrier={this.state.selectedCarrier}
+          toggleItem={this.toggleSelected}
+        />
         <SubmitButton onClick={this.onSubmit}>Compute</SubmitButton>
         <Loading active={isLoading}>Loading..</Loading>
-        <Dropdown />
         <PolygonList />
       </Container>
     )
