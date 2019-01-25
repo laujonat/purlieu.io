@@ -7,7 +7,7 @@ import { spaces, colors, media } from "../../lib/styles"
 import PolygonList from "../PolygonList"
 import Dropdown from "../Dropdown"
 import { receivePolygonCard } from "../PolygonList/actions"
-import { Carriers, CarrierToRideTypesMap, RideTypeToTitleMap } from "../../lib/carriers"
+import { Carriers, CarrierToRideTypesMap } from "../../lib/carriers"
 
 const Container = styled.nav`
   display: flex;
@@ -28,11 +28,17 @@ const HeaderContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100px;
+  flex-basis: 3em;
+  flex-grow: 0;
   background-color: whitesmoke;
-  box-shadow: 0px 3px 8px 1px rgba(87, 82, 87, 0.2);
+  box-shadow: 0px 3px 5px 1px rgba(87, 82, 87, 0.2);
   align-items: center;
   font-weight: 600;
+`
+
+const DropdownContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
 `
 
 const Header = styled.h1``
@@ -46,7 +52,6 @@ const DollarInputContainer = styled.div`
 
 const Input = styled.input`
   flex: 1;
-  /* margin-top: ${spaces.mdMargin}; */
   height: 50px;
   width: 100%;
   background-color: whitesmoke;
@@ -91,7 +96,9 @@ class NavPane extends Component {
     this.state = {
       dollarInput: 10,
       addressInput: "",
-      selectedCarrier: "Lyft",
+      carrier: "Select Carrier",
+      carrierType: "Ride Type",
+      isSelected: false,
       rideType: ""
     }
   }
@@ -102,6 +109,14 @@ class NavPane extends Component {
         addressInput: this.props.address
       })
     }
+  }
+
+  toggleSelected = (id, key) => {
+    let temp = Carriers[id]
+    this.setState({
+      [key]: temp[key],
+      isSelected: true
+    })
   }
 
   onSubmit = () => {
@@ -123,6 +138,8 @@ class NavPane extends Component {
 
   render() {
     const { isLoading } = this.props
+    const { carrier, carrierType } = this.state
+    console.log("current state", this.state)
     return (
       <Container>
         <HeaderContainer>
@@ -133,13 +150,16 @@ class NavPane extends Component {
           <DollarLabel>{`$${this.state.dollarInput}`}</DollarLabel>
         </DollarInputContainer>
         <AddressInput value={this.state.addressInput} onChange={this.onChange("addressInput")} />
-        <Dropdown
-          carrierLabel={"Select Carrier"}
-          list={Carriers}
-          onChange={this.onChange("selectedCarrier")}
-          selectedCarrier={this.state.selectedCarrier}
-          toggleItem={this.toggleSelected}
-        />
+        <DropdownContainer>
+          <Dropdown list={Carriers} selectedCarrier={carrier} toggleItem={this.toggleSelected} />
+          {this.state.isSelected ? (
+            <Dropdown
+              list={CarrierToRideTypesMap[carrier]}
+              selectedCarrier={carrierType}
+              toggleItem={this.toggleSelected}
+            />
+          ) : null}
+        </DropdownContainer>
         <SubmitButton onClick={this.onSubmit}>Compute</SubmitButton>
         <Loading active={isLoading}>Loading..</Loading>
         <PolygonList />
