@@ -54,6 +54,7 @@ export const reducer = (state = initialState, action) => {
       newState.polygons.splice(action.data, 1)
       return {
         ...newState,
+        boundaries: newState.boundaries,
         markers: newState.markers,
         polygons: newState.polygons
       }

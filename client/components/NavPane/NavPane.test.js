@@ -11,6 +11,7 @@ const props = {
 describe("NavPane", () => {
   it("renders the component", () => {
     const wrapper = shallow(<NavPane />)
+    wrapper.setState({ dollarInput: 10, carrier: "Lyft", rideType: "Lyft" })
     expect(wrapper).toMatchSnapshot()
   })
 
@@ -18,7 +19,7 @@ describe("NavPane", () => {
     it("calls getBoundaries", () => {
       const addPolygon = jest.fn()
       const wrapper = shallow(<NavPane.WrappedComponent {...props} addPolygon={addPolygon} />)
-      wrapper.setState({ dollarInput: 10 })
+      wrapper.setState({ dollarInput: 10, carrier: "Lyft", rideType: "Lyft" })
       wrapper.instance().onSubmit()
       const { address, location } = props
       expect(addPolygon).toHaveBeenCalledWith({
