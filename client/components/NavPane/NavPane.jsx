@@ -5,7 +5,7 @@ import Dropdown from "../Dropdown"
 import { connect } from "react-redux"
 import { Loading } from "../Loading"
 import { receivePolygonCard } from "../PolygonList/actions"
-import { Carriers, CarrierToRideTypesMap } from "../../lib/carriers"
+import { Carriers, CarrierToRideTypesMap, RideTypeToTitleMap } from "../../lib/carriers"
 import {
   Container,
   HeaderContainer,
@@ -25,10 +25,8 @@ class NavPane extends Component {
     this.state = {
       dollarInput: 10,
       addressInput: "",
-      carrier: "Select Carrier",
-      carrierType: "Ride Type",
-      isSelected: false,
-      rideType: ""
+      carrier: null,
+      rideType: null
     }
   }
 
@@ -40,17 +38,14 @@ class NavPane extends Component {
     }
   }
 
-  toggleSelected = (id, key) => {
-    let temp = Carriers[id]
-    this.setState({
-      [key]: temp[key],
-      isSelected: true
-    })
+  toggleSelected = item => {
+    this.setState({ [item.key]: item.value })
   }
 
   onSubmit = () => {
-    const { dollarInput } = this.state
-    const { location, address, map, carrier, rideType } = this.props
+    const { dollarInput, carrier } = this.state
+    const { location, address, map } = this.props
+    const rideType = RideTypeToTitleMap[this.state.rideType]
     this.props.addPolygon({
       address,
       amount: dollarInput,
@@ -67,7 +62,7 @@ class NavPane extends Component {
 
   render() {
     const { isLoading } = this.props
-    const { carrier, carrierType } = this.state
+    const { carrier, rideType } = this.state
 
     return (
       <Container>
@@ -80,13 +75,9 @@ class NavPane extends Component {
         </DollarInputContainer>
         <AddressInput value={this.state.addressInput} onChange={this.onChange("addressInput")} />
         <DropdownContainer>
-          <Dropdown list={Carriers} selectedCarrier={carrier} toggleItem={this.toggleSelected} />
-          {this.state.isSelected ? (
-            <Dropdown
-              list={CarrierToRideTypesMap[carrier]}
-              selectedCarrier={carrierType}
-              toggleItem={this.toggleSelected}
-            />
+          <Dropdown list={Carriers} placeholder={"Carrier"} selected={carrier} toggleItem={this.toggleSelected} />
+          {carrier ? (
+            <Dropdown list={CarrierToRideTypesMap[carrier]} selected={rideType} toggleItem={this.toggleSelected} />
           ) : null}
         </DropdownContainer>
         <SubmitButton onClick={this.onSubmit}>Compute</SubmitButton>
@@ -105,8 +96,8 @@ const mapStateToProps = ({ map, loading }) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  addPolygon: ({ amount, location, address, map }) =>
-    dispatch(receivePolygonCard({ amount, location, address, map, rideType: "lyft", carrier: "lyft" }))
+  addPolygon: ({ amount, location, address, map, rideType, carrier }) =>
+    dispatch(receivePolygonCard({ amount, location, address, map, rideType, carrier }))
 })
 
 NavPane.defaultProps = {

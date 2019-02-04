@@ -1,43 +1,31 @@
 export const Carriers = [
   {
-    id: 0,
-    carrier: "Lyft",
-    key: "carrier"
+    key: "carrier",
+    value: "Lyft"
   }
-  // {
-  //   id: 1,
-  //   carrier: "Uber",
-  //   key: "carrier"
-  // },
-  // {
-  //   id: 2,
-  //   carrier: "Bird",
-  //   key: "carrier"
-  // }
 ]
 
 export const CarrierToRideTypesMap = {
   Lyft: [
     {
-      id: 0,
-      carrierType: "Lyft",
-      key: "carrierType"
+      key: "rideType",
+      value: "Lyft"
     },
     {
-      id: 1,
-      carrierType: "Lyft Plus",
-      key: "carrierType"
+      key: "rideType",
+      value: "Lyft Plus"
     },
     {
-      id: 2,
-      carrierType: "Lyft Line",
-      key: "carrierType"
+      key: "rideType",
+      value: "Lyft Line"
     }
   ]
 }
 
 export const RideTypeToTitleMap = {
-  lyft: "Lyft",
-  lyft_plus: "Lyft Plus",
-  lyft_line: "Lyft Line"
+  Lyft: "lyft",
+  "Lyft Plus": "lyft_plus",
+  "Lyft Line": "lyft_line"
 }
+
+export const getKeyByValue = (object, value) => Object.keys(object).find(key => object[key] === value)

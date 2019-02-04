@@ -5,7 +5,7 @@
 We want to incorporate various ride sharing API's and create an orthogonal projection onto a google maps with the intent of visualizing distance based on a dollar amount the user enters into the form. 
 
 ```
-* Uber 
+* Lyft 
 * Person vehicles
 * Scooter commute services
 * Bike sharing services

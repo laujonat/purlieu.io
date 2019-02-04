@@ -1,8 +1,7 @@
 import lyftApi from "./lyft"
-const carriers = { lyft: "lyft" }
 const google = global.google
 
-const getBoundaries = ({ amount, location, carrier, rideType = "lyft" }) => {
+const getBoundaries = ({ amount, location, carrier, rideType }) => {
   const stdDev = 2
   const defaultRadiusInMeters = 32000
   let directions = []
@@ -19,7 +18,7 @@ const getBoundaries = ({ amount, location, carrier, rideType = "lyft" }) => {
 
     let api = lyftApi
     switch (carrier) {
-      case carriers.lyft:
+      case "Lyft":
         api = lyftApi
         break
       default:

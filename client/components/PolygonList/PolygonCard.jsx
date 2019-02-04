@@ -5,7 +5,7 @@ import { connect } from "react-redux"
 import { deletePolygonCard } from "../PolygonList/actions"
 import { receiveBoundaries } from "../../boundaries/actions"
 import { fonts, spaces } from "../../lib/styles"
-import { Loading } from "../Loading"
+import { getKeyByValue, RideTypeToTitleMap } from "../../lib/carriers"
 
 const Container = styled.div`
   display: flex;
@@ -132,7 +132,7 @@ class PolygonCard extends Component {
   }
 
   render() {
-    const { card, isLoading, deletePolygon } = this.props
+    const { card, deletePolygon } = this.props
     const { index, amount, carrier, rideType, address, location } = card
     return (
       <Container>
@@ -143,7 +143,7 @@ class PolygonCard extends Component {
         <Row mid>
           <Row midLeft>
             <Item carrier>{carrier}</Item>
-            <Item rideType>Type: {rideType}</Item>
+            <Item rideType>Type: {getKeyByValue(RideTypeToTitleMap, rideType)}</Item>
           </Row>
           <Row midRight>
             <Item geoLocation>
@@ -156,7 +156,6 @@ class PolygonCard extends Component {
           </Row>
         </Row>
         <Row bottom>
-          {/* <Loading active={isLoading}>Loading...</Loading> */}
           <Item deleteButton onClick={() => deletePolygon(index)}>
             X
           </Item>

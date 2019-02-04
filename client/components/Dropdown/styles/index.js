@@ -30,7 +30,7 @@ export const List = styled.ul`
   border-radius: 2px;
 `
 
-export const CarrierOptions = styled.li`
+export const DropdownOption = styled.li`
   height: 20px;
   text-align: center;
   &:hover {
@@ -42,7 +42,7 @@ export const CarrierOptions = styled.li`
   cursor: pointer;
 `
 
-export const CarrierLabel = styled.label`
+export const HeaderLabel = styled.label`
   display: flex;
   align-self: flex-start;
   padding: 0.5em 1em;

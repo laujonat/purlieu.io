@@ -1,14 +1,14 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
 import FontAwesome from "react-fontawesome"
-import { Wrapper, Container, Header, List, CarrierOptions, CarrierLabel, IconContainer } from "./styles"
+import { Wrapper, Container, Header, List, DropdownOption, HeaderLabel, IconContainer } from "./styles"
 
 class Dropdown extends Component {
   constructor(props) {
     super(props)
     this.state = {
       listOpen: false,
-      carrierCurrent: this.props.selectedCarrier
+      current: this.props.selected || this.props.placeholder
     }
   }
 
@@ -24,30 +24,31 @@ class Dropdown extends Component {
     }))
   }
 
-  toggleSelect = item => {
-    this.props.toggleItem(item.id, item.key)
-    this.setState({ carrierCurrent: item.carrier })
+  toggleSelect = item => () => {
+    this.props.toggleItem(item)
+    this.setState({ current: item.value })
     this.toggleList()
   }
 
   render() {
     const { list } = this.props
-    const { listOpen, carrierCurrent } = this.state
+    const { listOpen, current } = this.state
+
     return (
       <Wrapper>
         <Container>
-          <Header onClick={() => this.toggleList()}>
-            <CarrierLabel>{carrierCurrent}</CarrierLabel>
+          <Header onClick={this.toggleList}>
+            <HeaderLabel>{current}</HeaderLabel>
             <IconContainer>
               {listOpen ? <FontAwesome name="angle-up" size="2x" /> : <FontAwesome name="angle-down" size="2x" />}
             </IconContainer>
           </Header>
           {listOpen && (
             <List>
-              {list.map(item => (
-                <CarrierOptions key={item.id} onClick={() => this.toggleSelect(item)}>
-                  {item.carrier}
-                </CarrierOptions>
+              {list.map((item, index) => (
+                <DropdownOption key={index} onClick={this.toggleSelect(item)}>
+                  {item.value}
+                </DropdownOption>
               ))}
             </List>
           )}
@@ -59,14 +60,16 @@ class Dropdown extends Component {
 
 Dropdown.propTypes = {
   list: PropTypes.arrayOf(PropTypes.object),
-  selectedCarrier: PropTypes.string,
+  selected: PropTypes.string,
+  placeholder: PropTypes.string,
   onChange: PropTypes.func,
   toggleItem: () => {}
 }
 
 Dropdown.defaultProps = {
   list: [],
-  onChange: () => {}
+  onChange: () => {},
+  placeholder: "--"
 }
 
 export default Dropdown
