@@ -1,4 +1,4 @@
-import lyftApi from "./lyft"
+import lyftApi from "../lyft"
 const google = global.google
 
 const getBoundaries = ({ amount, location, carrier, rideType }) => {

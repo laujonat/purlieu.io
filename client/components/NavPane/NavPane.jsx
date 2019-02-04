@@ -63,7 +63,7 @@ class NavPane extends Component {
   render() {
     const { isLoading } = this.props
     const { carrier, rideType } = this.state
-
+    const canCompute = carrier && rideType
     return (
       <Container>
         <HeaderContainer>
@@ -80,7 +80,9 @@ class NavPane extends Component {
             <Dropdown list={CarrierToRideTypesMap[carrier]} selected={rideType} toggleItem={this.toggleSelected} />
           ) : null}
         </DropdownContainer>
-        <SubmitButton onClick={this.onSubmit}>Compute</SubmitButton>
+        <SubmitButton disabled={!canCompute} onClick={this.onSubmit}>
+          Compute
+        </SubmitButton>
         <Loading active={isLoading}>Loading..</Loading>
         <PolygonList />
       </Container>

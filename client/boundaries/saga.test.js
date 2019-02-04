@@ -4,7 +4,7 @@ import { receiveBoundariesSuccess, receiveBoundariesErrors } from "./actions"
 import { createMarker } from "../lib/map"
 import { selectCurrentCard } from "../components/PolygonList/selectors"
 import { selectMap } from "../components/Map/selectors"
-import api from "../services"
+import api from "../services/boundaries"
 
 describe("generateBoundaries saga", () => {
   const action = { data: { index: 0 } }

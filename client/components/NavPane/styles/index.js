@@ -56,6 +56,13 @@ export const Button = styled.button`
 
   ${media.tablet`flex-basis: 10em;`}
   ${media.mobileM`flex-basis: 10em;`}
+
+  ${({ disabled }) =>
+    disabled &&
+    `
+    opacity: 0.7;
+    cursor: not-allowed;
+  `}
 `
 
 export const DollarInput = styled(Input).attrs({

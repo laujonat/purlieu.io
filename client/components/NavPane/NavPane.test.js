@@ -11,6 +11,7 @@ const props = {
 describe("NavPane", () => {
   it("renders the component", () => {
     const wrapper = shallow(<NavPane />)
+    wrapper.setState({ dollarInput: 10, carrier: "Lyft", rideType: "Lyft" })
     expect(wrapper).toMatchSnapshot()
   })
 
