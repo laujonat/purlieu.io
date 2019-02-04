@@ -27,15 +27,34 @@ export const List = styled.ul`
   text-align: center;
   background-color: white;
   list-style-type: none;
+  border: 1px solid ${colors.grey};
   border-radius: 2px;
+
+  li:first-child {
+    border-top: 1px solid transparent;
+  }
+
+  li:last-child {
+    border-bottom: 1px solid transparent;
+  }
 `
 
 export const DropdownOption = styled.li`
-  height: 20px;
   text-align: center;
+  padding: 0.5em 1em;
+  display: block;
+  border: 1px solid transparent;
+
+  -webkit-transition: 0.1s ease-in-out;
+  -moz-transition: 0.1s ease-in-out;
+  -o-transition: 0.1s ease-in-out;
+  -ms-transition: 0.1s ease-in-out;
+  transition: 0.1s ease-in-out;
+
   &:hover {
+    border-top: 1px solid ${colors.grey};
+    border-bottom: 1px solid ${colors.grey};
     background-color: ${colors.purplishGrey};
-    border: 1px solid ${colors.grey};
     opacity: 0.8;
   }
 

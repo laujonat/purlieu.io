@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { spaces, colors, media } from "../../../lib/styles"
+import { spaces, colors, media, fonts } from "../../../lib/styles"
 
 export const Container = styled.nav`
   display: flex;
@@ -44,15 +44,14 @@ export const DollarInputContainer = styled.div`
 
 export const Input = styled.input`
   flex: 1;
-  height: 50px;
+  padding: 0.5em 1em;
   width: 100%;
+  font-family: "Source Code Pro", monospace;
   background-color: whitesmoke;
 `
 
 export const Button = styled.button`
   cursor: pointer;
-  margin-top: ${spaces.mdMargin};
-  width: 100%;
 
   ${media.tablet`flex-basis: 10em;`}
   ${media.mobileM`flex-basis: 10em;`}
@@ -60,22 +59,27 @@ export const Button = styled.button`
   ${({ disabled }) =>
     disabled &&
     `
-    opacity: 0.7;
+    opacity: 0.8;
     cursor: not-allowed;
-  `}
+  `} 
 `
 
 export const DollarInput = styled(Input).attrs({
   type: "range",
   min: 10,
   max: 400,
-  step: 1
+  step: 5
 })`
+  margin: ${spaces.smMargin} 0;
+  align-self: center;
+  padding: 0;
   cursor: pointer;
 `
 
 export const AddressInput = styled(Input)`
   flex: none;
+  border-radius: 3px;
+  border: 1px solid grey;
 `
 
 export const DollarLabel = styled.h1`
@@ -83,7 +87,24 @@ export const DollarLabel = styled.h1`
 `
 
 export const SubmitButton = styled(Button)`
-  height: 50px;
-  background-color: greenyellow;
-  padding: 0 ${spaces.mdMargin};
+  border-radius: 3px;
+  border: 1px solid transparent;
+  background-color: ${colors.green};
+  padding: 0 ${spaces.smMargin};
+
+  -webkit-transition: 0.1s ease-in-out;
+  -moz-transition: 0.1s ease-in-out;
+  -o-transition: 0.1s ease-in-out;
+  -ms-transition: 0.1s ease-in-out;
+  transition: 0.1s ease-in-out;
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  ${({ disabled }) =>
+    disabled &&
+    `
+    background-color: ${colors.grey};
+  `}
 `
