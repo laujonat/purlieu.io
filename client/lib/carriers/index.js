@@ -3,17 +3,17 @@ export const Carriers = [
     id: 0,
     carrier: "Lyft",
     key: "carrier"
-  },
-  {
-    id: 1,
-    carrier: "Uber",
-    key: "carrier"
-  },
-  {
-    id: 2,
-    carrier: "Bird",
-    key: "carrier"
   }
+  // {
+  //   id: 1,
+  //   carrier: "Uber",
+  //   key: "carrier"
+  // },
+  // {
+  //   id: 2,
+  //   carrier: "Bird",
+  //   key: "carrier"
+  // }
 ]
 
 export const CarrierToRideTypesMap = {
