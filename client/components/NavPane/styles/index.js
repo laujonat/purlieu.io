@@ -17,14 +17,16 @@ export const Container = styled.nav`
 `
 
 export const HeaderContainer = styled.div`
+  align-items: center;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-basis: 3em;
   flex-grow: 0;
-  background-color: whitesmoke;
+  background-color: black;
   box-shadow: 0px 3px 5px 1px rgba(87, 82, 87, 0.2);
-  align-items: center;
+  border-radius: 3px;
+  color: white;
   font-weight: 600;
 `
 
@@ -83,7 +85,8 @@ export const AddressInput = styled(Input)`
 `
 
 export const DollarLabel = styled.h1`
-  width: 20%;
+  padding: 0 10px;
+  min-width: ${spaces.mdLrgMargin};
 `
 
 export const SubmitButton = styled(Button)`

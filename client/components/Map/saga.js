@@ -1,4 +1,4 @@
-import { call, put, takeEvery } from "redux-saga/effects"
+import { call, put, select, takeEvery } from "redux-saga/effects"
 import {
   DRAW_POLYGON,
   RECEIVE_CLIENT_LOCATION,
@@ -10,7 +10,7 @@ import {
   receiveDrawPolygonSuccess,
   receiveDrawPolygonError
 } from "../Map/actions"
-
+import { selectCurrentCard } from "../../components/PolygonList/selectors"
 import api from "../../services/map"
 import { createPolygon } from "../../lib/map"
 
@@ -44,9 +44,11 @@ export function* setMarkerAddress(geoLocation) {
 }
 
 function* drawPolygon({ data }) {
+  const card = yield select(selectCurrentCard, data.cardIdx)
+
   try {
     const boundaries = yield call(api.getRecalculatedBoundaries, data)
-    const polygon = createPolygon(boundaries, data.map)
+    const polygon = createPolygon(boundaries, data.map, card)
 
     yield put(receiveDrawPolygonSuccess({ polygon }))
   } catch (error) {

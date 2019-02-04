@@ -1,22 +1,9 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
-import styled from "styled-components"
 import PropTypes from "prop-types"
 import { mapOptions } from "../../lib/map"
-import { media } from "../../lib/styles"
 import { receiveMap, receiveClientLocation, receiveMarkerLocation, receiveDrawPolygon } from "./actions"
-
-const Container = styled.div`
-  flex: 1 1 70%;
-`
-
-const MapComponent = styled.div`
-  height: 100%;
-  width: 100%;
-
-  ${media.tablet`height: 100%`}
-  ${media.mobileM`height: 100%;`}
-`
+import { Container, MapComponent } from "./styles"
 
 const google = global.google
 
@@ -43,6 +30,7 @@ class Map extends Component {
     if (prevProps.mapPolygons.length !== this.props.mapPolygons.length) {
       const { drawPolygon, location, mapPolygons } = this.props
       drawPolygon({
+        cardIdx: mapPolygons.length - 1,
         location,
         boundaries: mapPolygons[mapPolygons.length - 1],
         map: this.map
@@ -116,8 +104,8 @@ const mapDispatchToProps = dispatch => ({
   setMap: map => dispatch(receiveMap(map)),
   fetchClientLocation: () => dispatch(receiveClientLocation()),
   setMarkerAddress: geoLocation => dispatch(receiveMarkerLocation(geoLocation)),
-  drawPolygon: ({ location, address, boundaries, map }) =>
-    dispatch(receiveDrawPolygon({ location, address, boundaries, map }))
+  drawPolygon: ({ cardIdx, location, boundaries, map }) =>
+    dispatch(receiveDrawPolygon({ cardIdx, location, boundaries, map }))
 })
 
 Map.defaultProps = {

@@ -111,8 +111,6 @@ NavPane.defaultProps = {
   address: "",
   location: {},
   map: {},
-  carrier: "Lyft",
-  rideType: "lyft",
   isLoading: false,
   addPolygon: () => {}
 }
