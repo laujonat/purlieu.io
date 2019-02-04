@@ -2,6 +2,7 @@ import React, { Component } from "react"
 import PropTypes from "prop-types"
 import PolygonList from "../PolygonList"
 import Dropdown from "../Dropdown"
+import FontAwesome from "react-fontawesome"
 import { connect } from "react-redux"
 import { Loading } from "../Loading"
 import { receivePolygonCard } from "../PolygonList/actions"
@@ -72,6 +73,13 @@ class NavPane extends Component {
         <DollarInputContainer>
           <DollarInput value={this.state.dollarInput} onChange={this.onChange("dollarInput")} />
           <DollarLabel>{`$${this.state.dollarInput}`}</DollarLabel>
+          <SubmitButton disabled={!canCompute} onClick={this.onSubmit}>
+            {canCompute ? (
+              <FontAwesome name="check" size="2x" style={{ color: "white" }} />
+            ) : (
+              <FontAwesome name="ban" size="2x" style={{ color: "white" }} />
+            )}
+          </SubmitButton>
         </DollarInputContainer>
         <AddressInput value={this.state.addressInput} onChange={this.onChange("addressInput")} />
         <DropdownContainer>
@@ -80,9 +88,6 @@ class NavPane extends Component {
             <Dropdown list={CarrierToRideTypesMap[carrier]} selected={rideType} toggleItem={this.toggleSelected} />
           ) : null}
         </DropdownContainer>
-        <SubmitButton disabled={!canCompute} onClick={this.onSubmit}>
-          Compute
-        </SubmitButton>
         <Loading active={isLoading}>Loading..</Loading>
         <PolygonList />
       </Container>
