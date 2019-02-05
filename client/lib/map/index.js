@@ -31,11 +31,11 @@ export const createMarker = (position, map, drop = "drop") =>
 export const createPolygon = (boundaries, map, card) =>
   new google.maps.Polygon({
     paths: boundaries,
-    strokeColor: colors[card.rideType],
+    strokeColor: `${colors[card.rideType]}`,
     strokeOpacity: 1,
     strokeWeight: 2,
-    fillColor: colors[card.rideType],
-    fillOpacity: 0.25,
+    fillColor: `${colors[card.rideType]}`,
+    fillOpacity: 0.2,
     geodesic: true,
     clickable: true,
     map
