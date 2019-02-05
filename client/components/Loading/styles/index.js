@@ -1,5 +1,6 @@
-import styled from "styled-components"
+import styled, { keyframes } from "styled-components"
 import { spaces, fonts } from "../../../lib/styles"
+import FontAwesome from "react-fontawesome"
 
 export const Container = styled.div`
   visibility: hidden;
@@ -12,7 +13,20 @@ export const Container = styled.div`
     active &&
     `
     visibility: visible;
-    color: blue;
     display: flex;
   `}
+`
+
+const rotate = keyframes`
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+`
+
+export const StyledIcon = styled(FontAwesome)`
+  position: absolute;
+  right: 74%;
+  top: ${spaces.mdMargin};
+  z-index: 99;
+  color: white;
+  animation: ${rotate} 2s linear infinite;
 `

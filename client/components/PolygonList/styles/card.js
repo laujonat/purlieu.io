@@ -72,7 +72,7 @@ export const Item = styled.div`
     `
     margin: 1em 0;
     border-radius: 2px;
-    border-bottom: 4px solid ${colors[rideType]};
+    border-bottom: 5px solid ${colors[rideType]};
     box-sizing: border-box;
     padding: 0.5em 0;
   `};

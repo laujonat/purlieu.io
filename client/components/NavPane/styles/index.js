@@ -10,7 +10,8 @@ export const Container = styled.nav`
   background-color: ${colors.purplishGrey};
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
   padding: ${spaces.mdMargin};
-  min-width: 280px;
+  width: auto;
+  max-width: 420px;
 
   ${media.tablet`flex-basis: 1 1 30vh; height: 50%;`}
   ${media.mobileM`flex-basis: 1 1 30vh; height: 50%;`}

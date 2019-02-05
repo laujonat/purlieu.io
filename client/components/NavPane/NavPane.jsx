@@ -88,7 +88,7 @@ class NavPane extends Component {
             <Dropdown list={CarrierToRideTypesMap[carrier]} selected={rideType} toggleItem={this.toggleSelected} />
           ) : null}
         </DropdownContainer>
-        <Loading active={isLoading}>Loading..</Loading>
+        <Loading active={isLoading} />
         <PolygonList />
       </Container>
     )
