@@ -10,21 +10,24 @@ export const Container = styled.nav`
   background-color: ${colors.purplishGrey};
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
   padding: ${spaces.mdMargin};
-  min-width: 250px;
+  width: auto;
+  max-width: 420px;
 
   ${media.tablet`flex-basis: 1 1 30vh; height: 50%;`}
   ${media.mobileM`flex-basis: 1 1 30vh; height: 50%;`}
 `
 
 export const HeaderContainer = styled.div`
+  align-items: center;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-basis: 3em;
   flex-grow: 0;
-  background-color: whitesmoke;
+  background-color: black;
   box-shadow: 0px 3px 5px 1px rgba(87, 82, 87, 0.2);
-  align-items: center;
+  border-radius: 3px;
+  color: white;
   font-weight: 600;
 `
 
@@ -83,7 +86,8 @@ export const AddressInput = styled(Input)`
 `
 
 export const DollarLabel = styled.h1`
-  width: 20%;
+  padding: 0 10px;
+  min-width: ${spaces.mdLrgMargin};
 `
 
 export const SubmitButton = styled(Button)`

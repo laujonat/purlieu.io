@@ -15,6 +15,7 @@ class PolygonCard extends Component {
   render() {
     const { card, deletePolygon } = this.props
     const { index, amount, carrier, rideType, address, location } = card
+
     return (
       <Container>
         <Row top>
@@ -24,7 +25,7 @@ class PolygonCard extends Component {
         <Row mid>
           <Row midLeft>
             <Item carrier>{carrier}</Item>
-            <Item rideType>Type: {getKeyByValue(RideTypeToTitleMap, rideType)}</Item>
+            <Item rideType={rideType}>Type: {getKeyByValue(RideTypeToTitleMap, rideType)}</Item>
           </Row>
           <Row midRight>
             <Item geoLocation>
@@ -37,7 +38,7 @@ class PolygonCard extends Component {
           </Row>
         </Row>
         <Row bottom>
-          <Item deleteButton onClick={() => deletePolygon(index)}>
+          <Item deleteButton onClick={deletePolygon(index)}>
             X
           </Item>
         </Row>
@@ -52,7 +53,7 @@ const mapStateToProps = ({ loading }) => ({
 
 const mapDispatchToProps = dispatch => ({
   getBoundaries: index => dispatch(receiveBoundaries(index)),
-  deletePolygon: index => dispatch(deletePolygonCard(index))
+  deletePolygon: index => () => dispatch(deletePolygonCard(index))
 })
 
 PolygonCard.propTypes = {

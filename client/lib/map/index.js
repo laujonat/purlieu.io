@@ -21,21 +21,23 @@ export const createMarker = (position, map, drop = "drop") =>
     icon: {
       path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
       scale: 5,
-      strokeWeight: 2,
+      strokeWeight: 3,
       fillOpacity: 1.0,
       fillColor: colors.lightBlue
     },
     map: map
   })
 
-export const createPolygon = (boundaries, map, color = "#f7a0ff") =>
+export const createPolygon = (boundaries, map, card) =>
   new google.maps.Polygon({
     paths: boundaries,
-    strokeColor: color,
-    strokeOpacity: 0.7,
-    strokeWeight: 0.5,
-    fillColor: color,
-    fillOpacity: 0.35,
+    strokeColor: `${colors[card.rideType]}`,
+    strokeOpacity: 1,
+    strokeWeight: 2,
+    fillColor: `${colors[card.rideType]}`,
+    fillOpacity: 0.2,
+    geodesic: true,
+    clickable: true,
     map
   })
 

@@ -88,7 +88,7 @@ class NavPane extends Component {
             <Dropdown list={CarrierToRideTypesMap[carrier]} selected={rideType} toggleItem={this.toggleSelected} />
           ) : null}
         </DropdownContainer>
-        <Loading active={isLoading}>Loading..</Loading>
+        <Loading active={isLoading} />
         <PolygonList />
       </Container>
     )
@@ -111,8 +111,6 @@ NavPane.defaultProps = {
   address: "",
   location: {},
   map: {},
-  carrier: "Lyft",
-  rideType: "lyft",
   isLoading: false,
   addPolygon: () => {}
 }

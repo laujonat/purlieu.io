@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { fonts, spaces } from "../../../lib/styles"
+import { fonts, spaces, colors } from "../../../lib/styles"
 
 export const Container = styled.div`
   display: flex;
@@ -70,7 +70,11 @@ export const Item = styled.div`
   ${({ rideType }) =>
     rideType &&
     `
-
+    margin: 1em 0;
+    border-radius: 2px;
+    border-bottom: 5px solid ${colors[rideType]};
+    box-sizing: border-box;
+    padding: 0.5em 0;
   `};
 
   ${({ address }) =>
@@ -103,10 +107,8 @@ export const Item = styled.div`
   ${({ deleteButton }) =>
     deleteButton &&
     `
-    flex-basis: 15%;
-    width: 10%;
-    margin: ${spaces.xSmallMargin};
-    padding: 0.5em 1.5em;
+    flex-basis: 10%;
+    margin: ${spaces.xxSmall};
     border-radius: 5px;
     background-color: red;
     font-weight: 600;

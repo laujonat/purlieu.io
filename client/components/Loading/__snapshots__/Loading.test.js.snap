@@ -2,9 +2,12 @@
 
 exports[`Loading renders and displayed when active is true 1`] = `
 <div
-  className="sc-bdVaJa klLhBI"
+  className="sc-bdVaJa bCIOmA"
 >
-  Loading..
+  <span
+    aria-hidden={true}
+    className="fa fa-spinner fa-2x sc-bwzfXH fzbEKo"
+  />
 </div>
 `;
 
@@ -12,7 +15,10 @@ exports[`Loading renders and not displayed when active is false 1`] = `
 <div
   className="sc-bdVaJa bJFeRj"
 >
-  Loading..
+  <span
+    aria-hidden={true}
+    className="fa fa-spinner fa-2x sc-bwzfXH fzbEKo"
+  />
 </div>
 `;
 
@@ -20,6 +26,9 @@ exports[`Loading renders without crashing 1`] = `
 <div
   className="sc-bdVaJa bJFeRj"
 >
-  Loading..
+  <span
+    aria-hidden={true}
+    className="fa fa-spinner fa-2x sc-bwzfXH fzbEKo"
+  />
 </div>
 `;
