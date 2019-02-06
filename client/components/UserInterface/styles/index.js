@@ -8,8 +8,8 @@ export const Container = styled.div`
   font-size: ${fonts.base};
 
   ${media.tablet`
-      flex-direction: column;
-      height: 50em;
+      height: 100vh;
+      flex-direction: column-reverse;
    `}
   ${media.mobileM`
       flex-direction: column;

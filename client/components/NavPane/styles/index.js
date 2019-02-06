@@ -4,7 +4,7 @@ import { spaces, colors, media, fonts } from "../../../lib/styles"
 export const Container = styled.nav`
   display: flex;
   flex-direction: column;
-  flex: 1 1 auto;
+  flex: 1 0 auto;
   height: 100vh;
   text-align: center;
   background-color: ${colors.purplishGrey};
@@ -13,8 +13,14 @@ export const Container = styled.nav`
   width: auto;
   max-width: 420px;
 
-  ${media.tablet`flex-basis: 1 1 30vh; height: 50%;`}
-  ${media.mobileM`flex-basis: 1 1 30vh; height: 50%;`}
+  ${media.tablet`
+    max-width: none;
+    height: 50%;
+  `}
+  ${media.mobileM`
+     flex-basis: 1 1 30vh; 
+     height: 50%;
+    `}
 `
 
 export const HeaderContainer = styled.div`
@@ -34,6 +40,13 @@ export const HeaderContainer = styled.div`
 export const DropdownContainer = styled.div`
   display: flex;
   justify-content: space-between;
+
+  ${media.tablet`
+    top: 0;
+    position: absolute;
+    width: 50%;
+    z-index: 999;
+  `}
 `
 
 export const Header = styled.h1``
@@ -46,7 +59,7 @@ export const DollarInputContainer = styled.div`
 `
 
 export const Input = styled.input`
-  flex: 1;
+  flex: 1 0;
   padding: 0.5em 1em;
   width: 100%;
   font-family: "Source Code Pro", monospace;
@@ -75,7 +88,7 @@ export const DollarInput = styled(Input).attrs({
 })`
   margin: ${spaces.smMargin} 0;
   align-self: center;
-  padding: 0;
+  padding: 10px 0;
   cursor: pointer;
 `
 
