@@ -10,7 +10,7 @@
 bundle.js
 .vscode/
 /node_modules
-/.env.*
+/.env.local
 
 # Logs
 *.log
