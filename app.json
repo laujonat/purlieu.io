@@ -14,7 +14,7 @@
   "environments": {
     "test": {
       "scripts": {
-        "test": "jest --coverage && eslint 'client/**/*.{js,jsx}'"
+        "test": "jest --updateSnapshot && eslint 'client/**/*.{js,jsx}'"
       },
       "env": {
         "NODE_ENV": "development",
