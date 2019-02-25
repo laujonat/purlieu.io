@@ -7,7 +7,7 @@ const config = {
 }
 
 module.exports = {
-  mode: "development",
+  mode: config.mode,
   entry: ["babel-polyfill", "./client"],
   output: {
     path: path.join(__dirname, "public"),
