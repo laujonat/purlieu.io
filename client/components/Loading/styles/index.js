@@ -1,5 +1,5 @@
 import styled, { keyframes } from "styled-components"
-import { spaces, fonts } from "../../../lib/styles"
+import { spaces, fonts, media } from "../../../lib/styles"
 import FontAwesome from "react-fontawesome"
 
 export const Container = styled.div`
@@ -29,4 +29,11 @@ export const StyledIcon = styled(FontAwesome)`
   z-index: 99;
   color: white;
   animation: ${rotate} 2s linear infinite;
+
+  ${media.tablet`
+    top: 20px;
+    right: 20px;
+    position: absolute;
+    z-index: 999;
+  `}
 `

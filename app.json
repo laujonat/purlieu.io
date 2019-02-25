@@ -15,6 +15,9 @@
     "test": {
       "scripts": {
         "test": "eslint 'client/**/*.{js,jsx}'"
+      },
+      "env": {
+        "required": false
       }
     }
   }

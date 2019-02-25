@@ -6,7 +6,7 @@ exports[`Loading renders and displayed when active is true 1`] = `
 >
   <span
     aria-hidden={true}
-    className="fa fa-spinner fa-2x sc-bwzfXH fzbEKo"
+    className="fa fa-spinner fa-2x sc-bwzfXH jIjkQc"
   />
 </div>
 `;
@@ -17,7 +17,7 @@ exports[`Loading renders and not displayed when active is false 1`] = `
 >
   <span
     aria-hidden={true}
-    className="fa fa-spinner fa-2x sc-bwzfXH fzbEKo"
+    className="fa fa-spinner fa-2x sc-bwzfXH jIjkQc"
   />
 </div>
 `;
@@ -28,7 +28,7 @@ exports[`Loading renders without crashing 1`] = `
 >
   <span
     aria-hidden={true}
-    className="fa fa-spinner fa-2x sc-bwzfXH fzbEKo"
+    className="fa fa-spinner fa-2x sc-bwzfXH jIjkQc"
   />
 </div>
 `;

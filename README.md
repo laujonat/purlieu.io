@@ -1,15 +1,25 @@
-# Purlieu.io
-## Don't look at me! 
+<div align="center">
+
+# purlieu.io
 
 ## How to use
-```
-Click on the map to auto-fill the address input or with permission, Purlieu will fetch your current location for you.  
-Use the range slider to select an input of $10-$400. We'll use your inputs and generate a set of boundaries and output
+Click on the map to auto-fill the address input or with permission, Purlieu will fetch your current location for you.  Use the range slider to select an input of $10-$400. We'll use your inputs and generate a set of boundaries and output
 your selection details onto a card and project a polygon onto the map. 
-```
+
+
+
+### Desktop
+![Desktop](https://i.imgur.com/qBRKmHe.jpg)
+
+
+### Tablet
+
+![Tablet](https://i.imgur.com/vMoQwB8.png)
+
+</div>
 
 ## Purpose
-We want to incorporate various ride sharing API's and create an orthogonal projection onto a google maps with the intent of visualizing distance based on a dollar amount the user enters into the form. 
+To incorporate various ride sharing API's and create an orthogonal projection onto a google maps with the intent of visualizing distance based on a dollar input.
 
 ```
 * Lyft 
@@ -19,17 +29,22 @@ We want to incorporate various ride sharing API's and create an orthogonal proje
 * Bus/Bart transit (tbd)
 ```
 
-## Deployment 
-```
-* Standard git flow 
-* Heroku deployment pipeline 
-```
-
-## Developer
+# Developers
 ```
 yarn
 yarn dev
 ```
+## Setup
+
+1. Install yarn dependencies as needed on your local machine.
+
+
+## API Tokens
+Create a .env file and replace variables with your own. 
+
+### Lyft 
+Register for a developer account for ClientID and Secret Key
+
 
 ## Testing 
 If you are snapshot testing, make sure you commit: `yarn update:snapshot`
@@ -38,6 +53,8 @@ yarn test
 yarn test:watch
 ```
 
-### Setup
-
-1. Install yarn dependencies as needed on your local machine.
+## Deployment 
+```
+* Standard git flow 
+* Heroku deployment pipeline 
+```
