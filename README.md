@@ -4,6 +4,9 @@
 
 > NOTE: Lyft has announced updates to their API resulting in authorized accesss to the endpooints needed for this application.  Screenshots below were the results of the original application, but we will now have to update our API requests to be in compliance with Lyft' `ride estimates` API. 
 
+Reference: https://developer.lyft.com/blog/sandbox-deprecated-for-ride-request-api
+
+
 ## How to use
 Click on the map to auto-fill the address input or with permission, Purlieu will fetch your current location for you.  Use the range slider to select an input of $10-$400. We'll use your inputs and generate a set of boundaries and output
 your selection details onto a card and project a polygon onto the map. 
