@@ -47,20 +47,52 @@ ShallowWrapper {
       "$$typeof": Symbol(react.forward_ref),
       "attrs": Array [],
       "componentStyle": ComponentStyle {
-        "componentId": "sc-VigVT",
+        "componentId": "sc-hMqMXs",
         "isStatic": true,
         "rules": Array [
           "
   display: flex;
   z-index: -1;
   font-family: \\"Source Code Pro\\", monospace;
+  font-size: ",
+          "1em",
+          ";
+
+  ",
+          "
+    @media (max-width: ",
+          "48",
+          "em) {
+      ",
+          "
+      height: 100vh;
+      flex-direction: column-reverse;
+   ",
+          "
+    }
+  ",
+          "
+  ",
+          "
+    @media (max-width: ",
+          "23.4375",
+          "em) {
+      ",
+          "
+      flex-direction: column;
+      height: 50em;
+   ",
+          "
+    }
+  ",
+          "
 ",
         ],
       },
       "displayName": "styled.div",
       "foldedComponentIds": Array [],
       "render": [Function],
-      "styledComponentId": "sc-VigVT",
+      "styledComponentId": "sc-hMqMXs",
       "target": "div",
       "toString": [Function],
       "warnTooManyClasses": [Function],
@@ -103,20 +135,52 @@ ShallowWrapper {
         "$$typeof": Symbol(react.forward_ref),
         "attrs": Array [],
         "componentStyle": ComponentStyle {
-          "componentId": "sc-VigVT",
+          "componentId": "sc-hMqMXs",
           "isStatic": true,
           "rules": Array [
             "
   display: flex;
   z-index: -1;
   font-family: \\"Source Code Pro\\", monospace;
+  font-size: ",
+            "1em",
+            ";
+
+  ",
+            "
+    @media (max-width: ",
+            "48",
+            "em) {
+      ",
+            "
+      height: 100vh;
+      flex-direction: column-reverse;
+   ",
+            "
+    }
+  ",
+            "
+  ",
+            "
+    @media (max-width: ",
+            "23.4375",
+            "em) {
+      ",
+            "
+      flex-direction: column;
+      height: 50em;
+   ",
+            "
+    }
+  ",
+            "
 ",
           ],
         },
         "displayName": "styled.div",
         "foldedComponentIds": Array [],
         "render": [Function],
-        "styledComponentId": "sc-VigVT",
+        "styledComponentId": "sc-hMqMXs",
         "target": "div",
         "toString": [Function],
         "warnTooManyClasses": [Function],

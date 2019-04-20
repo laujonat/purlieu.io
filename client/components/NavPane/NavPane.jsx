@@ -1,79 +1,23 @@
 import React, { Component } from "react"
-import styled from "styled-components"
 import PropTypes from "prop-types"
-import { Loading } from "../Loading"
+import PolygonList from "../PolygonList"
+import Dropdown from "../Dropdown"
+import FontAwesome from "react-fontawesome"
 import { connect } from "react-redux"
-import { spaces } from "../../lib/styles/spaces"
-import { receiveBoundaries } from "../../boundaries/actions"
-
-const Container = styled.nav`
-  display: flex;
-  flex-direction: column;
-  flex: 1 1 auto;
-  height: 100vh;
-  text-align: center;
-  background: #fff;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-  padding: ${spaces.md};
-  min-width: 250px;
-`
-
-const HeaderContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100px;
-  align-items: center;
-  background-color: #f0f0f5;
-  font-weight: 600;
-`
-
-const Header = styled.h1``
-
-const DollarInputContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-`
-
-const Input = styled.input`
-  flex: 1;
-  margin-top: ${spaces.md};
-  padding: 0 ${spaces.md};
-  height: 50px;
-  width: 100%;
-  background-color: whitesmoke;
-`
-
-const Button = styled.button`
-  cursor: pointer;
-  margin-top: ${spaces.md};
-  width: 100%;
-`
-
-const DollarInput = styled(Input).attrs({
-  type: "range",
-  min: 10,
-  max: 400,
-  step: 1
-})`
-  cursor: pointer;
-`
-
-const AddressInput = styled(Input)`
-  flex: none;
-`
-
-const DollarLabel = styled.h1`
-  width: 20%;
-`
-
-const SubmitButton = styled(Button)`
-  height: 50px;
-  background-color: greenyellow;
-  padding: 0 ${spaces.md};
-`
+import { Loading } from "../Loading"
+import { receivePolygonCard } from "../PolygonList/actions"
+import { Carriers, CarrierToRideTypesMap, RideTypeToTitleMap } from "../../lib/carriers"
+import {
+  Container,
+  HeaderContainer,
+  DropdownContainer,
+  Header,
+  DollarInputContainer,
+  DollarInput,
+  AddressInput,
+  DollarLabel,
+  SubmitButton
+} from "./styles"
 
 class NavPane extends Component {
   constructor(props) {
@@ -81,7 +25,9 @@ class NavPane extends Component {
 
     this.state = {
       dollarInput: 10,
-      addressInput: ""
+      addressInput: "",
+      carrier: null,
+      rideType: null
     }
   }
 
@@ -93,15 +39,21 @@ class NavPane extends Component {
     }
   }
 
+  toggleSelected = item => {
+    this.setState({ [item.key]: item.value })
+  }
+
   onSubmit = () => {
-    const { dollarInput } = this.state
-    const { location, address } = this.props
-    this.props.getBoundaries({
+    const { dollarInput, carrier } = this.state
+    const { location, address, map } = this.props
+    const rideType = RideTypeToTitleMap[this.state.rideType]
+    this.props.addPolygon({
+      address,
       amount: dollarInput,
-      geoLocation: {
-        location,
-        address
-      }
+      carrier,
+      location,
+      map,
+      rideType
     })
   }
 
@@ -110,53 +62,67 @@ class NavPane extends Component {
   }
 
   render() {
-    const { isFetching } = this.props
+    const { isLoading } = this.props
+    const { carrier, rideType } = this.state
+    const canCompute = carrier && rideType
     return (
       <Container>
         <HeaderContainer>
           <Header>purlieu.io</Header>
         </HeaderContainer>
         <DollarInputContainer>
-          <DollarInput
-            value={this.state.dollarInput}
-            onChange={this.onChange("dollarInput")}
-          />
-          <DollarLabel>{`$${this.state.dollarInput}`}</DollarLabel>
+          <DollarInput value={this.state.dollarInput} onChange={this.onChange("dollarInput")} />
+          <DollarLabel>{this.state.dollarInput}</DollarLabel>
+          <SubmitButton disabled={!canCompute} onClick={this.onSubmit}>
+            {canCompute ? (
+              <FontAwesome name="check" size="2x" style={{ color: "white" }} />
+            ) : (
+              <FontAwesome name="ban" size="2x" style={{ color: "white" }} />
+            )}
+          </SubmitButton>
         </DollarInputContainer>
-        <AddressInput
-          value={this.state.addressInput}
-          onChange={this.onChange("addressInput")}
-        />
-        <SubmitButton onClick={this.onSubmit}>Show Me Dah Wey</SubmitButton>
-        <Loading active={isFetching}>Loading..</Loading>
+        <AddressInput value={this.state.addressInput} onChange={this.onChange("addressInput")} />
+        <DropdownContainer>
+          <Dropdown list={Carriers} placeholder={"Carrier"} selected={carrier} toggleItem={this.toggleSelected} />
+          {carrier ? (
+            <Dropdown list={CarrierToRideTypesMap[carrier]} selected={rideType} toggleItem={this.toggleSelected} />
+          ) : null}
+        </DropdownContainer>
+        <Loading active={isLoading} />
+        <PolygonList />
       </Container>
     )
   }
 }
 
-const mapStateToProps = ({ map }) => ({
+const mapStateToProps = ({ map, loading }) => ({
   address: map.address,
   location: map.location,
-  isFetching: map.isFetching
+  map: map.map,
+  isLoading: Object.keys(loading).length > 0
 })
 
 const mapDispatchToProps = dispatch => ({
-  getBoundaries: ({ amount, geoLocation }) =>
-    dispatch(receiveBoundaries({ amount, geoLocation, carrier: "lyft" }))
+  addPolygon: ({ amount, location, address, map, rideType, carrier }) =>
+    dispatch(receivePolygonCard({ amount, location, address, map, rideType, carrier }))
 })
 
 NavPane.defaultProps = {
   address: "",
   location: {},
-  getBoundaries: () => {},
-  isFetching: true
+  map: {},
+  isLoading: false,
+  addPolygon: () => {}
 }
 
 NavPane.propTypes = {
-  getBoundaries: PropTypes.func,
+  addPolygon: PropTypes.func,
   address: PropTypes.string,
+  map: PropTypes.object,
   location: PropTypes.object,
-  isFetching: PropTypes.bool
+  isLoading: PropTypes.bool,
+  carrier: PropTypes.string,
+  rideType: PropTypes.string
 }
 
 export default connect(

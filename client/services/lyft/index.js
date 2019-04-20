@@ -2,14 +2,7 @@ import axios from "axios"
 
 const google = global.google
 
-const getRideEstimate = async (
-  start,
-  end,
-  amount,
-  stdDev,
-  direction,
-  rideType
-) => {
+const getRideEstimate = async (start, end, amount, stdDev, direction, rideType) => {
   const result = await axios.get("/rideEstimate", {
     params: {
       start_lat: start.lat(),
@@ -27,37 +20,19 @@ const getRideEstimate = async (
     let estimate = primetimePercentage * baseCost + baseCost
 
     if (result.data.cost_estimates[0].can_request_ride) {
-      if (
-        (estimate < amount + stdDev && estimate > amount - stdDev) ||
-        history.length > 8
-      ) {
+      if ((estimate < amount + stdDev && estimate > amount - stdDev) || history.length > 8) {
         return Promise.resolve(end)
       } else {
         let ratio = amount / estimate
         const googleGeometry = google.maps.geometry.spherical
         const newDistance = googleGeometry.computeDistanceBetween(start, end)
-        const newEnd = new googleGeometry.computeOffset(
-          start,
-          ratio * newDistance,
-          direction
-        )
-        return getRideEstimate(
-          start,
-          newEnd,
-          amount,
-          stdDev,
-          direction,
-          rideType
-        )
+        const newEnd = new googleGeometry.computeOffset(start, ratio * newDistance, direction)
+        return getRideEstimate(start, newEnd, amount, stdDev, direction, rideType)
       }
     } else {
       const googleGeometry = google.maps.geometry.spherical
       const newDistance = googleGeometry.computeDistanceBetween(start, end) / 2
-      const newEnd = new googleGeometry.computeOffset(
-        start,
-        newDistance,
-        direction
-      )
+      const newEnd = new googleGeometry.computeOffset(start, newDistance, direction)
       return getRideEstimate(start, newEnd, amount, stdDev, direction, rideType)
     }
   }

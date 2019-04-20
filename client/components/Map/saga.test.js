@@ -1,9 +1,11 @@
 import { testSaga } from "redux-saga-test-plan"
-import { fetchClientLocation } from "./saga"
+import { fetchClientLocation, setMarkerAddress } from "./saga"
 
 import {
   receiveClientLocationSuccess,
-  receiveClientLocationErrors
+  receiveClientLocationErrors,
+  receiveMarkerLocationSuccess,
+  receiveMarkerLocationError
 } from "./actions"
 import api from "../../services/map"
 
@@ -41,10 +43,48 @@ describe("fetchClientLocation saga", () => {
   })
 
   describe("successfully setting marker address", () => {
-    it("calls receiveClientLocationSuccess", () => {})
+    it("calls receiveMarkerLocationSuccess", () => {
+      const action = {
+        data: {
+          lat: 11.342,
+          lng: -123.4104
+        }
+      }
+      const location = action.data
+      const address = "123 Marker Street"
+      const data = {
+        location,
+        address
+      }
+
+      testSaga(setMarkerAddress, action)
+        .next()
+        .call(api.getAddress, location)
+        .next(address)
+        .put(receiveMarkerLocationSuccess(data))
+        .next()
+        .isDone()
+    })
   })
 
   describe("unsuccessfully setting marker address", () => {
-    it("calls receiveClientLocationSuccess", () => {})
+    it("calls receiveClientLocationError", () => {
+      const action = {
+        data: {
+          lat: 11.342,
+          lng: -123.4104
+        }
+      }
+      const location = action.data
+      const error = { data: {} }
+
+      testSaga(setMarkerAddress, action)
+        .next()
+        .call(api.getAddress, location)
+        .throw(error)
+        .put(receiveMarkerLocationError(error))
+        .next()
+        .isDone()
+    })
   })
 })
