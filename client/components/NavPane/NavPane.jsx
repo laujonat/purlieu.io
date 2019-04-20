@@ -72,7 +72,7 @@ class NavPane extends Component {
         </HeaderContainer>
         <DollarInputContainer>
           <DollarInput value={this.state.dollarInput} onChange={this.onChange("dollarInput")} />
-          <DollarLabel>{`$${this.state.dollarInput}`}</DollarLabel>
+          <DollarLabel>{this.state.dollarInput}</DollarLabel>
           <SubmitButton disabled={!canCompute} onClick={this.onSubmit}>
             {canCompute ? (
               <FontAwesome name="check" size="2x" style={{ color: "white" }} />
