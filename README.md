@@ -2,7 +2,7 @@
 
 # purlieu.io
 
-> NOTE: Lyft has announced updates to their API resulting in authorized accesss to the endpooints needed for this application.  Screenshots below were the results of the original application, but we will now have to update our API requests to be in compliance with Lyft' `ride estimates` API. 
+> Please note, Lyft has an API for developers maintains a request limit. If hexagonal projection is faulty, please try again later. 
 
 Reference: https://developer.lyft.com/blog/sandbox-deprecated-for-ride-request-api
 
