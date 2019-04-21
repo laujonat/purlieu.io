@@ -1,13 +1,11 @@
-const path = require("path")
-const Dotenv = require("dotenv-webpack")
+const path = require("path");
+const webpack = require('webpack');
+const merge = require("webpack-merge");
+const parts = require("./webpack/parts.config");
+const productionConfig = require("./webpack/prod.config");
+const developmentConfig = require("./webpack/dev.config");
 
-const env = process.env.NODE_ENV
-const config = {
-  mode: env || "development"
-}
-
-module.exports = {
-  mode: config.mode,
+const baseConfig = {
   entry: ["babel-polyfill", "./client"],
   output: {
     path: path.join(__dirname, "public"),
@@ -30,18 +28,27 @@ module.exports = {
       }
     ]
   },
-  target: "web",
-  plugins: [
-    new Dotenv({
-      path: "./.env", // load this now instead of the ones in '.env'
-      safe: true, // load '.env.example' to verify the '.env' variables are all set. Can also be a string to a different file.
-      systemvars: true
-    })
-  ],
   node: {
     fs: "empty"
   },
   resolve: {
     extensions: [".js", ".jsx", "*"]
   }
-}
+};
+const prodConfig = merge([]);
+
+const devConfig = merge([
+  parts.devServer({
+    host: process.env.HOST,
+    port: process.env.PORTs
+  }),
+  developmentConfig
+]);
+
+module.exports = mode => {
+  if (mode === "production") {
+    return merge(baseConfig, productionConfig, { mode });
+  }
+  
+  return merge(baseConfig, devConfig, { mode });
+};

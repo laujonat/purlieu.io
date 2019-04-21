@@ -15,9 +15,11 @@ bundle.js
 # Logs
 *.log
 npm-debug.log*
+npm-error.log*
 yarn-debug.log*
 yarn-error.log*
 
 # coverage 
 /coverage/
+/dist
 
