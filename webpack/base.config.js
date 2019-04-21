@@ -6,6 +6,23 @@ var baseConfig = {
   output: {
     path: BUILD_DIR,
     filename: "bundle.js"
+  }, 
+  module: {
+    rules: [
+      {
+        loader: "babel-loader",
+        exclude: /node_modules/,
+        test: /.jsx?$/,
+        query: {
+          presets: ["@babel/env", "@babel/react"],
+          plugins: ["@babel/proposal-class-properties"]
+        }
+      },
+      {
+        loader: "style-loader!css-loader",
+        test: /\.css$/
+      }
+    ]
   },
   plugins: [
     new webpack.EnvironmentPlugin([

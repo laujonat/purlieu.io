@@ -1,5 +1,5 @@
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-const base = require('./prod.config.js');
+const base = require('./prod.config');
 const merge = require('webpack-merge');
 
 
