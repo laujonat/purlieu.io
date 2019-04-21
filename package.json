@@ -52,6 +52,7 @@
     "babel-eslint": "^10.0.1",
     "babel-jest": "^24.7.1",
     "babel-loader": "^8.0.4",
+    "babel-plugin-dynamic-import-node": "^2.2.0",
     "cors": "^2.8.5",
     "enzyme": "^3.8.0",
     "enzyme-adapter-react-16": "^1.7.1",
@@ -97,7 +98,9 @@
       "node"
     ],
     "testEnvironment": "node",
-    "setupTestFrameworkScriptFile": "<rootDir>/client/testSetup.js",
+    "setupFilesAfterEnv": [
+      "<rootDir>/client/testSetup.js"
+    ],
     "testMatch": [
       "**/?(*.)+(spec|test).js?(x)"
     ],

@@ -1,4 +1,4 @@
-import { call, put, fork, select, throttle, delay} from "redux-saga/effects"
+import { call, put, fork, select, throttle, delay } from "redux-saga/effects"
 import { RECEIVE_BOUNDARIES, receiveBoundariesSuccess, receiveBoundariesErrors } from "./actions"
 import api from "../services/boundaries"
 import { createMarker } from "../lib/map"

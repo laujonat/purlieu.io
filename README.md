@@ -2,7 +2,7 @@
 
 # purlieu.io
 
-> Please note, Lyft API for developers has a strict a request limit. If hexagonal projection is faulty, please try again later. 
+> Please note, Lyft developer API maintains a strict request limit. If hexagonal projection is faulty, try refreshing the page or try again later. 
 
 
 The real maximum price for a Lyft is $400.   
