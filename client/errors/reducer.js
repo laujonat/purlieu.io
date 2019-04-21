@@ -7,7 +7,10 @@ import {
   DRAW_POLYGON_ERROR
 } from "../components/Map/actions"
 
-import { RECEIVE_BOUNDARIES_SUCCESS, RECEIVE_BOUNDARIES_ERROR } from "../boundaries/actions"
+import {
+  RECEIVE_BOUNDARIES_SUCCESS,
+  RECEIVE_BOUNDARIES_ERROR
+} from "../boundaries/actions"
 
 export const initialState = {}
 

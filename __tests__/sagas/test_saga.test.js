@@ -14,7 +14,9 @@ describe("spikeSaga", () => {
   it("should successfully call endpoint and ", () => {
     expect(generator.next().value).toEqual(call(axios.get, url))
     const mockResponse = { data: "test" }
-    expect(generator.next(mockResponse).value).toEqual(put(receiveTestSuccess(mockResponse.data)))
+    expect(generator.next(mockResponse).value).toEqual(
+      put(receiveTestSuccess(mockResponse.data))
+    )
     expect(generator.next().done).toBeTruthy()
   })
 

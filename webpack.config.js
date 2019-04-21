@@ -33,8 +33,7 @@ module.exports = {
   target: "web",
   plugins: [
     new Dotenv({
-      path: "./.env", // load this now instead of the ones in '.env'
-      safe: true, // load '.env.example' to verify the '.env' variables are all set. Can also be a string to a different file.
+      path: "./.env",
       systemvars: true
     })
   ],

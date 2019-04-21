@@ -18,7 +18,10 @@ router.get("/", (req, res) => {
 })
 
 router.get("/rideEstimate", (req, res) => {
-  const lyft = new Lyft(process.env.LYFT_CLIENT_ID, process.env.LYFT_CLIENT_SECRET)
+  const lyft = new Lyft(
+    process.env.LYFT_CLIENT_ID,
+    process.env.LYFT_CLIENT_SECRET
+  )
 
   const query = {
     start: {

@@ -1,5 +1,8 @@
 import { reducer, initialState } from "./reducer"
-import { RECEIVE_CLIENT_LOCATION_SUCCESS, RECEIVE_MARKER_LOCATION_SUCCESS } from "./actions"
+import {
+  RECEIVE_CLIENT_LOCATION_SUCCESS,
+  RECEIVE_MARKER_LOCATION_SUCCESS
+} from "./actions"
 
 describe("map reducer", () => {
   it("should return the initial state", () => {
@@ -13,7 +16,9 @@ describe("map reducer", () => {
         address: "123 Street"
       }
     }
-    expect(reducer(initialState, action)).toEqual(Object.assign({}, initialState, action.data))
+    expect(reducer(initialState, action)).toEqual(
+      Object.assign({}, initialState, action.data)
+    )
   })
 
   it("should handle RECEIVE_MARKER_LOCATION_SUCCESS", () => {
@@ -24,6 +29,8 @@ describe("map reducer", () => {
         lng: 11.234
       }
     }
-    expect(reducer(initialState, action)).toEqual(Object.assign({}, initialState, action.data))
+    expect(reducer(initialState, action)).toEqual(
+      Object.assign({}, initialState, action.data)
+    )
   })
 })

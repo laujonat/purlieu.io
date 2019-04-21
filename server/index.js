@@ -52,9 +52,11 @@ const onError = error => {
 
 const onListening = () => {
   const addr = server.address()
-  const bind = `${typeof addr === "string" ? "pipe" : "port"} ${typeof addr === "string" ? addr : addr.port}`
+  const bind = `${typeof addr === "string" ? "pipe" : "port"} ${
+    typeof addr === "string" ? addr : addr.port
+  }`
   log(`Server is listening on ${bind}`)
-  // log(`Visit: http://localhost:${addr.port}`)
+  log(`Visit: http://localhost:${addr.port}`)
 }
 
 server.on("error", onError)

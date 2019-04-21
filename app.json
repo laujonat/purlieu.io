@@ -14,11 +14,7 @@
   "environments": {
     "test": {
       "scripts": {
-        "test": "jest --updateSnapshot && eslint 'client/**/*.{js,jsx}'"
-      },
-      "env": {
-        "NODE_ENV": "development",
-        "required": false
+        "test": "eslint --ignore-pattern !.eslintrc.js"
       }
     }
   }

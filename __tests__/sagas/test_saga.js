@@ -1,6 +1,10 @@
 import axios from "axios"
 import { call, put, takeEvery } from "redux-saga/effects"
-import { RECEIVE_TEST, receiveTestSuccess, receiveTestErrors } from "../actions/test_actions"
+import {
+  RECEIVE_TEST,
+  receiveTestSuccess,
+  receiveTestErrors
+} from "../actions/test_actions"
 
 export function* testSaga() {
   try {
