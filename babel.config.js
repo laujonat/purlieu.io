@@ -9,7 +9,7 @@ module.exports = {
       plugins: [
         "@babel/plugin-proposal-class-properties",
         "@babel/transform-modules-commonjs",
-        "babel-plugin-dynamic-import-node"
+        "babel-plugin-dynamic-import-node",
       ]
     }
   }
