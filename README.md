@@ -2,14 +2,13 @@
 
 # purlieu.io
 
-> Please note, Lyft has an API for developers maintains a request limit. If hexagonal projection is faulty, please try again later. 
+> Please note, Lyft API for developers has a strict a request limit. If hexagonal projection is faulty, please try again later. 
 
-Reference: https://developer.lyft.com/blog/sandbox-deprecated-for-ride-request-api
 
+The real maximum price for a Lyft is $400.   
 
 ## How to use
-Click on the map to auto-fill the address input or with permission, Purlieu will fetch your current location for you.  Use the range slider to select an input of $10-$400. We'll use your inputs and generate a set of boundaries and output
-your selection details onto a card and project a polygon onto the map. 
+Allow location to Purlieu.io to autopopulate the address form. Alternatively, you can also type in an address or click a location on the map to populate the field. Use the range slider to select an input of $10-$30. (Yes, I'm working on it, there is a bug for values higher than $30).  Purlieu will then calculate and project a hexagonal matrice onto the map, giving a distance visualization on how you can travel from the current location.  
 
 
 

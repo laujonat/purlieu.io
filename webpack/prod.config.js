@@ -1,10 +1,10 @@
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-const webpack = require('webpack');
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin")
+const webpack = require("webpack")
 
 module.exports = {
-  mode: 'production',
+  mode: "production",
   performance: {
-    hints: 'warning'
+    hints: "warning"
   },
   output: {
     pathinfo: false
@@ -12,7 +12,7 @@ module.exports = {
   optimization: {
     namedModules: false,
     namedChunks: false,
-    nodeEnv: 'production',
+    nodeEnv: "production",
     flagIncludedChunks: true,
     occurrenceOrder: true,
     sideEffects: true,
@@ -21,25 +21,27 @@ module.exports = {
     splitChunks: {
       hidePathInfo: true,
       minSize: 30000,
-      maxInitialRequests: 3,
+      maxInitialRequests: 3
     },
     noEmitOnErrors: true,
     checkWasmTypes: true,
     // minimize: true,
-    minimizer: [new UglifyJsPlugin({
-      uglifyOptions: {
-        compress: true,
-        parallel: true,
-      }
-    })],
+    minimizer: [
+      new UglifyJsPlugin({
+        uglifyOptions: {
+          compress: true,
+          parallel: true
+        }
+      })
+    ]
   },
   plugins: [
     new webpack.DefinePlugin({
-      'process.env': {
+      "process.env": {
         NODE_ENV: '"production"'
       }
-    }),     
+    }),
     new webpack.optimize.ModuleConcatenationPlugin(),
-    new webpack.NoEmitOnErrorsPlugin(),
+    new webpack.NoEmitOnErrorsPlugin()
   ]
 }

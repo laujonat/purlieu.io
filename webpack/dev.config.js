@@ -1,9 +1,9 @@
-const webpack = require('webpack');
-const Dotenv = require("dotenv-webpack");
+const webpack = require("webpack")
+const Dotenv = require("dotenv-webpack")
 
 module.exports = {
-  mode: 'development',
-  devtool: 'eval',
+  mode: "development",
+  devtool: "eval",
   cache: true,
   performance: {
     hints: false
@@ -14,7 +14,7 @@ module.exports = {
   optimization: {
     namedModules: true,
     namedChunks: true,
-    nodeEnv: 'development',
+    nodeEnv: "development",
     flagIncludedChunks: false,
     occurrenceOrder: false,
     sideEffects: false,
@@ -24,11 +24,11 @@ module.exports = {
       hidePathInfo: false,
       minSize: 10000,
       maxAsyncRequests: Infinity,
-      maxInitialRequests: Infinity,
+      maxInitialRequests: Infinity
     },
     noEmitOnErrors: false,
     checkWasmTypes: false,
-    minimize: false,
+    minimize: false
   },
   module: {
     rules: [
@@ -51,14 +51,14 @@ module.exports = {
     new webpack.NamedModulesPlugin(),
     new webpack.NamedChunksPlugin(),
     new webpack.DefinePlugin({
-      'process.env': {
+      "process.env": {
         NODE_ENV: '"development"'
       }
-    }),    
+    }),
     new Dotenv({
       path: "./.env.local", // load this now instead of the ones in '.env'
       safe: true, // load '.env.example' to verify the '.env' variables are all set. Can also be a string to a different file.
       systemvars: true
     })
-  ],
+  ]
 }

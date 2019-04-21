@@ -1,9 +1,8 @@
-const path = require("path");
-const webpack = require('webpack');
-const merge = require("webpack-merge");
-const parts = require("./webpack/parts.config");
-const productionConfig = require("./webpack/prod.config");
-const developmentConfig = require("./webpack/dev.config");
+const path = require("path")
+const merge = require("webpack-merge")
+const parts = require("./webpack/parts.config")
+const productionConfig = require("./webpack/prod.config")
+const developmentConfig = require("./webpack/dev.config")
 
 const baseConfig = {
   entry: ["babel-polyfill", "./client"],
@@ -34,8 +33,8 @@ const baseConfig = {
   resolve: {
     extensions: [".js", ".jsx", "*"]
   }
-};
-const prodConfig = merge([]);
+}
+const prodConfig = merge([])
 
 const devConfig = merge([
   parts.devServer({
@@ -43,12 +42,12 @@ const devConfig = merge([
     port: process.env.PORTs
   }),
   developmentConfig
-]);
+])
 
 module.exports = mode => {
   if (mode === "production") {
-    return merge(baseConfig, productionConfig, { mode });
+    return merge(baseConfig, productionConfig, { mode })
   }
-  
-  return merge(baseConfig, devConfig, { mode });
-};
+
+  return merge(baseConfig, devConfig, { mode })
+}

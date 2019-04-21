@@ -83,7 +83,7 @@ export const Button = styled.button`
 export const DollarInput = styled(Input).attrs({
   type: "range",
   min: 10,
-  max: 400,
+  max: 30,
   step: 5
 })`
   margin: ${spaces.smMargin} 0;
