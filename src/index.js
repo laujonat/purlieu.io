@@ -1,4 +1,3 @@
-require("@babel/polyfill")
 const routes = require("../routes")
 const path = require("path")
 const express = require("express")
