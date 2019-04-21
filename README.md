@@ -10,6 +10,20 @@ The real maximum price for a Lyft is $400.
 ## How to use
 Allow location to Purlieu.io to autopopulate the address form. Alternatively, you can also type in an address or click a location on the map to populate the field. Use the range slider to select an input of $10-$30. (Yes, I'm working on it, there is a bug for values higher than $30).  Purlieu will then calculate and project a hexagonal matrice onto the map, giving a distance visualization on how you can travel from the current location.  
 
+#### Purpose
+To learn React Saga patterns and various testing practices. Webpack was made from scratch to better understand how all pieces fit together.  Purlieu is the personal continuation of group capstone project in 2018.  
+
+### Technologies 
+
+```
+React
+Redux 
+React Saga Patterns 
+Saga Test Plan library 
+Jest/Enzyme
+Google Maps API 
+Styled Components 
+```
 
 
 ### Desktop
@@ -35,30 +49,28 @@ To incorporate various ride sharing API's and create an orthogonal projection on
 
 # Developers
 ```
-yarn
-yarn dev
+npm run dev # development 
+npm run start # production 
 ```
-## Setup
 
-1. Install yarn dependencies as needed on your local machine.
-
-
-## API Tokens
-Create a .env file and replace variables with your own. 
-
-### Lyft 
-Register for a developer account for ClientID and Secret Key
-
+## Configuration
+1. Create an .env.local file.
+2. Sign up for an account on Google Maps API to retrieve your API key.
+3. Sign up for a Lyft Developer account for the CLIENT_ID and CLIENT_SECRET keys.
+4. Replace .env values with your newly obtained keys.
 
 ## Testing 
-If you are snapshot testing, make sure you commit: `yarn update:snapshot`
 ```
-yarn test 
-yarn test:watch
+# If you are snapshot testing, make sure you commit: `npm run update:snapshot`
+npm run test 
 ```
 
 ## Deployment 
 ```
 * Standard git flow 
 * Heroku deployment pipeline 
+
+# Run heroku environemt locally 
+$ heroku local npm run start
+$ heroku logs # To view local version of pre-deployed application 
 ```
