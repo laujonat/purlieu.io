@@ -1,10 +1,10 @@
 const path = require("path")
-var BUILD_DIR = path.resolve(__dirname, './public')
+const webpack = require('webpack')
 
 var baseConfig = {
   entry: ["babel-polyfill", "./client"],
   output: {
-    path: BUILD_DIR,
+    path: path.join(__dirname, "public"),
     filename: "bundle.js"
   }, 
   module: {

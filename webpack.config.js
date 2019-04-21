@@ -1,11 +1,13 @@
 const merge = require("webpack-merge");
 const parts = require("./webpack/parts.config");
+const productionConfig = require("./webpack/prod.config");
+const developmentConfig = require("./webpack/dev.config");
 
 const commonConfig = merge([]);
 
-const productionConfig = merge([]);
+const prodConfig = merge([]);
 
-const developmentConfig = merge([
+const devConfig = merge([
   parts.devServer({
     host: process.env.HOST,
     port: process.env.PORT,
@@ -14,8 +16,8 @@ const developmentConfig = merge([
 
 module.exports = mode => {
   if (mode === "production") {
-    return merge(commonConfig, productionConfig, { mode });
+    return merge(commonConfig, productionConfig, prodConfig, { mode });
   }
-
-  return merge(commonConfig, developmentConfig, { mode });
+  
+  return merge(commonConfig, developmentConfig, devConfig, { mode });
 };

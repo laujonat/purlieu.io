@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
+    "@babel/polyfill": "^7.4.3",
     "@babel/runtime": "^7.2.0",
     "axios": "^0.18.0",
     "babel-cli": "^6.26.0",
@@ -28,7 +29,7 @@
     "tls": "0.0.1"
   },
   "scripts": {
-    "build": "webpack --env production",
+    "build": "webpack-dev-server --env production",
     "lint": "eslint 'client/**/*.{js,jsx}'",
     "lint-fix": "yarn lint --fix && yarn prettier-fix",
     "prettier": "prettier --list-different --no-semi './**/*.{js,jsx}' './**/*.css **/*.json'",
@@ -36,7 +37,7 @@
     "test": "yarn update:snapshot && yarn lint",
     "update:snapshot": "jest --updateSnapshot",
     "test:watch": "jest --watch --verbose",
-    "watch": "webpack-dev-server --mode=development --watch",
+    "watch": "webpack --verbose --watch",
     "dev": "nodemon --exec babel-node ./server/index.js && watch",
     "start": "node ./server/index.js",
     "postinstall": "npm run build"
@@ -51,7 +52,7 @@
     "@google/maps": "^0.5.5",
     "babel-core": "^7.0.0-0",
     "babel-eslint": "8",
-    "babel-jest": "^23.6.0",
+    "babel-jest": "^24.7.1",
     "babel-loader": "^8.0.4",
     "cors": "^2.8.5",
     "enzyme": "^3.8.0",
@@ -61,7 +62,7 @@
     "eslint-plugin-html": "^5.0.0",
     "eslint-plugin-prettier": "^3.0.1",
     "eslint-plugin-react": "^7.11.1",
-    "jest": "^23.6.0",
+    "jest": "^24.7.1",
     "prettier": "^1.15.3",
     "react-redux": "^6.0.0",
     "redux": "^4.0.1",
@@ -72,6 +73,7 @@
     "uglifyjs-webpack-plugin": "^2.1.2",
     "webpack": "^4.0.0",
     "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.3.1",
     "webpack-merge": "^4.2.1"
   },
   "jest": {

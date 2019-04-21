@@ -1,4 +1,5 @@
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const webpack = require('webpack');
 const base = require('./prod.config');
 const merge = require('webpack-merge');
 
@@ -29,9 +30,14 @@ module.exports = merge(base, {
     checkWasmTypes: true,
     minimize: true,
     minimizer: new UglifyJsPlugin({
-      sourceMap: false,
-      compress: true,
-      parallel: true
+      uglifyOptions: {
+        compress: true,
+        parallel: true,
+        output: null,
+        toplevel: false,
+        nameCache: null,
+        ie8: false,
+      }
     }),
   },
   plugins: [
