@@ -1,10 +1,7 @@
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const webpack = require('webpack');
-const base = require('./prod.config');
-const merge = require('webpack-merge');
 
-
-module.exports = merge(base, {
+module.exports = {
   mode: 'production',
   performance: {
     hints: 'warning'
@@ -28,24 +25,21 @@ module.exports = merge(base, {
     },
     noEmitOnErrors: true,
     checkWasmTypes: true,
-    minimize: true,
-    minimizer: new UglifyJsPlugin({
+    // minimize: true,
+    minimizer: [new UglifyJsPlugin({
       uglifyOptions: {
         compress: true,
         parallel: true,
-        output: null,
-        toplevel: false,
-        nameCache: null,
-        ie8: false,
       }
-    }),
+    })],
   },
   plugins: [
-    new webpack.DefinePlugin({ "process.env.NODE_ENV": JSON.stringify("production") }),
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: '"production"'
+      }
+    }),     
     new webpack.optimize.ModuleConcatenationPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
-    new webpack.LoaderOptionsPlugin({
-      minimize: true,
-    }),
   ]
-})
+}

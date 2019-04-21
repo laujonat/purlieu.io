@@ -1,0 +1,38 @@
+Hash: 5c164769b181ee5d04bb
+Version: webpack 4.28.3
+Time: 2439ms
+Built at: 04/20/2019 11:01:13 PM
+    Asset      Size  Chunks                    Chunk Names
+bundle.js  2.04 MiB    main  [emitted]  [big]  main
+Entrypoint main [big] = bundle.js
+[0] multi babel-polyfill ./client 40 bytes {main} [built]
+    factory:1ms building:2ms = 3ms
+[./client/App.js] 557 bytes {main} [built]
+    [0] 3ms -> [./client/index.js] 287ms -> factory:174ms building:129ms dependencies:429ms = 1022ms
+[./client/boundaries/actions.js] 639 bytes {main} [built]
+    [0] 3ms -> [./client/index.js] 287ms -> [./client/sagas.js] 303ms -> [./client/boundaries/saga.js] 566ms -> factory:321ms building:177ms dependencies:124ms = 1781ms
+[./client/boundaries/saga.js] 2.91 KiB {main} [built]
+    [0] 3ms -> [./client/index.js] 287ms -> [./client/sagas.js] 303ms -> factory:348ms building:218ms dependencies:293ms = 1452ms
+[./client/configureStore.js] 667 bytes {main} [built]
+    [0] 3ms -> [./client/index.js] 287ms -> factory:174ms building:129ms dependencies:429ms = 1022ms
+[./client/errors/reducer.js] 2.13 KiB {main} [built]
+    [0] 3ms -> [./client/index.js] 287ms -> [./client/reducers.js] 303ms -> factory:407ms building:262ms dependencies:141ms = 1403ms
+[./client/index.js] 385 bytes {main} [built]
+    [0] 3ms -> factory:53ms building:234ms = 290ms
+[./client/lib/map/index.js] 1.28 KiB {main} [built]
+    [0] 3ms -> [./client/index.js] 287ms -> [./client/sagas.js] 303ms -> [./client/boundaries/saga.js] 566ms -> factory:321ms building:177ms dependencies:124ms = 1781ms
+[./client/lib/styles/index.js] 200 bytes {main} [built]
+    [0] 3ms -> [./client/index.js] 287ms -> [./client/sagas.js] 303ms -> [./client/boundaries/saga.js] 566ms -> [./client/lib/map/index.js] 498ms -> factory:259ms building:136ms = 2052ms
+[./client/reducers.js] 357 bytes {main} [built]
+    [0] 3ms -> [./client/index.js] 287ms -> factory:174ms building:129ms dependencies:429ms = 1022ms
+[./client/sagas.js] 780 bytes {main} [built]
+    [0] 3ms -> [./client/index.js] 287ms -> factory:174ms building:129ms dependencies:429ms = 1022ms
+[./client/services/boundaries/index.js] 1.01 KiB {main} [built]
+    [0] 3ms -> [./client/index.js] 287ms -> [./client/sagas.js] 303ms -> [./client/boundaries/saga.js] 566ms -> factory:321ms building:177ms dependencies:124ms = 1781ms
+[./client/services/lyft/index.js] 3.56 KiB {main} [built]
+    [0] 3ms -> [./client/index.js] 287ms -> [./client/sagas.js] 303ms -> [./client/boundaries/saga.js] 566ms -> [./client/services/boundaries/index.js] 498ms -> factory:276ms building:132ms dependencies:0ms = 2065ms
+[./client/services/map/index.js] 5.28 KiB {main} [built]
+    [0] 3ms -> [./client/index.js] 287ms -> [./client/sagas.js] 303ms -> [./client/components/Map/saga.js] 566ms -> factory:362ms building:129ms dependencies:0ms = 1650ms
+[./node_modules/webpack/buildin/global.js] (webpack)/buildin/global.js 472 bytes {main} [built]
+    [0] 3ms -> [./node_modules/babel-polyfill/lib/index.js] 287ms -> factory:241ms building:45ms dependencies:811ms = 1387ms
+    + 496 hidden modules

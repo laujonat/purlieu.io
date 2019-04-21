@@ -29,7 +29,7 @@
     "tls": "0.0.1"
   },
   "scripts": {
-    "build": "webpack-dev-server --env production",
+    "build": "webpack --env production",
     "lint": "eslint 'client/**/*.{js,jsx}'",
     "lint-fix": "yarn lint --fix && yarn prettier-fix",
     "prettier": "prettier --list-different --no-semi './**/*.{js,jsx}' './**/*.css **/*.json'",
@@ -37,8 +37,8 @@
     "test": "yarn update:snapshot && yarn lint",
     "update:snapshot": "jest --updateSnapshot",
     "test:watch": "jest --watch --verbose",
-    "watch": "webpack --verbose --watch",
-    "dev": "nodemon --exec babel-node ./server/index.js && watch",
+    "watch": "webpack-dev-server --env development --verbose --profile --watch",
+    "dev": "nodemon --exec babel-node ./server/index.js && npm run watch",
     "start": "node ./server/index.js",
     "postinstall": "npm run build"
   },

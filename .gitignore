@@ -21,4 +21,5 @@ yarn-error.log*
 
 # coverage 
 /coverage/
+/dist
 
