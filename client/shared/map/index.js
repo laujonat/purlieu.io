@@ -1,4 +1,4 @@
-import { colors, mapStyle } from "../../lib/styles"
+import { colors, mapStyle } from "../../shared/styles"
 
 const google = global.google
 

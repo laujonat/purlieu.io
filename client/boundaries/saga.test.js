@@ -1,7 +1,7 @@
 import { testSaga } from "redux-saga-test-plan"
 import { generateBoundaries, dropMarker } from "./saga"
 import { receiveBoundariesSuccess, receiveBoundariesErrors } from "./actions"
-import { createMarker } from "../lib/map"
+import { createMarker } from "../shared/map"
 import { selectCurrentCard } from "../components/PolygonList/selectors"
 import { selectMap } from "../components/Map/selectors"
 import api from "../services/boundaries"

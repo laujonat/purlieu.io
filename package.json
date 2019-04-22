@@ -29,7 +29,8 @@
     "styled-components": "^4.1.2"
   },
   "scripts": {
-    "build": "webpack --mode production",
+    "build": "webpack --env production",
+    "debug": "npm run build -- --progress --colors --profile --display-modules --display-reasons --display-error-details",
     "lint": "eslint 'client/**/*.{js,jsx}'",
     "lint-fix": "npm run lint --fix && npm run prettier-fix",
     "prettier": "prettier --list-different --no-semi './**/*.{js,jsx}' './**/*.css **/*.json'",
@@ -37,9 +38,9 @@
     "test": "npm run update:snapshot && npm run lint",
     "update:snapshot": "jest --updateSnapshot",
     "test:watch": "jest --watch --verbose",
-    "watch": "webpack-dev-server --mode development --watch",
+    "watch": "webpack --env development --watch",
     "dev": "nodemon --exec babel-node ./server/index.js",
-    "start": "node ./server/index.js",
+    "start": "npm run build && node ./server/index.js",
     "postinstall": "npm run build"
   },
   "devDependencies": {
@@ -85,7 +86,7 @@
     "collectCoverageFrom": [
       "client/**.{js, jsx}",
       "!client/*.{js,jsx}",
-      "!client/lib/**.{js,jsx}"
+      "!client/shared/**.{js,jsx}"
     ],
     "coveragePathIgnorePatterns": [
       "client/*.{js, jsx}"

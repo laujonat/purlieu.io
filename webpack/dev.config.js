@@ -30,33 +30,16 @@ module.exports = {
     checkWasmTypes: false,
     minimize: false
   },
-  module: {
-    rules: [
-      {
-        loader: "babel-loader?cacheDirectory",
-        exclude: /node_modules/,
-        test: /.jsx?$/,
-        query: {
-          presets: ["@babel/env", "@babel/react"],
-          plugins: ["@babel/proposal-class-properties"]
-        }
-      },
-      {
-        loader: "style-loader!css-loader",
-        test: /\.css$/
-      }
-    ]
-  },
   plugins: [
     new webpack.NamedModulesPlugin(),
     new webpack.NamedChunksPlugin(),
     new webpack.DefinePlugin({
       "process.env": {
-        NODE_ENV: '"development"'
+        NODE_ENV: JSON.stringify("development")
       }
     }),
     new Dotenv({
-      path: "./.env.local", // load this now instead of the ones in '.env'
+      path: "./.env",
       safe: true, // load '.env.example' to verify the '.env' variables are all set. Can also be a string to a different file.
       systemvars: true
     })

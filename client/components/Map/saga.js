@@ -12,7 +12,7 @@ import {
 } from "../Map/actions"
 import { selectCurrentCard } from "../../components/PolygonList/selectors"
 import api from "../../services/map"
-import { createPolygon } from "../../lib/map"
+import { createPolygon } from "../../shared/map"
 
 export function* fetchClientLocation() {
   try {

@@ -48,7 +48,7 @@ const devConfig = merge([
 ])
 
 module.exports = mode => {
-  console.log(mode);
+  console.log(mode)
   if (mode === "production") {
     return merge(baseConfig, prodConfig, { mode })
   }
