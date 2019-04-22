@@ -7,9 +7,10 @@ APP_ENTRY = path.join(__dirname, "client")
 APP_OUTPUT = path.join(__dirname, "public")
 
 const baseConfig = {
-  entry: ["babel-pollyfill", APP_ENTRY],
+  entry: ["babel-polyfill", APP_ENTRY],
   output: {
     path: APP_OUTPUT,
+    publicPath: '/public/',
     filename: "bundle.js"
   },
   module: {
@@ -36,19 +37,20 @@ const baseConfig = {
     extensions: [".js", ".jsx", "*"]
   }
 }
-const prodConfig = merge([])
+const prodConfig = merge([productionConfig])
 
 const devConfig = merge([
   parts.devServer({
     host: process.env.HOST,
-    port: process.env.PORTs
+    port: process.env.PORT,
   }),
   developmentConfig
 ])
 
 module.exports = mode => {
+  console.log(mode);
   if (mode === "production") {
-    return merge(baseConfig, productionConfig, { mode })
+    return merge(baseConfig, prodConfig, { mode })
   }
 
   return merge(baseConfig, devConfig, { mode })

@@ -25,10 +25,11 @@ module.exports = {
     },
     noEmitOnErrors: true,
     checkWasmTypes: true,
-    // minimize: true,
+    minimize: true,
     minimizer: [
       new UglifyJsPlugin({
         uglifyOptions: {
+          extractComments: true,
           compress: true,
           parallel: true
         }
