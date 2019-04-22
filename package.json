@@ -2,6 +2,8 @@
   "name": "purlieu",
   "version": "1.0.0",
   "private": true,
+  "description": "Distance projection project",
+  "main": "./src/index.js",
   "engines": {
     "node": "10.15.3"
   },
@@ -27,7 +29,7 @@
     "styled-components": "^4.1.2"
   },
   "scripts": {
-    "build": "webpack --env production",
+    "build": "webpack --mode production",
     "lint": "eslint 'client/**/*.{js,jsx}'",
     "lint-fix": "yarn lint --fix && yarn prettier-fix",
     "prettier": "prettier --list-different --no-semi './**/*.{js,jsx}' './**/*.css **/*.json'",
@@ -35,8 +37,8 @@
     "test": "yarn update:snapshot && yarn lint",
     "update:snapshot": "jest --updateSnapshot",
     "test:watch": "jest --watch --verbose",
-    "watch": "webpack-dev-server --env development --verbose --profile --watch",
-    "dev": "nodemon --exec babel-node ./server/index.js && npm run watch",
+    "watch": "webpack-dev-server --mode development --watch",
+    "dev": "nodemon --exec babel-node ./server/index.js",
     "start": "node ./server/index.js",
     "postinstall": "npm run build"
   },
@@ -48,6 +50,7 @@
     "@babel/preset-env": "^7.1.6",
     "@babel/preset-react": "^7.0.0",
     "@google/maps": "^0.5.5",
+    "babel": "^6.23.0",
     "babel-core": "^7.0.0-0",
     "babel-eslint": "^10.0.1",
     "babel-jest": "^24.7.1",
@@ -116,8 +119,7 @@
       "/node_modules/"
     ]
   },
-  "description": "Distance projection project",
-  "main": "./src/index.js",
+  "browserslist": "> 0.25%, not dead",
   "author": "Jonathan Lau, Andre Le",
   "license": "MIT"
 }
