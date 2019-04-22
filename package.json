@@ -31,10 +31,10 @@
   "scripts": {
     "build": "webpack --mode production",
     "lint": "eslint 'client/**/*.{js,jsx}'",
-    "lint-fix": "yarn lint --fix && yarn prettier-fix",
+    "lint-fix": "npm run lint --fix && npm run prettier-fix",
     "prettier": "prettier --list-different --no-semi './**/*.{js,jsx}' './**/*.css **/*.json'",
     "prettier-fix": "prettier --write --no-semi './**/*.{js,jsx}' './**/*.css **/*.json'",
-    "test": "yarn update:snapshot && yarn lint",
+    "test": "npm run update:snapshot && npm run lint",
     "update:snapshot": "jest --updateSnapshot",
     "test:watch": "jest --watch --verbose",
     "watch": "webpack-dev-server --mode development --watch",
