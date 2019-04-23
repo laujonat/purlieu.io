@@ -1,0 +1,119 @@
+Hash: 5c164769b181ee5d04bb
+Version: webpack 4.28.3
+Time: 2439ms
+Built at: 04/20/2019 11:01:13 PM
+    Asset      Size  Chunks                    Chunk Names
+bundle.js  2.04 MiB    main  [emitted]  [big]  main
+Entrypoint main [big] = bundle.js
+[0] multi babel-polyfill ./client 40 bytes {main} [built]
+    factory:1ms building:2ms = 3ms
+[./client/App.js] 557 bytes {main} [built]
+    [0] 3ms -> [./client/index.js] 287ms -> factory:174ms building:129ms dependencies:429ms = 1022ms
+[./client/boundaries/actions.js] 639 bytes {main} [built]
+    [0] 3ms -> [./client/index.js] 287ms -> [./client/sagas.js] 303ms -> [./client/boundaries/saga.js] 566ms -> factory:321ms building:177ms dependencies:124ms = 1781ms
+[./client/boundaries/saga.js] 2.91 KiB {main} [built]
+    [0] 3ms -> [./client/index.js] 287ms -> [./client/sagas.js] 303ms -> factory:348ms building:218ms dependencies:293ms = 1452ms
+[./client/configureStore.js] 667 bytes {main} [built]
+    [0] 3ms -> [./client/index.js] 287ms -> factory:174ms building:129ms dependencies:429ms = 1022ms
+[./client/errors/reducer.js] 2.13 KiB {main} [built]
+    [0] 3ms -> [./client/index.js] 287ms -> [./client/reducers.js] 303ms -> factory:407ms building:262ms dependencies:141ms = 1403ms
+[./client/index.js] 385 bytes {main} [built]
+    [0] 3ms -> factory:53ms building:234ms = 290ms
+[./client/lib/map/index.js] 1.28 KiB {main} [built]
+    [0] 3ms -> [./client/index.js] 287ms -> [./client/sagas.js] 303ms -> [./client/boundaries/saga.js] 566ms -> factory:321ms building:177ms dependencies:124ms = 1781ms
+[./client/lib/styles/index.js] 200 bytes {main} [built]
+    [0] 3ms -> [./client/index.js] 287ms -> [./client/sagas.js] 303ms -> [./client/boundaries/saga.js] 566ms -> [./client/lib/map/index.js] 498ms -> factory:259ms building:136ms = 2052ms
+[./client/reducers.js] 357 bytes {main} [built]
+    [0] 3ms -> [./client/index.js] 287ms -> factory:174ms building:129ms dependencies:429ms = 1022ms
+[./client/sagas.js] 780 bytes {main} [built]
+    [0] 3ms -> [./client/index.js] 287ms -> factory:174ms building:129ms dependencies:429ms = 1022ms
+[./client/services/boundaries/index.js] 1.01 KiB {main} [built]
+    [0] 3ms -> [./client/index.js] 287ms -> [./client/sagas.js] 303ms -> [./client/boundaries/saga.js] 566ms -> factory:321ms building:177ms dependencies:124ms = 1781ms
+[./client/services/lyft/index.js] 3.56 KiB {main} [built]
+    [0] 3ms -> [./client/index.js] 287ms -> [./client/sagas.js] 303ms -> [./client/boundaries/saga.js] 566ms -> [./client/services/boundaries/index.js] 498ms -> factory:276ms building:132ms dependencies:0ms = 2065ms
+[./client/services/map/index.js] 5.28 KiB {main} [built]
+    [0] 3ms -> [./client/index.js] 287ms -> [./client/sagas.js] 303ms -> [./client/components/Map/saga.js] 566ms -> factory:362ms building:129ms dependencies:0ms = 1650ms
+[./node_modules/webpack/buildin/global.js] (webpack)/buildin/global.js 472 bytes {main} [built]
+    [0] 3ms -> [./node_modules/babel-polyfill/lib/index.js] 287ms -> factory:241ms building:45ms dependencies:811ms = 1387ms
+    + 496 hidden modules
+
+> purlieu@1.0.0 build /Users/laujonat/DEV/purlieu.io
+> webpack --env production "--progress" "--colors" "--profile"
+
+production
+Hash: [1mf45c9d4b38e5991ccafa[39m[22m
+Version: webpack [1m4.30.0[39m[22m
+Time: [1m6172[39m[22mms
+Built at: 04/22/2019 [1m2:59:33 AM[39m[22m
+    [1mAsset[39m[22m     [1mSize[39m[22m  [1mChunks[39m[22m  [1m[39m[22m           [1m[39m[22m       [1mChunk Names[39m[22m
+[1m[33mbundle.js[39m[22m  [1m[33m375 KiB[39m[22m       [1m0[39m[22m  [1m[32m[emitted][39m[22m  [1m[33m[big][39m[22m  main
+Entrypoint [1mmain[39m[22m [1m[33m[big][39m[22m = [1m[32mbundle.js[39m[22m
+  [6] [1m./client/lib/styles/index.js + 5 modules[39m[22m 4.09 KiB {[1m[33m0[39m[22m}[1m[32m [built][39m[22m
+      | [1m./client/lib/styles/index.js[39m[22m 200 bytes[1m[32m [built][39m[22m
+      |     [183] 3ms -> [] 296ms -> [] 292ms -> [174] [1m448ms[39m[22m -> [68] [1m498ms[39m[22m -> factory:173ms building:106ms = [1m[33m1816ms[39m[22m
+      | [1m./client/lib/styles/media.js[39m[22m 412 bytes[1m[32m [built][39m[22m
+      |     [183] 3ms -> [] 296ms -> [] 292ms -> [174] [1m448ms[39m[22m -> [68] [1m498ms[39m[22m -> [] 279ms -> factory:62ms building:48ms = [1m[33m1926ms[39m[22m
+      | [1m./client/lib/styles/spaces.js[39m[22m 231 bytes[1m[32m [built][39m[22m
+      |     [183] 3ms -> [] 296ms -> [] 292ms -> [174] [1m448ms[39m[22m -> [68] [1m498ms[39m[22m -> [] 279ms -> factory:62ms building:48ms = [1m[33m1926ms[39m[22m
+      | [1m./client/lib/styles/colors.js[39m[22m 200 bytes[1m[32m [built][39m[22m
+      |     [183] 3ms -> [] 296ms -> [] 292ms -> [174] [1m448ms[39m[22m -> [68] [1m498ms[39m[22m -> [] 279ms -> factory:62ms building:48ms = [1m[33m1926ms[39m[22m
+      | [1m./client/lib/styles/map.js[39m[22m 2.93 KiB[1m[32m [built][39m[22m
+      |     [183] 3ms -> [] 296ms -> [] 292ms -> [174] [1m448ms[39m[22m -> [68] [1m498ms[39m[22m -> [] 279ms -> factory:62ms building:48ms = [1m[33m1926ms[39m[22m
+      | [1m./client/lib/styles/fonts.js[39m[22m 138 bytes[1m[32m [built][39m[22m
+      |     [183] 3ms -> [] 296ms -> [] 292ms -> [174] [1m448ms[39m[22m -> [68] [1m498ms[39m[22m -> [] 279ms -> factory:62ms building:48ms = [1m[33m1926ms[39m[22m
+ [11] [1m./node_modules/redux-saga/dist/redux-saga-effects-npm-proxy.esm.js + 1 modules[39m[22m 11 KiB {[1m[33m0[39m[22m}[1m[32m [built][39m[22m
+      |    2 modules
+ [20] [1m./client/boundaries/actions.js[39m[22m 639 bytes {[1m[33m0[39m[22m}[1m[32m [built][39m[22m
+      [183] 3ms -> [] 296ms -> [] 292ms -> [174] [1m448ms[39m[22m -> factory:210ms building:288ms dependencies:17ms = [1m[33m1554ms[39m[22m
+ [24] [1m(webpack)/buildin/global.js[39m[22m 472 bytes {[1m[33m0[39m[22m}[1m[32m [built][39m[22m
+      [183] 3ms -> [184] 296ms -> factory:249ms building:49ms dependencies:[1m[32m791ms[39m[22m = [1m[32m1388ms[39m[22m
+ [44] [1m./node_modules/react-redux/es/index.js + 18 modules[39m[22m 40.8 KiB {[1m[33m0[39m[22m}[1m[32m [built][39m[22m
+      |    19 modules
+ [68] [1m./client/lib/map/index.js[39m[22m 1.28 KiB {[1m[33m0[39m[22m}[1m[32m [built][39m[22m
+      [183] 3ms -> [] 296ms -> [] 292ms -> [174] [1m448ms[39m[22m -> factory:210ms building:288ms dependencies:17ms = [1m[33m1554ms[39m[22m
+ [75] [1m./client/services/map/index.js[39m[22m 5.16 KiB {[1m[33m0[39m[22m}[1m[32m [built][39m[22m
+      [183] 3ms -> [] 296ms -> [] 292ms -> [] [1m448ms[39m[22m -> factory:[1m393ms[39m[22m building:114ms dependencies:1ms = [1m[33m1547ms[39m[22m
+[122] [1m./client/services/lyft/index.js[39m[22m 3.45 KiB {[1m[33m0[39m[22m}[1m[32m [built][39m[22m
+      [183] 3ms -> [] 296ms -> [] 292ms -> [174] [1m448ms[39m[22m -> [175] [1m498ms[39m[22m -> factory:165ms building:135ms dependencies:0ms = [1m[33m1837ms[39m[22m
+[174] [1m./client/boundaries/saga.js[39m[22m 2.88 KiB {[1m[33m0[39m[22m}[1m[32m [built][39m[22m
+      [183] 3ms -> [] 296ms -> [] 292ms -> factory:355ms building:93ms dependencies:106ms = [1m[32m1145ms[39m[22m
+[175] [1m./client/services/boundaries/index.js[39m[22m 1.01 KiB {[1m[33m0[39m[22m}[1m[32m [built][39m[22m
+      [183] 3ms -> [] 296ms -> [] 292ms -> [174] [1m448ms[39m[22m -> factory:210ms building:288ms dependencies:17ms = [1m[33m1554ms[39m[22m
+[182] [1m./node_modules/@emotion/is-prop-valid/dist/is-prop-valid.browser.esm.js + 1 modules[39m[22m 4.36 KiB {[1m[33m0[39m[22m}[1m[32m [built][39m[22m
+      |    2 modules
+[183] [1mmulti babel-polyfill ./client[39m[22m 40 bytes {[1m[33m0[39m[22m}[1m[32m [built][39m[22m
+      factory:0ms building:3ms = 3ms
+[387] [1m(webpack)/buildin/harmony-module.js[39m[22m 573 bytes {[1m[33m0[39m[22m}[1m[32m [built][39m[22m
+      [183] 3ms -> [] 296ms -> [] 292ms -> [39] [1m694ms[39m[22m -> [121] [1m501ms[39m[22m -> factory:22ms building:107ms = [1m[33m1915ms[39m[22m
+[419] [1m./client/index.js + 37 modules[39m[22m 151 KiB {[1m[33m0[39m[22m}[1m[32m [built][39m[22m
+      | [1m./client/index.js[39m[22m 385 bytes[1m[32m [built][39m[22m
+      |     [183] 3ms -> factory:56ms building:240ms = 299ms
+      | [1m./client/reducers.js[39m[22m 357 bytes[1m[32m [built][39m[22m
+      |     [183] 3ms -> [] 296ms -> factory:161ms building:131ms dependencies:354ms = [1m[32m945ms[39m[22m
+      | [1m./client/sagas.js[39m[22m 780 bytes[1m[32m [built][39m[22m
+      |     [183] 3ms -> [] 296ms -> factory:161ms building:131ms dependencies:354ms = [1m[32m945ms[39m[22m
+      | [1m./client/App.js[39m[22m 557 bytes[1m[32m [built][39m[22m
+      |     [183] 3ms -> [] 296ms -> factory:161ms building:131ms dependencies:354ms = [1m[32m945ms[39m[22m
+      | [1m./client/configureStore.js[39m[22m 674 bytes[1m[32m [built][39m[22m
+      |     [183] 3ms -> [] 296ms -> factory:161ms building:131ms dependencies:354ms = [1m[32m945ms[39m[22m
+      | [1m./client/errors/reducer.js[39m[22m 2.02 KiB[1m[32m [built][39m[22m
+      |     [183] 3ms -> [] 296ms -> [] 292ms -> factory:[1m431ms[39m[22m building:263ms dependencies:221ms = [1m[32m1506ms[39m[22m
+      | [1m./client/lib/carriers/index.js[39m[22m 528 bytes[1m[32m [built][39m[22m
+      |     [183] 3ms -> [] 296ms -> [] 292ms -> [] [1m768ms[39m[22m -> [] 153ms -> [] 221ms -> [] 111ms -> factory:63ms building:38ms dependencies:2ms = [1m[33m1947ms[39m[22m
+      |     + 31 hidden modules
+    + 406 hidden modules
+
+[1m[33mWARNING in asset size limit: The following asset(s) exceed the recommended size limit (244 KiB).
+This can impact web performance.
+Assets: 
+  bundle.js (375 KiB)[39m[22m
+
+[1m[33mWARNING in entrypoint size limit: The following entrypoint(s) combined asset size exceeds the recommended limit (244 KiB). This can impact web performance.
+Entrypoints:
+  main (375 KiB)
+      bundle.js
+[39m[22m
+
+[1m[33mWARNING in webpack performance recommendations: 
+You can limit the size of your bundles by using import() or require.ensure to lazy load some parts of your application.
+For more info visit https://webpack.js.org/guides/code-splitting/[39m[22m

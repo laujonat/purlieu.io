@@ -25,10 +25,11 @@ module.exports = {
     },
     noEmitOnErrors: true,
     checkWasmTypes: true,
-    // minimize: true,
+    minimize: true,
     minimizer: [
       new UglifyJsPlugin({
         uglifyOptions: {
+          extractComments: true,
           compress: true,
           parallel: true
         }
@@ -38,7 +39,7 @@ module.exports = {
   plugins: [
     new webpack.DefinePlugin({
       "process.env": {
-        NODE_ENV: '"production"'
+        NODE_ENV: JSON.stringify("production")
       }
     }),
     new webpack.optimize.ModuleConcatenationPlugin(),
