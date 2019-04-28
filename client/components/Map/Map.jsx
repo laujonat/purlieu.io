@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
 import PropTypes from "prop-types"
-import { mapOptions } from "../../lib/map"
+import { mapOptions } from "../../shared/map"
 import { receiveMap, receiveClientLocation, receiveMarkerLocation, receiveDrawPolygon } from "./actions"
 import { Container, MapComponent } from "./styles"
 

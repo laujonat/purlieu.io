@@ -1,5 +1,5 @@
 import styled, { keyframes } from "styled-components"
-import { spaces, fonts, media } from "../../../lib/styles"
+import { spaces, fonts, media } from "../../../shared/styles"
 import FontAwesome from "react-fontawesome"
 
 export const Container = styled.div`

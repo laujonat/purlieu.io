@@ -38,7 +38,7 @@
     "test": "npm run update:snapshot && npm run lint",
     "update:snapshot": "jest --updateSnapshot",
     "test:watch": "jest --watch --verbose",
-    "watch": "webpack-dev-server --mode development --watch",
+    "watch": "webpack --env development --watch",
     "dev": "nodemon --exec babel-node ./server/index.js",
     "start": "npm run build && node ./server/index.js",
     "postinstall": "npm run build"
@@ -86,7 +86,7 @@
     "collectCoverageFrom": [
       "client/**.{js, jsx}",
       "!client/*.{js,jsx}",
-      "!client/lib/**.{js,jsx}"
+      "!client/shared/**.{js,jsx}"
     ],
     "coveragePathIgnorePatterns": [
       "client/*.{js, jsx}"

@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { fonts, colors } from "../../../lib/styles"
+import { fonts, colors } from "../../../shared/styles"
 
 export const Wrapper = styled.div`
   font-size: ${fonts.small};

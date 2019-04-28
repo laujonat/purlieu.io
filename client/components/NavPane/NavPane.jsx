@@ -6,7 +6,7 @@ import FontAwesome from "react-fontawesome"
 import { connect } from "react-redux"
 import { Loading } from "../Loading"
 import { receivePolygonCard } from "../PolygonList/actions"
-import { Carriers, CarrierToRideTypesMap, RideTypeToTitleMap } from "../../lib/carriers"
+import { Carriers, CarrierToRideTypesMap, RideTypeToTitleMap } from "../../shared/carriers"
 import {
   Container,
   HeaderContainer,
