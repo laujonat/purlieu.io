@@ -1,22 +1,12 @@
 import React from "react"
 import PropTypes from "prop-types"
-import styled from "styled-components"
+import { Container, StyledIcon } from "./styles"
 
-const Container = styled.div`
-  display: none;
-  justify-content: center;
-
-  ${({ active }) =>
-    active &&
-    `
-    color: blue;
-    display: block;
-  `}
-`
-
-export const Loading = ({ active }) => {
-  return <Container active={active}>Loading..</Container>
-}
+export const Loading = ({ active }) => (
+  <Container active={active}>
+    <StyledIcon name="spinner" size="2x" />
+  </Container>
+)
 
 Loading.defaultProps = {
   active: false

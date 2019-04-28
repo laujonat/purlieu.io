@@ -1,22 +1,9 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
-import styled from "styled-components"
 import PropTypes from "prop-types"
-import MapStyle from "../../lib/styles/map_style"
-import {
-  receiveClientLocation,
-  receiveMarkerLocation,
-  receiveDrawPolygon
-} from "./actions"
-
-const Container = styled.div`
-  flex: 1 1 70%;
-`
-
-const MapComponent = styled.div`
-  height: 100%;
-  width: 100%;
-`
+import { mapOptions } from "../../shared/map"
+import { receiveMap, receiveClientLocation, receiveMarkerLocation, receiveDrawPolygon } from "./actions"
+import { Container, MapComponent } from "./styles"
 
 const google = global.google
 
@@ -40,30 +27,21 @@ class Map extends Component {
       this.centerMap(this.props.location)
     }
 
-    if (prevProps.polygonList !== this.props.polygonList) {
-      this.drawBoundaries()
+    if (prevProps.mapPolygons.length !== this.props.mapPolygons.length) {
+      const { drawPolygon, location, mapPolygons } = this.props
+      drawPolygon({
+        cardIdx: mapPolygons.length - 1,
+        location,
+        boundaries: mapPolygons[mapPolygons.length - 1],
+        map: this.map
+      })
     }
   }
 
-  mapOptions = center => ({
-    center: center,
-    zoom: 13,
-    zoomControl: false,
-    mapTypeControl: false,
-    scaleControl: false,
-    streetViewControl: false,
-    rotateControl: false,
-    fullscreenControl: false,
-    styles: MapStyle
-  })
-
   initializeMap = () => {
-    const { location } = this.props
-
-    this.map = new google.maps.Map(
-      this.renderedMap.current,
-      this.mapOptions(location)
-    )
+    const { location, setMap } = this.props
+    this.map = new google.maps.Map(this.renderedMap.current, mapOptions(location))
+    setMap(this.map)
 
     this.marker = new google.maps.Marker({
       position: location,
@@ -106,27 +84,6 @@ class Map extends Component {
     this.props.fetchClientLocation()
   }
 
-  newMarker = pos => {
-    new google.maps.Marker({
-      position: pos,
-      map: this.map,
-      title: `${pos.lat()}, ${pos.lng()}`,
-      icon: {
-        url: "http://maps.google.com/mapfiles/ms/icons/red-dot.png",
-        scaledSize: new google.maps.Size(20, 20)
-      }
-    })
-  }
-
-  drawBoundaries = () => {
-    const { location, polygonList } = this.props
-    this.props.drawPolygon(
-      location,
-      polygonList[polygonList.length - 1].boundaries,
-      this.map
-    )
-  }
-
   render() {
     return (
       <Container>
@@ -139,14 +96,16 @@ class Map extends Component {
 const mapStateToProps = ({ map, polygonList }) => ({
   location: map.location,
   address: map.address,
+  mapPolygons: map.boundaries,
   polygonList
 })
 
 const mapDispatchToProps = dispatch => ({
+  setMap: map => dispatch(receiveMap(map)),
   fetchClientLocation: () => dispatch(receiveClientLocation()),
   setMarkerAddress: geoLocation => dispatch(receiveMarkerLocation(geoLocation)),
-  drawPolygon: (location, boundaries, map) =>
-    dispatch(receiveDrawPolygon({ location, boundaries, map }))
+  drawPolygon: ({ cardIdx, location, boundaries, map }) =>
+    dispatch(receiveDrawPolygon({ cardIdx, location, boundaries, map }))
 })
 
 Map.defaultProps = {
@@ -157,7 +116,8 @@ Map.defaultProps = {
   address: "",
   polygonList: [],
   setMarkerAddress: () => {},
-  drawPolygon: () => {}
+  drawPolygon: () => {},
+  setMap: () => {}
 }
 
 Map.propTypes = {
@@ -166,7 +126,9 @@ Map.propTypes = {
   drawPolygon: PropTypes.func,
   location: PropTypes.object,
   address: PropTypes.string,
-  polygonList: PropTypes.array
+  mapPolygons: PropTypes.array,
+  polygonList: PropTypes.array,
+  setMap: PropTypes.func
 }
 
 export default connect(
