@@ -2,7 +2,7 @@
 
 # purlieu.io
 
-> Please note, Lyft developer API maintains a strict request limit. If hexagonal projection is faulty, try refreshing the page or try again later. 
+> Oops, something is broken with my Heroku deploy. Only a development version is available at this time. Please note, Lyft developer API maintains a strict request limit. If hexagonal projection is faulty, try refreshing the page or try again later. 
 
 
 The real maximum price for a Lyft is $400.   
