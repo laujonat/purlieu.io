@@ -1,7 +1,7 @@
 import { call, put, fork, select, throttle, delay } from "redux-saga/effects"
 import { RECEIVE_BOUNDARIES, receiveBoundariesSuccess, receiveBoundariesErrors } from "./actions"
 import api from "../services/boundaries"
-import { createMarker } from "../lib/map"
+import { createMarker } from "../shared/map"
 import { selectCurrentCard } from "../components/PolygonList/selectors"
 import { selectMap } from "../components/Map/selectors"
 

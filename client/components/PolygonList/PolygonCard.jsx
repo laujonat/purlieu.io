@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 import { connect } from "react-redux"
 import { deletePolygonCard } from "../PolygonList/actions"
 import { receiveBoundaries } from "../../boundaries/actions"
-import { getKeyByValue, RideTypeToTitleMap } from "../../lib/carriers"
+import { getKeyByValue, RideTypeToTitleMap } from "../../shared/carriers"
 import { Container, Row, Item } from "./styles/card"
 
 class PolygonCard extends Component {

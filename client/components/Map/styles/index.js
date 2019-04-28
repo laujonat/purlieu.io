@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { media } from "../../../lib/styles"
+import { media } from "../../../shared/styles"
 
 export const Container = styled.div`
   flex: 1 1 70%;
