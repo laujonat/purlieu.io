@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { spaces, colors, media, fonts } from "../../../lib/styles"
+import { spaces, colors, media, fonts } from "../../../shared/styles"
 
 export const Container = styled.nav`
   display: flex;
