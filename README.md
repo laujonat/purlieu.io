@@ -2,6 +2,8 @@
 
 # purlieu.io
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/laujonat/purlieu.io.svg)](https://greenkeeper.io/)
+
 > Oops, something is broken with my Heroku deploy. Only a development version is available at this time. Please note, Lyft developer API maintains a strict request limit. If hexagonal projection is faulty, try refreshing the page or try again later. 
 
 
