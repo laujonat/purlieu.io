@@ -16,7 +16,7 @@
     "babel-cli": "^6.26.0",
     "babel-plugin-styled-components": "^1.10.0",
     "babel-polyfill": "^6.26.0",
-    "dotenv": "^7.0.0",
+    "dotenv": "^8.0.0",
     "dotenv-webpack": "^1.5.5",
     "lyft-node": "0.0.5",
     "nodemon": "^1.18.7",
