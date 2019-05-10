@@ -1,5 +1,6 @@
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin")
 const webpack = require("webpack")
+const Dotenv = require("dotenv-webpack")
 
 module.exports = {
   mode: "production",
@@ -37,12 +38,12 @@ module.exports = {
     ]
   },
   plugins: [
-    new webpack.DefinePlugin({
-      "process.env": {
-        NODE_ENV: JSON.stringify("production")
-      }
-    }),
     new webpack.optimize.ModuleConcatenationPlugin(),
-    new webpack.NoEmitOnErrorsPlugin()
+    new webpack.NoEmitOnErrorsPlugin(),
+    new Dotenv({
+      path: "./.env",
+      safe: true, // load '.env.example' to verify the '.env' variables are all set. Can also be a string to a different file.
+      systemvars: true
+    })
   ]
 }

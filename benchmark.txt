@@ -1,3 +1,0 @@
-Benchmark Logs
-4.21.19 - bundle.js 2.03mb 
-4.22.19 - bundle.js: 375kb - 6074ms
