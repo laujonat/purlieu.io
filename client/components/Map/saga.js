@@ -47,7 +47,8 @@ function* drawPolygon({ data }) {
   const card = yield select(selectCurrentCard, data.cardIdx)
 
   try {
-    const boundaries = yield call(api.getRecalculatedBoundaries, data)
+    const token = yield call(api.getToken)
+    const boundaries = yield call(api.getRecalculatedBoundaries, token, data)
     const polygon = createPolygon(boundaries, data.map, card)
 
     yield put(receiveDrawPolygonSuccess({ polygon }))

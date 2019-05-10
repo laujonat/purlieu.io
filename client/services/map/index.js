@@ -1,4 +1,5 @@
 const google = global.google
+import axios from "axios"
 
 const getLocation = () =>
   new Promise((success, reject) => {
@@ -35,7 +36,7 @@ const getAddress = geoLocation => {
   })
 }
 
-const getRecalculatedBoundaries = ({ location, boundaries, map }) => {
+const getRecalculatedBoundaries = (token, { location, boundaries, map }) => {
   const currentPos = new google.maps.LatLng(location)
   const boundariesArray = []
   const recalculatedBoundaries = []
@@ -46,14 +47,14 @@ const getRecalculatedBoundaries = ({ location, boundaries, map }) => {
 
   boundaries.forEach((boundary, index) => {
     let direction = (360 / boundaries.length) * index
-    recalculatedBoundaries.push(recalculateBoundary(currentPos, boundary, map, direction))
+    recalculatedBoundaries.push(recalculateBoundary(currentPos, boundary, map, token, direction))
   })
 
   return Promise.all(recalculatedBoundaries).then(results => results)
 }
 
-const recalculateBoundary = async (position, boundary, map, direction) => {
-  let result = await landOrWater(boundary, map)
+const recalculateBoundary = async (position, boundary, map, token, direction) => {
+  let result = await landOrWater(boundary, map, token)
   if (result === "land") {
     return Promise.resolve(boundary)
   }
@@ -67,20 +68,31 @@ const recalculateBoundary = async (position, boundary, map, direction) => {
 
   const midLatLng = new googleGeometry.computeOffset(position, midPoint, direction)
 
-  result = await landOrWater(midLatLng, map)
+  result = await landOrWater(midLatLng, map, token)
   if (result === "water") recalculateBoundary(position, midLatLng, map, direction)
   else recalculateBoundary(midLatLng, boundary, map, direction)
 
   return Promise.resolve()
 }
 
-const landOrWater = (position, map) =>
+const getToken = () => {
+  try {
+    const result = axios.get("/gAuth").then(function(res) {
+      return res.data;
+    })
+    return result;
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+const landOrWater = (position, map, token) => 
   new Promise(resolve => {
     const staticMapUrl = "https://maps.googleapis.com/maps/api/staticmap?"
     const mapOptions = [
       `center=${position.lat()},${position.lng()}`,
       `zoom=${map.getZoom()}`,
-      `key=${process.env.GOOGLE_API_KEY}`,
+      `key=${token}`,
       "size=1x1",
       "maptype=roadmap"
     ].join("&")
@@ -106,6 +118,7 @@ const landOrWater = (position, map) =>
 const api = {
   getLocation,
   getAddress,
+  getToken,
   getRecalculatedBoundaries
 }
 
