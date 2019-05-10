@@ -17,6 +17,11 @@ router.get("/", (req, res) => {
   res.render("index")
 })
 
+router.get("/gAuth", (req, res) => {
+  const result = { key: process.env.GOOGLE_API_KEY }
+  return res.send(result.key)
+})
+
 router.get("/rideEstimate", (req, res) => {
   const lyft = new Lyft(process.env.LYFT_CLIENT_ID, process.env.LYFT_CLIENT_SECRET)
 
@@ -49,7 +54,7 @@ router.get("/snapToRoad", (req, res) => {
       params: {
         origin: req.query.origin,
         destination: req.query.destination,
-        key: process.env.GOOGLE_MAPS_API_KEY
+        key: process.env.GOOGLE_API_KEY
       }
     })
     .then(result => {
