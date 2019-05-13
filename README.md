@@ -16,5 +16,5 @@ Built with an Express Node.js server with demonstrations with Node concurrency p
 
 
 ## Security 
-This application is vulnerable and surfaces an API key in while drawing boundaries. The client mixes up a bit of logic that should belong in the server. This was made only for learning purposes.
+This application is vulnerable and surfaces an API key when making a server request. The client mixes logic that should belong in the server. This was made only for learning purposes.
 
